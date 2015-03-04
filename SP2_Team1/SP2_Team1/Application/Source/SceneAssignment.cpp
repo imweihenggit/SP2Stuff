@@ -609,7 +609,16 @@ void SceneAssignment::InitCollision()
 	for(int i = 0; i < 16; i++)
 	{
 		Skybox1.collisionPos.push_back(Vector3(200 + (i*20), 30, 340));
-	}	
+	}
+	for(int i = 0; i < 12; i++)
+	{
+		Skybox1.collisionPos.push_back(Vector3(410, 30, 70 + (i*20)));
+		Skybox1.collisionPos.push_back(Vector3(410, 30, -70 - (i*20)));
+	}
+
+	//for the lift doors
+	Skybox1.collisionPos.push_back(Vector3(440, 30, -50));
+
 	//middle platform
 	Skybox1.collisionPos.push_back(Vector3(0, 30, 340));
 
@@ -841,6 +850,7 @@ void SceneAssignment::InitCollision()
 /*-------------------------------------------------!! UPDATE NEEDED (WEI HENG) !!----------------------------------------------------*/
 	Travellator.collisionPos.push_back(Vector3(-47,30,100));
 /*-------------------------------------------------!! UPDATE NEEDED (WEI HENG) !!----------------------------------------------------*/
+	Travellator.collisionPos.push_back(Vector3(35, 180,-205));
 
 	Travellator.collisionRad = 10;
 	ObjectList.push_back(Travellator);
@@ -890,43 +900,35 @@ void SceneAssignment::InitCollision()
 		//Houses on left side
 	for(int i = 0; i < 2; i++)
 	{
-		House.translateVal.push_back(Vector3(-920 + (200*i), 0, 321));
+		House.translateVal.push_back(Vector3(-920 + (200*i), 0, 250));
 		House.rotateVal.push_back(90);
 		House.rotateAxis.push_back(Vector3(0,1,0));
 		House.scaleVal.push_back(Vector3(20, 20, 20));
 
-		//collision on 1st house
-		House.collisionPos.push_back(Vector3(House.translateVal[2*i].x, 30, House.translateVal[2*i].z));
-		House.collisionPos.push_back(Vector3(House.translateVal[2*i].x+60, 30, House.translateVal[2*i].z));
-		
-		House.collisionPos.push_back(Vector3(House.translateVal[2*i].x, 30, House.translateVal[2*i].z-30));
-		House.collisionPos.push_back(Vector3(House.translateVal[2*i].x+60, 30, House.translateVal[2*i].z-30));
+		House.collisionPos.push_back(Vector3(-920+(200*i), 30, 250));
+		House.collisionPos.push_back(Vector3(-920+60+(200*i), 30, 250));
+
+		House.collisionPos.push_back(Vector3(-920+(200*i), 30, 250 - 30));
+		House.collisionPos.push_back(Vector3(-920+60+(200*i), 30, 250-30));
 	}
 	
 	//Houses on right side
 	for(int i = 0; i < 2; i++)
 	{
-		House.translateVal.push_back(Vector3(620 + (200*i), 0, 321));
+		House.translateVal.push_back(Vector3(620 + (200*i), 0, 250));
 		House.rotateVal.push_back(90);
 		House.rotateAxis.push_back(Vector3(0,1,0));
 		House.scaleVal.push_back(Vector3(20, 20, 20));
 
-		//collision on 1st house
-		House.collisionPos.push_back(Vector3(House.translateVal[2*i].x, 30, House.translateVal[2*i].z));
-		House.collisionPos.push_back(Vector3(House.translateVal[2*i].x+60, 30, House.translateVal[2*i].z));
 		
-		House.collisionPos.push_back(Vector3(House.translateVal[2*i].x, 30, House.translateVal[2*i].z-30));
-		House.collisionPos.push_back(Vector3(House.translateVal[2*i].x+60, 30, House.translateVal[2*i].z-30));
+		House.collisionPos.push_back(Vector3(620+(200*i), 30, 250));
+		House.collisionPos.push_back(Vector3(620+60+(200*i), 30, 250));
 
-		//collision on 2nd house
-		House.collisionPos.push_back(Vector3(House.translateVal[2*i].x + 200, 30, House.translateVal[2*i].z));
-		House.collisionPos.push_back(Vector3(House.translateVal[2*i].x+260, 30, House.translateVal[2*i].z));
-		
-		House.collisionPos.push_back(Vector3(House.translateVal[2*i].x + 200,30,House.translateVal[2*i].z-30));
-		House.collisionPos.push_back(Vector3(House.translateVal[2*i].x+260,30,House.translateVal[2*i].z-30));
+		House.collisionPos.push_back(Vector3(620+(200*i), 30, 250 - 30));
+		House.collisionPos.push_back(Vector3(620+60+(200*i), 30, 250-30));
 	}
 	
-	House.collisionRad = 50;
+	House.collisionRad = 70;
 	ObjectList.push_back(House);
 
 	/*-------------------------------------------------!! UPDATE NEEDED (WEI HENG) !!----------------------------------------------------*/
@@ -1332,7 +1334,7 @@ void SceneAssignment::UpdateLift(double dt)
 	if (Application::IsKeyPressed('C')&&(playerCamera.position.y <= 180)&& playerCamera.position.x > 395 && (down == false))
 	{ 
 			Lclose = true;
-			buttonPress = true;	
+			buttonPress = true;
 	}
 
 	if (buttonPress == true)
