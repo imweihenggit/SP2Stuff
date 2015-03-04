@@ -12,8 +12,6 @@
 #include "MoveAI.h"
 #include <sstream>
 #include <fstream>
-#include <irrKlang.h>
-
 
 class SceneAssignment : public Scene
 {
@@ -26,130 +24,32 @@ class SceneAssignment : public Scene
 		U_MATERIAL_DIFFUSE,
 		U_MATERIAL_SPECULAR,
 		U_MATERIAL_SHININESS,
-		
-		//light1
 		U_LIGHT0_POSITION,
 		U_LIGHT0_COLOR,
 		U_LIGHT0_POWER,
 		U_LIGHT0_KC,
 		U_LIGHT0_KL,
 		U_LIGHT0_KQ,
-
+		/* ================================ Glenn's work =====================*/
 		U_LIGHT0_TYPE,
 		U_LIGHT0_SPOTDIRECTION,
 		U_LIGHT0_COSCUTOFF,
 		U_LIGHT0_COSINNER,
 		U_LIGHT0_EXPONENT,
-
-		//light2
-		U_LIGHT1_POSITION,
-		U_LIGHT1_COLOR,
-		U_LIGHT1_POWER,
-		U_LIGHT1_KC,
-		U_LIGHT1_KL,
-		U_LIGHT1_KQ,
+		U_UI_ENABLED,
+		U_UI_COLOR,
+		/* ================================ Glenn's work =====================*/
 		U_LIGHTENABLED,
-
-		U_LIGHT1_TYPE,
-		U_LIGHT1_SPOTDIRECTION,
-		U_LIGHT1_COSCUTOFF,
-		U_LIGHT1_COSINNER,
-		U_LIGHT1_EXPONENT,
-
 		U_NUMLIGHTS,
 		U_COLOR_TEXTURE_ENABLED,
 		U_COLOR_TEXTURE,
 		U_TEXT_ENABLED,
 		U_TEXT_COLOR,
-		U_UI_ENABLED,
-		U_UI_COLOR,
 
 		U_TOTAL
 	};
-	enum GEOMETRY_TYPE
-	{
-		//level 1 for the supermarket
-		GEO_BOTTOM_L1,
-		GEO_LEFT_L1,
-		GEO_RIGHT_L1,
-		GEO_FRONT_L1,
-		GEO_BACK_L1,
-		GEO_APPLE,
-		GEO_ORANGE,
-		GEO_WATERMELON,
-		GEO_CABBAGE,
-		GEO_COCONUT,
-		GEO_LODIN,
-		GEO_ICECREAM,
-		GEO_REGISTER,
-		GEO_BASKET,
-		GEO_COOLER,
-		GEO_CEILING,
-		GEO_CASHIER,
-		GEO_UI,
 
-		//level 2 for the supermarket - Rayner's work
-		GEO_TOP2,
-		GEO_LEFT2,
-		GEO_RIGHT2,
-		GEO_FRONT2,
-		GEO_BACK2,
-		GEO_CHAR,
-		GEO_TENT,	
-		GEO_DOORMAN,
-		GEO_SHELF,
-		GEO_TRAVELATORUP,
-		GEO_TRAVELATORDN,
-		GEO_BARRIER,
-		GEO_PACKET,
-		GEO_BOX1,
-		GEO_CAN1,
-
-		//Andy's work		
-		GEO_LIFT,
-		GEO_DOOR,
-		GEO_ALARM,
-		GEO_LIGHTBALL,
-
-		GEO_BUILDING,
-
-		GEO_PINKAI,
-		GEO_BLUEAI,
-		GEO_ORANGEAI,
-		GEO_YELLOWAI,
-		GEO_REDAI,
-		GEO_TEXT,
-
-		GEO_CAR,
-		GEO_CAR2,
-		GEO_CAR3,
-		GEO_CAR4,
-		GEO_TRUCK,
-		GEO_BUS,
-
-		NUM_GEOMETRY
-	};
-
-	enum SKYBOX_TYPE
-	{
-		SKYBOX_FRONT,
-		SKYBOX_BACK,
-		SKYBOX_LEFT,
-		SKYBOX_RIGHT,
-		SKYBOX_UP,
-		SKYBOX_DOWN,
-		SKYBOX_EXTEBANNER,
-		SKYBOX_EXTESIDE,
-		NUM_SKYBOX
-	};
-
-	enum CAMERA_TYPE
-	{
-		PLAYER_CAM,
-		NOCLIP_CAM,
-		NUM_CAMERA
-	};
-
+	/* ================================ Glenn's work =====================*/
 	//for the model blue
 	enum MODEL_TYPE_BLUE
 	{
@@ -195,32 +95,82 @@ class SceneAssignment : public Scene
 		NUM_MODEL_PINK,
 	};
 
-	enum MODEL_TYPE_RED
+	/* ================================ Glenn's work =====================*/
+	enum GEOMETRY_TYPE
 	{
-		MODEL_BODY_RED = 0,
-		MODEL_LEFTARM_RED,
-		MODEL_LEFTFIST_RED,
-		MODEL_LEFT_LEG_UPPER_RED,
-		MODEL_LEFT_LEG_LOWER_RED,
-		MODEL_RIGHTARM_RED,
-		MODEL_RIGHTFIST_RED,
-		MODEL_RIGHT_LEG_UPPER_RED,
-		MODEL_RIGHT_LEG_LOWER_RED,
-		NUM_MODEL_RED,
+		//level 1 for the supermarket
+		GEO_TOP_L1,
+		GEO_BOTTOM_L1,
+		GEO_LEFT_L1,
+		GEO_RIGHT_L1,
+		GEO_FRONT_L1,
+		GEO_BACK_L1,
+
+		//objects
+		GEO_APPLE,
+		GEO_ORANGE,
+		GEO_WATERMELON,
+		GEO_CABBAGE,
+		GEO_COCONUT,
+		GEO_LODIN,
+		GEO_ICECREAM,
+		GEO_REGISTER,
+		GEO_BASKET,
+		GEO_COOLER,
+		GEO_CHAR,
+		GEO_TENT,	
+		GEO_DOORMAN,
+		GEO_SHELF,
+		GEO_TRAVELATORUP,
+		GEO_TRAVELATORDN,
+		GEO_BARRIER,
+		GEO_PACKET,
+		GEO_BOX1,
+		GEO_CAN1,
+		GEO_BUILDING,
+
+		/* ======================================= Glenn's work ================================== */
+		GEO_CASHIER,
+		GEO_UI,
+		/* ======================================= Glenn's work ================================== */
+
+		//level 2 for the supermarket - Rayner's work
+		GEO_TOP2,
+		GEO_BOTTOM2,
+		GEO_LEFT2,
+		GEO_RIGHT2,
+		GEO_FRONT2,
+		GEO_BACK2,
+		
+
+		//Andy's work		
+		GEO_LIFT,
+		GEO_DOOR,
+		GEO_ALARM,
+		GEO_LIGHTBALL,
+		GEO_TEXT,
+
+		NUM_GEOMETRY
 	};
 
-	enum MODEL_TYPE_YELLOW
+	enum SKYBOX_TYPE
 	{
-		MODEL_BODY_YELLOW = 0,
-		MODEL_LEFTARM_YELLOW,
-		MODEL_LEFTFIST_YELLOW,
-		MODEL_LEFT_LEG_UPPER_YELLOW,
-		MODEL_LEFT_LEG_LOWER_YELLOW,
-		MODEL_RIGHTARM_YELLOW,
-		MODEL_RIGHTFIST_YELLOW,
-		MODEL_RIGHT_LEG_UPPER_YELLOW,
-		MODEL_RIGHT_LEG_LOWER_YELLOW,
-		NUM_MODEL_YELLOW,
+		SKYBOX_FRONT,
+		SKYBOX_BACK,
+		SKYBOX_LEFT,
+		SKYBOX_RIGHT,
+		SKYBOX_UP,
+		SKYBOX_DOWN,
+		SKYBOX_EXTEBANNER,
+		SKYBOX_EXTESIDE,
+		NUM_SKYBOX
+	};
+
+	enum CAMERA_TYPE
+	{
+		PLAYER_CAM,
+		NOCLIP_CAM,
+		NUM_CAMERA
 	};
 
 public:
@@ -234,11 +184,23 @@ public:
 	void InitExtSkybox();
 	void InitCollision();
 	void InitAI();
+
+	/* ================================== Glenn's work ===================*/
 	void InitModelBlue();
 	void InitModelOrange();
 	void InitModelPink();
-	void InitModelRed();
-	void InitModelYellow();
+
+	void UpdateModelGlenn(double dt);
+	void RenderModelGlenn();
+	void RenderQuadOnScreen(Mesh* mesh, float x_size, float y_size, float x, float y);
+	void ReadFromText();	//this should be linked to RenderTextOnScreen function
+	
+	//slot in all AI movements here and call to RenderModels();
+	void RenderModelBlue();
+	void RenderModelOrange();
+	void RenderModelPink();
+	
+	/* ================================== Glenn's work ===================*/
 
 	//Update functions
 	void UpdateViewMode(double dt);
@@ -247,8 +209,6 @@ public:
 	void UpdateLight(double dt);
 	void UpdateModel(double dt);
 	void UpdateTravel(double dt);
-	void UpdateModelGlenn(double dt);
-	void UpdateAndy(double dt);
 
 	//Render functions
 	void RenderLevel1();
@@ -263,20 +223,6 @@ public:
 	void RenderOut_Skybox();
 	void RenderText(Mesh* mesh, std::string text, Color color);
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
-	void RenderMusic();
-	void RenderBGM(); 
-	void RenderMission();
-	void RenderModelGlenn();
-	void RenderQuadOnScreen(Mesh* mesh, float x_size, float y_size, float x, float y);
-	void ReadFromText();	//this should be linked to RenderTextOnScreen function
-	//slot in all AI movements here and call to RenderModels();
-	void RenderModelBlue();
-	void RenderModelOrange();
-	void RenderModelPink();
-	void RenderModelRed();
-	void RenderModelYellow();
-	void RenderModelVehicles();
-
 
 	virtual void Init();
 	virtual void Update(double dt);
@@ -285,11 +231,13 @@ public:
 private:
 	Mesh* meshList[NUM_GEOMETRY];
 	Mesh* skyboxList[NUM_SKYBOX];		//for the skybox
+
+	/* =================== Glenn's work ==================== */
 	Mesh* modelList2[NUM_MODEL_BLUE];	//blue model animation
 	Mesh* modelList6[NUM_MODEL_ORANGE];	//orange model animation
 	Mesh* modelList7[NUM_MODEL_PINK];	//pink model animation
-	Mesh* modelList3[NUM_MODEL_RED];	//red model animation
-	Mesh* modelList4[NUM_MODEL_YELLOW];	//yellow model animation
+	/* =================== Glenn's work ==================== */
+
 	unsigned m_vertexArrayID;
 	unsigned m_programID;
 	unsigned m_parameters[U_TOTAL];
@@ -306,36 +254,38 @@ private:
 	float DX;
 	float DX2;
 
-	//elevator - Andy's work
+	//elevator 
 	float eley;
 	float LiftDoor;
 	float LiftDoor2;
-	float waitTime, waitTime2,waitTime3;
+	float waitTime, waitTime2;
 	bool up;
 	bool down;
 	bool Lopen;
 	bool Lclose;
 	bool Lopen2;
 	bool Lclose2;
-	bool buttonPress, buttonPress2,buttonPress3;
+	bool buttonPress, buttonPress2;
 
-	//travelator - Andy's work
+	//travelator
 	bool travel;
 	bool travelDwn;
-	//music
-	bool musicAlarm, loop1, loop2,musicStop, musicBGM, musicCrowd, Mission, coin;
-	
-	//entrance
-	bool open2;
-	bool close2;
-	float D2X;
-	float D2X2;
+	bool RenderOn;
+
+	//light
+	bool flash;
 
 	//model-related variables
 	float rotateAngle;
 	float translateX;
 	float translateY;
 	float translateZ;
+
+	//entrance
+	bool open2;
+	bool close2;
+	float D2X;
+	float D2X2;
 
 	//collision
 	vector<Vector3> sphere;
@@ -345,64 +295,39 @@ private:
 	CAMERA_TYPE camType;
 	FPC noClipCamera;
 	FPC playerCamera;
-	Light lights[2];
+	Light light[1];
 
 	void RenderMesh(Mesh *mesh, bool enableLight);
 
 	MS modelStack, viewStack, projectionStack;
 
 	vector<CObjects> ObjectList;
-	/*-------------------------------------------------!! UPDATE NEEDED (WEI HENG) !!----------------------------------------------------*/
+	
 	CObjects Skybox1, Skybox2, Basket, Cooler, Shelf, Travellator, Cashier, Elevator, Register, Barrier,firealarm, House,
-		     PickUp1, PickUp2, PickUp3, PickUp4, PickUp5, PickUp6, PickUp7,scenerio3;	
-	/*-------------------------------------------------!! UPDATE NEEDED (WEI HENG) !!----------------------------------------------------*/
+		     PickUp1, PickUp2, PickUp3,scenerio3;
 
-	float FPS, ET,timer;
+	float FPS, ET;
 
 	//debug
 	bool debug;
 
-	bool render1, render2, render3, render4, render5, render6, render7, render8,renderscenerio3,renderscenerio3text,startgame,game3;	
-	bool place1,place2,place3,place4,place5,gameover,congrat,caught;
-
-	/*-----------------------AI-------------------------------------------*/
-	float openStart;
-
+	bool render1, render2, render3,renderscenerio3;
+	
 	CObjects modelPink;
 	int pinkSize; // size of  vector
 	vector <bool> pinkCheck; //Give each transformation a bool, and set it to true
 	vector <float> pinkMove; //Give each transformation a value, and set it to 0
-	float pinkTime0, pinkTime1,pinkTime2;
 
 	CObjects modelBlue;
 	int blueSize; 
 	vector <bool> blueCheck; 
 	vector <float> blueMove; 
-	float blueTime0, blueTime1, blueTime2;
 
 	CObjects modelOrange;
 	int orangeSize; 
 	vector <bool> orangeCheck; 
 	vector <float> orangeMove; 
-	float orangeTime0, orangeTime1, orangeTime2;
 
-	CObjects modelYellow;
-	int yellowSize; 
-	vector <bool> yellowCheck; 
-	vector <float> yellowMove; 
-
-	CObjects modelRed;
-	int redSize; 
-	vector <bool> redCheck; 
-	vector <float> redMove; 
-
-
-	//Scene1
-	double speedAI;
-
-	//Scene2
-	bool gameStart, gameEnd;
-	float gameTime;
 
 };
 

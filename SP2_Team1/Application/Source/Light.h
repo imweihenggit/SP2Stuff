@@ -10,12 +10,12 @@ struct Light
 	float power;
 	float kC, kL, kQ;
 
+	//add these after existing parameters 
 	enum LIGHT_TYPE
 	{
 		LIGHT_POINT = 0,
 		LIGHT_DIRECTIONAL,
 		LIGHT_SPOT,
-
 	};
 	LIGHT_TYPE type;
 	Vector3 spotDirection;
@@ -24,6 +24,4 @@ struct Light
 	float exponent;
 	
 };
-
-
 #endif
