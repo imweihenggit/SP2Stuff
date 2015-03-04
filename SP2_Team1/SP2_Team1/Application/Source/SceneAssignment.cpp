@@ -1069,6 +1069,12 @@ void SceneAssignment::Init()
 
 	render1 = render2 = render3 = render4 = render5 = render6 = render7 = render8 = true; 
 
+	ai1 = ai2 = ai3 = true;
+	renderai1text = renderai2text = renderai3text = false;
+	renderai1text_2 = renderai2text_2 = renderai3text_2 = false;
+	aitimer1 = aitimer2 = aitimer3 = 0;
+	start = false;
+
 	LiftDoor = LiftDoor2 = 0;
 
 	// Set background color to dark blue
@@ -1940,6 +1946,85 @@ void SceneAssignment::Update(double dt)
 	if (-bus1.translateX < -3600)
 	{
 		bus1.translateX = -3600;
+	}
+	
+	
+	//static ai 1 work
+	if ((playerCamera.position.x<=210 && playerCamera.position.x>=180) && (playerCamera.position.z<= -170 && playerCamera.position.z>= -190 ) && playerCamera.position.y >= 180 && renderai1text_2==false)
+	{
+		renderai1text = true;
+	}
+	else
+	{
+		renderai1text = false;
+	}
+	if (renderai1text == true && Application::IsKeyPressed('F'))
+	{
+		renderai1text_2 = true;
+		start = true;
+	}
+	
+	if(start == true)
+	{
+		aitimer1 += dt;
+		
+		if(aitimer1 >= 2)
+		{
+			renderai1text_2 = false;
+			renderai1text = false;
+		}
+	}
+
+	//static ai 2 work
+	if ((playerCamera.position.x<= -20 && playerCamera.position.x>=-70) && (playerCamera.position.z<= 50 && playerCamera.position.z>= 10 ) && playerCamera.position.y >= 180 && renderai2text_2==false)
+	{
+		renderai2text = true;
+	}
+	else
+	{
+		renderai2text = false;
+	}
+	if (renderai2text == true && Application::IsKeyPressed('F'))
+	{
+		renderai2text_2 = true;
+		start = true;
+	}
+	
+	if(start == true)
+	{
+		aitimer2 += dt;
+		
+		if(aitimer2 >= 2)
+		{
+			renderai2text_2 = false;
+			renderai2text = false;
+		}
+	}
+
+	//static ai 3 work
+	if ((playerCamera.position.x<= 280 && playerCamera.position.x>= 230) && (playerCamera.position.z<= 130 && playerCamera.position.z>= 90 ) && playerCamera.position.y >= 30 && renderai3text_2==false)
+	{
+		renderai3text = true;
+	}
+	else
+	{
+		renderai3text = false;
+	}
+	if (renderai3text == true && Application::IsKeyPressed('F'))
+	{
+		renderai3text_2 = true;
+		start = true;
+	}
+	
+	if(start == true)
+	{
+		aitimer3 += dt;
+		
+		if(aitimer3 >= 2)
+		{
+			renderai3text_2 = false;
+			renderai3text = false;
+		}
 	}
 }
 void SceneAssignment::RenderMesh(Mesh *mesh, bool enableLight)
@@ -4502,6 +4587,80 @@ void SceneAssignment::RenderQuadOnScreen(Mesh* mesh, float x_size, float y_size,
 	modelStack.PopMatrix();
 	glEnable(GL_DEPTH_TEST);
 }
+void SceneAssignment::RenderStaticAIGlenn()
+{
+		modelStack.PushMatrix();
+		modelStack.Translate(210, 150,-190);
+		//modelStack.Rotate(180,0,1,0);
+		modelStack.Scale(5,5,5);
+		RenderMesh(meshList[GEO_PINKAI], false);
+		modelStack.PopMatrix();
+
+		modelStack.PushMatrix();
+		modelStack.Translate(-30, 150, 50);
+		//modelStack.Rotate(180,0,1,0);
+		modelStack.Scale(5,5,5);
+		RenderMesh(meshList[GEO_REDAI], false);
+		modelStack.PopMatrix();
+
+		modelStack.PushMatrix();
+		modelStack.Translate(250, 0, 100);
+		modelStack.Rotate(90,0,1,0);
+		modelStack.Scale(5,5,5);
+		RenderMesh(meshList[GEO_YELLOWAI], false);
+		modelStack.PopMatrix();
+
+	if(renderai1text == true)
+	{
+		//template for 'F' function triggers
+		modelStack.PushMatrix();
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
+		modelStack.PopMatrix();
+		RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to talk." , Color(0, 0.7, 1), 4, 6.3, 5);
+	}
+	if(renderai1text_2 == true)
+	{
+		//template for 'F' function triggers
+		modelStack.PushMatrix();
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
+		modelStack.PopMatrix();
+		RenderTextOnScreen(meshList[GEO_TEXT], "So many to choose from...!" , Color(0, 0.7, 1), 4, 6, 5);
+	}
+
+	if(renderai2text == true)
+	{
+		//template for 'F' function triggers
+		modelStack.PushMatrix();
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
+		modelStack.PopMatrix();
+		RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to talk." , Color(0, 0.7, 1), 4, 6.3, 5);
+	}
+	if(renderai2text_2 == true)
+	{
+		//template for 'F' function triggers
+		modelStack.PushMatrix();
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
+		modelStack.PopMatrix();
+		RenderTextOnScreen(meshList[GEO_TEXT], "I forgot what I want to buy..." , Color(0, 0.7, 1), 4, 4.5, 5);
+	}
+
+	if(renderai3text == true)
+	{
+		//template for 'F' function triggers
+		modelStack.PushMatrix();
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
+		modelStack.PopMatrix();
+		RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to talk." , Color(0, 0.7, 1), 4, 6.3, 5);
+	}
+	if(renderai3text_2 == true)
+	{
+		//template for 'F' function triggers
+		modelStack.PushMatrix();
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
+		modelStack.PopMatrix();
+		RenderTextOnScreen(meshList[GEO_TEXT], "Ice cream should be cheaper." , Color(0, 0.7, 1), 4, 4.5, 5);
+	}
+}
 void SceneAssignment::Render()
 {
 	// Render VBO here
@@ -4598,7 +4757,7 @@ void SceneAssignment::Render()
 	RenderSmallObjects();
 	RenderLevel1();
 	RenderChar();
-
+	RenderStaticAIGlenn();
 	// FOR VISUAL DEBUGGING, IGNORE THE DOORMAN
 	if (debug == true)
 	{
@@ -5010,7 +5169,7 @@ void SceneAssignment::Render()
 		RenderTextOnScreen(meshList[GEO_TEXT], "GameOver" , Color(0, 0.7, 1), 6, 5.2, 3.8);
 		modelStack.PopMatrix();
 	}
-	//need to add collision detection for this UI to work properly - Glenn
+	
 	if(caught == false)
 		{
 		//template for 'F' function triggers

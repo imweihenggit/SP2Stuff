@@ -248,7 +248,7 @@ public:
 	void UpdateModel(double dt);
 	void UpdateTravel(double dt);
 	void UpdateModelGlenn(double dt);
-	void UpdateAndy(double dt);
+	void UpdateStaticAIGlenn(double dt);
 
 	//Render functions
 	void RenderLevel1();
@@ -276,7 +276,7 @@ public:
 	void RenderModelRed();
 	void RenderModelYellow();
 	void RenderModelVehicles();
-
+	void RenderStaticAIGlenn();
 
 	virtual void Init();
 	virtual void Update(double dt);
@@ -358,14 +358,16 @@ private:
 	/*-------------------------------------------------!! UPDATE NEEDED (WEI HENG) !!----------------------------------------------------*/
 
 	int FPS;
-	float ET,timer;
+	float ET,timer, aitimer1, aitimer2, aitimer3;
 
 	//debug
 	bool debug;
 
 	bool render1, render2, render3, render4, render5, render6, render7, render8,renderscenerio3,renderscenerio3text,startgame,game3;	
 	bool place1,place2,place3,place4,place5,gameover,congrat,caught;
-
+	bool ai1, ai2, ai3;
+	bool renderai1text, renderai1text_2, renderai2text, renderai2text_2, renderai3text, renderai3text_2;
+	bool start;
 	/*-----------------------AI-------------------------------------------*/
 	float openStart;
 
@@ -408,3 +410,4 @@ private:
 };
 
 #endif
+
