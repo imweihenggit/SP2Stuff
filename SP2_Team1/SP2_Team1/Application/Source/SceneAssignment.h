@@ -87,7 +87,7 @@ class SceneAssignment : public Scene
 		GEO_CEILING,
 		GEO_CASHIER,
 		GEO_UI,
-
+		GEO_MOUTAIN,
 		//level 2 for the supermarket - Rayner's work
 		GEO_TOP2,
 		GEO_LEFT2,
