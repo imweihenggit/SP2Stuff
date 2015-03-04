@@ -1623,6 +1623,7 @@ void SceneAssignment::Update(double dt)
 	if(Application::IsKeyPressed('P')) {
 		isPaused = true;
 		engine->setAllSoundsPaused(true);
+		engine2->setAllSoundsPaused(true);
 	}
 
 
@@ -4839,6 +4840,16 @@ void SceneAssignment::Render()
 	RenderMesh(meshList[GEO_DOOR], false);
 	modelStack.PopMatrix();
 
+	for(int i = 0;i<firealarm.getTotal();++i)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(firealarm.translateVal[i].x,firealarm.translateVal[i].y,firealarm.translateVal[i].z);
+		modelStack.Rotate(firealarm.rotateVal[i],firealarm.rotateAxis[i].x,firealarm.rotateAxis[i].y,firealarm.rotateAxis[i].z);
+		modelStack.Scale(firealarm.scaleVal[i].x,firealarm.scaleVal[i].y,firealarm.scaleVal[i].z);
+		RenderMesh(meshList[GEO_ALARM], false);
+		modelStack.PopMatrix();
+	}
+
 
 	RenderLevel2();
 	RenderLargeObjects();
@@ -5312,14 +5323,17 @@ void SceneAssignment::Render()
 
 		if (Application::IsKeyPressed(VK_RETURN)) {
 			if (iChoice == 1) {
-					bReset = true;
+				engine->stopAllSounds();
+				engine2->stopAllSounds();
+				bReset = true;
 			}
 			if (iChoice == 2) {
-					exit(0);
+				exit(0);
 			}
 			if (iChoice == 3) {
-					isPaused = false;
-					engine->setAllSoundsPaused(false);
+				isPaused = false;
+				engine->setAllSoundsPaused(false);
+				engine2->setAllSoundsPaused(false);
 			}
 		}
 
