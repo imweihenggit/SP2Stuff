@@ -1,6 +1,6 @@
 #include "MoveAI.h"
 
-bool AImoveZ (MS &model, float &zero, float val)
+bool AImoveZ (MS &model, float &zero, float val, float speed)
 {
 	model.Translate(0,0,zero);
 
@@ -8,7 +8,7 @@ bool AImoveZ (MS &model, float &zero, float val)
 	{
 		if (zero < val)
 		{
-			zero+=1;
+			zero+=speed;
 			return true;
 		}
 		else
@@ -18,7 +18,7 @@ bool AImoveZ (MS &model, float &zero, float val)
 	{
 		if (zero > val)
 		{
-			zero-=1;
+			zero-=speed;
 			return true;
 		}
 		else
@@ -26,7 +26,7 @@ bool AImoveZ (MS &model, float &zero, float val)
 	}
 }
 
-bool AImoveX (MS &model, float &zero, float val)
+bool AImoveX (MS &model, float &zero, float val, float speed)
 {
 	model.Translate(zero,0,0);
 
@@ -34,7 +34,7 @@ bool AImoveX (MS &model, float &zero, float val)
 	{
 		if (zero < val)
 		{
-			zero+=1;
+			zero+=speed;
 			return true;
 		}
 		else
@@ -44,7 +44,7 @@ bool AImoveX (MS &model, float &zero, float val)
 	{
 		if (zero > val)
 		{
-			zero-=1;
+			zero-=speed;
 			return true;
 		}
 		else
@@ -52,7 +52,7 @@ bool AImoveX (MS &model, float &zero, float val)
 	}
 }
 
-bool AImoveY (MS &model, float &zero, float val)
+bool AImoveY (MS &model, float &zero, float val, float speed)
 {
 
 	model.Translate(0,zero,0);
@@ -61,7 +61,7 @@ bool AImoveY (MS &model, float &zero, float val)
 	{
 		if (zero < val)
 		{
-			zero+= (1*((float)11/25));
+			zero+= (speed*((float)11/25));
 			return true;
 		}
 		else
@@ -71,7 +71,7 @@ bool AImoveY (MS &model, float &zero, float val)
 	{
 		if (zero > val)
 		{
-			zero-= (1*((float)11/25));
+			zero-= (speed*((float)11/25));
 			return true;
 		}
 		else
@@ -79,18 +79,18 @@ bool AImoveY (MS &model, float &zero, float val)
 	}
 }
 
-bool AIstop (float &zero, float val)
+bool AIstop (float &zero, float val, float speed)
 {
 	if (zero < val)
 	{
-		zero += 1;
+		zero += speed;
 		return true;
 	}
 	else
 		return false;
 }
 
-bool AIrotate (MS &model, Vector3 &pos, float &zero, char axis, float val)
+bool AIrotate (MS &model, Vector3 &pos, float &zero, char axis, float val, float speed)
 {
 	model.Translate(pos.x,pos.y,pos.z);
 
@@ -107,7 +107,7 @@ bool AIrotate (MS &model, Vector3 &pos, float &zero, char axis, float val)
 	{
 		if (zero < val)
 		{
-			zero+=2;
+			zero+=speed;
 			return true;
 		}
 		else
@@ -117,7 +117,7 @@ bool AIrotate (MS &model, Vector3 &pos, float &zero, char axis, float val)
 	{
 		if (zero > val)
 		{
-			zero-=2;
+			zero-=speed;
 			return true;
 		}
 		else
