@@ -226,6 +226,7 @@ class SceneAssignment : public Scene
 public:
 	SceneAssignment();
 	~SceneAssignment();
+	static bool bReset;
 
 	//Init functions
 	void InitLevel1();
@@ -282,6 +283,7 @@ public:
 	virtual void Update(double dt);
 	virtual void Render();
 	virtual void Exit();
+
 private:
 	Mesh* meshList[NUM_GEOMETRY];
 	Mesh* skyboxList[NUM_SKYBOX];		//for the skybox
@@ -406,6 +408,11 @@ private:
 	//Scene2
 	bool gameStart, gameEnd;
 	float gameTime;
+
+
+	//Pause menu
+	bool isPaused;
+	int iChoice;
 
 };
 

@@ -22,8 +22,11 @@ ISoundEngine* engine = createIrrKlangDevice(ESOD_AUTO_DETECT,ESEO_MULTI_THREADED
 
 ISoundEngine* engine2 = createIrrKlangDevice(ESOD_AUTO_DETECT,ESEO_MULTI_THREADED | ESEO_LOAD_PLUGINS | ESEO_USE_3D_BUFFERS); 
 
+bool SceneAssignment::bReset = false;
+
 SceneAssignment::SceneAssignment()
 {
+	bReset = false;
 }
 SceneAssignment::~SceneAssignment()
 {
@@ -795,7 +798,7 @@ void SceneAssignment::InitCollision()
 		}
 		
 	}
-	Shelf.collisionRad = 30;
+	Shelf.collisionRad = 15;
 	
 	ObjectList.push_back(Shelf);
 
@@ -894,7 +897,7 @@ void SceneAssignment::InitCollision()
 	
 	Barrier.scaleVal.push_back(Vector3(10,7,20));
 	
-	Barrier.collisionRad = 30;
+	Barrier.collisionRad = 20;
 	ObjectList.push_back(Barrier);
 
 		//Houses on left side
@@ -1018,6 +1021,10 @@ void SceneAssignment::InitAI()
 }
 void SceneAssignment::Init()
 {
+	//Pause
+	isPaused = false;
+	iChoice = 1;
+
 	//car, truck and bus
 	car1.translateX = 0;
 	car1.translateZ = 0;
@@ -1520,7 +1527,7 @@ void SceneAssignment::UpdateDoor(double dt)
 		} 
 	}
 
-	if (openStart >= 1 && openStart <= 3) { 
+	if (openStart >= 2 && openStart <= 4) { 
 		open2 = true; 
 	} 
 
@@ -1613,341 +1620,434 @@ void SceneAssignment::UpdateModelGlenn(double dt)
 }
 void SceneAssignment::Update(double dt)
 {
-	//car, bus, truck
-	car1.translateZ += (float)(50 * dt);
-	car1.rotateAngle += (float)(10 * dt);
-	car2.translateX += (float)(300 * dt);
-	car4.translateX += (float)(300 * dt);
-	truck1.translateX += (float)(300 * dt);
-	bus1.translateX += (float)(300 * dt);
-
-	bool collideALL = Collision(charPos,ObjectList);
-
-	FPS = 1/dt;
-	ET += dt;
-
-	UpdateModelGlenn(dt);
-	UpdateViewMode(dt);
-	UpdateDoor(dt);
-	UpdateLift(dt);
-	UpdateLift(dt);
-	UpdateTravel(dt);
-
-	if(Application::IsKeyPressed('Q'))
-	{
-		debug = true;
-	}
-	if(Application::IsKeyPressed('E'))
-	{
-		debug = false;
-	}
-				/*-------------------------------------------------!! UPDATE NEEDED (WEI HENG) !!----------------------------------------------------*/
-	if (gameStart == true && gameEnd == false) {
-		if (Application::IsKeyPressed('F') && Collision(playerCamera.position,ObjectList,4,28))
-		{
-			if (render1 == true)
-				coin = true;
-
-			render1 = false;
-
-			
-		}
-
-		if (Application::IsKeyPressed('F') && Collision(playerCamera.position,ObjectList,2,29))
-		{
-			if (render2 == true)
-				coin = true;
-			
-			render2 = false;
-		}
-	
-		if (Application::IsKeyPressed('F') && Collision(playerCamera.position,ObjectList,3,4))
-		{
-			if (render3 == true)
-				coin = true;
-
-			render3 = false;
-		}
-
-		if ( Application::IsKeyPressed('F') && ( Collision(playerCamera.position,ObjectList,4,83) || Collision(playerCamera.position,ObjectList,4,30) ) )
-		{
-			if (render5 == true)
-				coin = true;
-
-			render5 = false;
-		}
-
-		if ( Application::IsKeyPressed('F') &&  Collision(playerCamera.position,ObjectList,4,46) )
-		{
-			if (render6 == true)
-				coin = true;
-			render6 = false;
-		}
-
-		if ( Application::IsKeyPressed('F') &&  Collision(playerCamera.position,ObjectList,4,36) )
-		{
-			if (render7 == true)
-				coin = true;
-
-			render7 = false;
-		}
-
-		if ( Application::IsKeyPressed('F') &&  Collision(playerCamera.position,ObjectList,4,84) )
-		{
-			if (render8 == true)
-				coin = true;
-
-			render8 = false;
-		}
+	if(Application::IsKeyPressed('P')) {
+		isPaused = true;
+		engine->setAllSoundsPaused(true);
 	}
 
-	if (Application::IsKeyPressed('F') && Collision(playerCamera.position,ObjectList,5,1) && loop1==false)
-	{
-		render4 = false;
-	}
 
-	if (Application::IsKeyPressed('F') && Collision(playerCamera.position,ObjectList,5,1) && gameStart == true)
-	{
-		musicStop = true; 
-		gameEnd = true;
-	}
+	if (isPaused == false) {
 
-	if (gameStart == true)
-		gameTime += dt;
-	
-	//=================================================!! UPDATE NEEDED (ANDY)1/3/15!!===================================================
-	if(loop1)
-	{
-		lights[0].color.Set(1, 0, 0);
-		glUniform3fv(m_parameters[U_LIGHT0_COLOR], 1, &lights[0].color.r);
-		meshList[GEO_LEFT_L1]->material.kAmbient.Set(1.0f, 0.f, 0.f);
-		meshList[GEO_RIGHT_L1]->material.kAmbient.Set(1.0f, 0.f, 0.f);
-		meshList[GEO_BOTTOM_L1]->material.kAmbient.Set(1.0f, 0.f, 0.f);
-		meshList[GEO_FRONT_L1]->material.kAmbient.Set(1.0f, 0.f, 0.f);
-		meshList[GEO_BACK_L1]->material.kAmbient.Set(1.0f, 0.f, 0.f);
-		meshList[GEO_CEILING]->material.kAmbient.Set(1.0f, 0.f, 0.f);
-		
-	}
-	if (loop2)
-	{
-		lights[0].color.Set(1, 1, 1);
-		glUniform3fv(m_parameters[U_LIGHT0_COLOR], 1, &lights[0].color.r);
-		meshList[GEO_LEFT_L1]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
-		meshList[GEO_RIGHT_L1]->material.kAmbient.Set(0.10f, 0.1f, 0.1f);
-		meshList[GEO_BOTTOM_L1]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
-		meshList[GEO_FRONT_L1]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
-		meshList[GEO_BACK_L1]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+		playerCamera.Update(dt,ObjectList);
+
+		//car, bus, truck
+		car1.translateZ += (float)(50 * dt);
+		car1.rotateAngle += (float)(10 * dt);
+		car2.translateX += (float)(300 * dt);
+		car4.translateX += (float)(300 * dt);
+		truck1.translateX += (float)(300 * dt);
+		bus1.translateX += (float)(300 * dt);
+
+		bool collideALL = Collision(charPos,ObjectList);
+
+		FPS = 1/dt;
+		ET += dt;
+
+		UpdateModelGlenn(dt);
+		UpdateViewMode(dt);
+		UpdateDoor(dt);
+		UpdateLift(dt);
+		UpdateLift(dt);
+		UpdateTravel(dt);
+
+		if(Application::IsKeyPressed('Q')) {
+			debug = true;
+		}
+		if(Application::IsKeyPressed('E')) {
+			debug = false;
+		}
+		/*-------------------------------------------------!! UPDATE NEEDED (WEI HENG) !!----------------------------------------------------*/
+		if (gameStart == true && gameEnd == false) {
+			if (Application::IsKeyPressed('F') && Collision(playerCamera.position,ObjectList,4,28))
+			{
+				if (render1 == true)
+					coin = true;
+
+				render1 = false;
+
+
+			}
+
+			if (Application::IsKeyPressed('F') && Collision(playerCamera.position,ObjectList,2,29))
+			{
+				if (render2 == true)
+					coin = true;
+
+				render2 = false;
+			}
+
+			if (Application::IsKeyPressed('F') && Collision(playerCamera.position,ObjectList,3,4))
+			{
+				if (render3 == true)
+					coin = true;
+
+				render3 = false;
+			}
+
+			if ( Application::IsKeyPressed('F') && ( Collision(playerCamera.position,ObjectList,4,83) || Collision(playerCamera.position,ObjectList,4,30) ) )
+			{
+				if (render5 == true)
+					coin = true;
+
+				render5 = false;
+			}
+
+			if ( Application::IsKeyPressed('F') &&  Collision(playerCamera.position,ObjectList,4,46) )
+			{
+				if (render6 == true)
+					coin = true;
+				render6 = false;
+			}
+
+			if ( Application::IsKeyPressed('F') &&  Collision(playerCamera.position,ObjectList,4,36) )
+			{
+				if (render7 == true)
+					coin = true;
+
+				render7 = false;
+			}
+
+			if ( Application::IsKeyPressed('F') &&  Collision(playerCamera.position,ObjectList,4,84) )
+			{
+				if (render8 == true)
+					coin = true;
+
+				render8 = false;
+			}
+		}
+
+		if (Application::IsKeyPressed('F') && Collision(playerCamera.position,ObjectList,5,1) && loop1==false)
+		{
+			render4 = false;
+		}
+
+		if (Application::IsKeyPressed('F') && Collision(playerCamera.position,ObjectList,5,1) && gameStart == true)
+		{
+			musicStop = true; 
+			gameEnd = true;
+		}
+
+		if (gameStart == true)
+			gameTime += dt;
+
+		//=================================================!! UPDATE NEEDED (ANDY)1/3/15!!===================================================
+		if(loop1)
+		{
+			lights[0].color.Set(1, 0, 0);
+			glUniform3fv(m_parameters[U_LIGHT0_COLOR], 1, &lights[0].color.r);
+			meshList[GEO_LEFT_L1]->material.kAmbient.Set(1.0f, 0.f, 0.f);
+			meshList[GEO_RIGHT_L1]->material.kAmbient.Set(1.0f, 0.f, 0.f);
+			meshList[GEO_BOTTOM_L1]->material.kAmbient.Set(1.0f, 0.f, 0.f);
+			meshList[GEO_FRONT_L1]->material.kAmbient.Set(1.0f, 0.f, 0.f);
+			meshList[GEO_BACK_L1]->material.kAmbient.Set(1.0f, 0.f, 0.f);
+			meshList[GEO_CEILING]->material.kAmbient.Set(1.0f, 0.f, 0.f);
+
+		}
+		if (loop2)
+		{
+			lights[0].color.Set(1, 1, 1);
+			glUniform3fv(m_parameters[U_LIGHT0_COLOR], 1, &lights[0].color.r);
+			meshList[GEO_LEFT_L1]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+			meshList[GEO_RIGHT_L1]->material.kAmbient.Set(0.10f, 0.1f, 0.1f);
+			meshList[GEO_BOTTOM_L1]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+			meshList[GEO_FRONT_L1]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+			meshList[GEO_BACK_L1]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
 			meshList[GEO_CEILING]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
-	}
+		}
 
 
-	if (Application::IsKeyPressed('F') && (playerCamera.position.x >= 350 &&((playerCamera.position.z >= -150)&&(playerCamera.position.z <= -130))&&(playerCamera.position.y <= 50)) && (musicAlarm == false)&&(buttonPress3 ==false))
-	{
-		musicStop = false; 
- 		musicAlarm = true; 
-		loop1 = true;	
-		buttonPress3 = true;
-	}
-	if(buttonPress3 == true)
-	{
-		
-		if (waitTime3 < 1500)
-			waitTime3++;
-		else{
-			musicStop = true;
-			loop1 = false;
-			loop2 = true;
+		if (Application::IsKeyPressed('F') && (playerCamera.position.x >= 350 &&((playerCamera.position.z >= -150)&&(playerCamera.position.z <= -130))&&(playerCamera.position.y <= 50)) && (musicAlarm == false)&&(buttonPress3 ==false))
+		{
+			musicStop = false; 
+			musicAlarm = true; 
+			loop1 = true;	
+			buttonPress3 = true;
+		}
+		if(buttonPress3 == true)
+		{
+
+			if (waitTime3 < 1500)
+				waitTime3++;
+			else{
+				musicStop = true;
+				loop1 = false;
+				loop2 = true;
+			}
+		}
+
+
+		//=================================================!! UPDATE NEEDED (ANDY)1/3/15!!===================================================
+
+		if(Application::IsKeyPressed('I'))
+		{
+			//to do: switch light type to POINT and pass the information to shader
+			lights[0].power = 0.5;
+			glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
+		}
+		else if(Application::IsKeyPressed('O'))
+		{
+			//to do: switch light type to DIRECTIONAL and pass the information to shader
+			lights[0].power = 0.1;
+			glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
+
+
+		}
+		else if(Application::IsKeyPressed('P'))
+		{
+			//to do: switch light type to SPOT and pass the information to shader
+
+		}
+		//scenerio3
+		if(game3 == true)
+		{
+			if ((playerCamera.position.x<=545 && playerCamera.position.x>=525) && (playerCamera.position.z<=262 && playerCamera.position.z>=245) && (renderscenerio3== true)&& (startgame == true))
+			{
+				renderscenerio3text = false;
+			}
+			else
+			{
+				renderscenerio3text = true;
+			}
+			if (renderscenerio3text == false && Application::IsKeyPressed('F'))
+			{
+				renderscenerio3 = false;
+
+			}
+			if(renderscenerio3 == false && Application::IsKeyPressed('E'))
+			{
+				startgame = false;
+				renderscenerio3 = true;
+			}
+			if(startgame == false)
+			{
+				timer += dt;
+				if(timer<=20)
+				{
+					place1 = false;
+				}
+				else
+				{
+					place1 = true;
+				}
+				if(timer<=40 && timer>=20)
+				{
+					place2 = false;
+				}
+				else
+				{
+					place2 = true;
+				}
+				if(timer<=60 && timer>=40)
+				{
+					place3 = false;
+				}
+				else
+				{
+					place3 = true;
+				}
+				if(timer<=80 && timer>=60)
+				{
+					place4 = false;
+				}
+				else
+				{
+					place4 = true;
+				}
+				if(timer<=100 && timer>=80)
+				{
+					place5 = false;
+				}
+				else
+				{
+					place5 = true;
+				}
+				if(timer>=100)
+				{
+					gameover = false;
+				}
+
+				if(timer>105)
+				{
+					gameover = true;
+				}
+				//place1
+				if((playerCamera.position.x<=352 && playerCamera.position.x>=332) && (playerCamera.position.z<=-272 && playerCamera.position.z>=-292)&& timer<=20)
+				{
+					caught = false;	 
+				}
+				//place2
+				else if((playerCamera.position.x<=-45 && playerCamera.position.x>=-65) && (playerCamera.position.z<=428 && playerCamera.position.z>=408)&&(timer<=40 && timer>=20))
+				{
+					caught = false;
+				}
+				//place3
+				else if((playerCamera.position.x<=-20 && playerCamera.position.x>=-40) && (playerCamera.position.z<=292 && playerCamera.position.z>=272)&&(timer<=60 && timer>=40))
+				{
+					caught = false;
+				}
+				//place4
+				else if((playerCamera.position.x<=-766 && playerCamera.position.x>=-746) && (playerCamera.position.z<=203 && playerCamera.position.z>=183)&&(timer<=80 && timer>=60))
+				{
+					caught = false;
+				}
+				//place5
+				else if((playerCamera.position.x<=-35 && playerCamera.position.x>=-15) && (playerCamera.position.z<=169 && playerCamera.position.z>=149)&&(timer<=100 && timer>=80))
+				{
+					caught = false;
+				}
+				else
+				{
+					caught = true;
+				}
+				if(caught == false && Application::IsKeyPressed('F'))
+				{
+					congrat = false;
+					caught = true;
+					startgame = true;
+				}
+
+			}
+			if(congrat == false && Application::IsKeyPressed('E'))
+			{
+				congrat = true;
+				game3 = false;
+			}
+		}
+		engine->setListenerPosition(vec3df(playerCamera.position.x,playerCamera.position.y,playerCamera.position.z),vec3df(0,0,0),vec3df(playerCamera.up.x,playerCamera.up.y,playerCamera.up.z));
+
+
+		//go out of carpark
+		if (car1.translateZ < 150)
+		{
+			car1.rotateAngle = 0;
+		}
+		if (car1.translateZ > 150)
+		{
+			car1.rotateAngle -= (float)100*dt;
+			car1.translateZ = 150;
+
+			if(car1.rotateAngle < -90)
+			{
+				car1.rotateAngle = -90;
+			}
+			if(car1.rotateAngle == -90)
+			{
+				car1.translateX -= (float)300*dt;
+			}
+		}
+		if(car1.translateX <= -2000)
+		{
+			car1.translateX = 2000;
+			car1.translateX += (float)300*dt;
+
+			if(car1.translateX <= 0)
+			{
+				car1.translateX = 0;
+			}
+		}
+
+		//test test
+		if (car2.translateX > 3600)
+		{
+			car2.translateX = -3600;
+		}
+		if (-car4.translateX < -3600)
+		{
+			car4.translateX = -3600;
+		}
+		if (truck1.translateX > 3600)
+		{
+			truck1.translateX = -3600;
+		}
+		if (-bus1.translateX < -3600)
+		{
+			bus1.translateX = -3600;
 		}
 	}
 
-
-	//=================================================!! UPDATE NEEDED (ANDY)1/3/15!!===================================================
-
-	if(Application::IsKeyPressed('I'))
-	{
-		//to do: switch light type to POINT and pass the information to shader
-		lights[0].power = 0.5;
-		glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
-	}
-	else if(Application::IsKeyPressed('O'))
-	{
-		//to do: switch light type to DIRECTIONAL and pass the information to shader
-		lights[0].power = 0.1;
-		glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
-		
-		
-	}
-	else if(Application::IsKeyPressed('P'))
-	{
-		//to do: switch light type to SPOT and pass the information to shader
-		
-	}
-	//scenerio3
-	if(game3 == true)
-	{
-	if ((playerCamera.position.x<=545 && playerCamera.position.x>=525) && (playerCamera.position.z<=262 && playerCamera.position.z>=245) && (renderscenerio3== true)&& (startgame == true))
-	{
-		renderscenerio3text = false;
-	}
-	else
-	{
-		renderscenerio3text = true;
-	}
-	if (renderscenerio3text == false && Application::IsKeyPressed('F'))
-	{
-		renderscenerio3 = false;
-
-	}
-	if(renderscenerio3 == false && Application::IsKeyPressed('E'))
-	{
-		startgame = false;
-		renderscenerio3 = true;
-	}
-	if(startgame == false)
-	{
-		timer += dt;
-	if(timer<=20)
-	{
-		place1 = false;
-	}
-	else
-	{
-		place1 = true;
-	}
-	if(timer<=40 && timer>=20)
-	{
-		place2 = false;
-	}
-	else
-	{
-		place2 = true;
-	}
-	if(timer<=60 && timer>=40)
-	{
-		place3 = false;
-	}
-	else
-	{
-		place3 = true;
-	}
-	if(timer<=80 && timer>=60)
-	{
-		place4 = false;
-	}
-	else
-	{
-		place4 = true;
-	}
-	if(timer<=100 && timer>=80)
-	{
-		place5 = false;
-	}
-	else
-	{
-		place5 = true;
-	}
-	if(timer>=100)
-	{
-		gameover = false;
+	else {
+		double midScreenX = (Application::returnWindowSize(true)/2);
+		double midScreenY = (Application::returnWindowSize(false)/2);
+		Application::SetMouseinput(midScreenX, midScreenY);
 	}
 	
-	if(timer>105)
+	
+	//static ai 1 work
+	if ((playerCamera.position.x<=210 && playerCamera.position.x>=180) && (playerCamera.position.z<= -170 && playerCamera.position.z>= -190 ) && playerCamera.position.y >= 180 && renderai1text_2==false)
 	{
-		gameover = true;
-	}
-	//place1
-	if((playerCamera.position.x<=352 && playerCamera.position.x>=332) && (playerCamera.position.z<=-272 && playerCamera.position.z>=-292)&& timer<=20)
-	{
-		caught = false;	 
-	}
-	//place2
-	else if((playerCamera.position.x<=-45 && playerCamera.position.x>=-65) && (playerCamera.position.z<=428 && playerCamera.position.z>=408)&&(timer<=40 && timer>=20))
-	{
-		caught = false;
-	}
-	//place3
-	else if((playerCamera.position.x<=-20 && playerCamera.position.x>=-40) && (playerCamera.position.z<=292 && playerCamera.position.z>=272)&&(timer<=60 && timer>=40))
-	{
-		caught = false;
-	}
-	//place4
-	else if((playerCamera.position.x<=-766 && playerCamera.position.x>=-746) && (playerCamera.position.z<=203 && playerCamera.position.z>=183)&&(timer<=80 && timer>=60))
-	{
-		caught = false;
-	}
-	//place5
-	else if((playerCamera.position.x<=-35 && playerCamera.position.x>=-15) && (playerCamera.position.z<=169 && playerCamera.position.z>=149)&&(timer<=100 && timer>=80))
-	{
-		caught = false;
+		renderai1text = true;
 	}
 	else
 	{
-		caught = true;
+		renderai1text = false;
 	}
-	if(caught == false && Application::IsKeyPressed('F'))
+	if (renderai1text == true && Application::IsKeyPressed('F'))
 	{
-		congrat = false;
-		caught = true;
-		startgame = true;
+		renderai1text_2 = true;
+		start = true;
 	}
 	
-	}
-	if(congrat == false && Application::IsKeyPressed('E'))
+	if(start == true)
 	{
-		congrat = true;
-		game3 = false;
-	}
-	}
-	engine->setListenerPosition(vec3df(playerCamera.position.x,playerCamera.position.y,playerCamera.position.z),vec3df(0,0,0),vec3df(playerCamera.up.x,playerCamera.up.y,playerCamera.up.z));
-
-	playerCamera.Update(dt,ObjectList);
-
-	//go out of carpark
-	if (car1.translateZ < 150)
-	{
-		car1.rotateAngle = 0;
-	}
-	if (car1.translateZ > 150)
-	{
-		car1.rotateAngle -= (float)100*dt;
-		car1.translateZ = 150;
-
-		if(car1.rotateAngle < -90)
+		aitimer1 += dt;
+		
+		if(aitimer1 >= 2)
 		{
-			car1.rotateAngle = -90;
-		}
-		if(car1.rotateAngle == -90)
-		{
-			car1.translateX -= (float)300*dt;
-		}
-	}
-	if(car1.translateX <= -2000)
-	{
-		car1.translateX = 2000;
-		car1.translateX += (float)300*dt;
-
-		if(car1.translateX <= 0)
-		{
-			car1.translateX = 0;
+			renderai1text_2 = false;
+			renderai1text = false;
 		}
 	}
 
-	//test test
-	if (car2.translateX > 3600)
+	//static ai 2 work
+	if ((playerCamera.position.x<= -20 && playerCamera.position.x>=-70) && (playerCamera.position.z<= 50 && playerCamera.position.z>= 10 ) && playerCamera.position.y >= 180 && renderai2text_2==false)
 	{
-		car2.translateX = -3600;
+		renderai2text = true;
 	}
-	if (-car4.translateX < -3600)
+	else
 	{
-		car4.translateX = -3600;
+		renderai2text = false;
 	}
-	if (truck1.translateX > 3600)
+	if (renderai2text == true && Application::IsKeyPressed('F'))
 	{
-		truck1.translateX = -3600;
+		renderai2text_2 = true;
+		start = true;
 	}
-	if (-bus1.translateX < -3600)
+	
+	if(start == true)
 	{
-		bus1.translateX = -3600;
+		aitimer2 += dt;
+		
+		if(aitimer2 >= 2)
+		{
+			renderai2text_2 = false;
+			renderai2text = false;
+		}
+	}
+
+	//static ai 3 work
+	if ((playerCamera.position.x<= 280 && playerCamera.position.x>= 230) && (playerCamera.position.z<= 130 && playerCamera.position.z>= 90 ) && playerCamera.position.y >= 30 && renderai3text_2==false)
+	{
+		renderai3text = true;
+	}
+	else
+	{
+		renderai3text = false;
+	}
+	if (renderai3text == true && Application::IsKeyPressed('F'))
+	{
+		renderai3text_2 = true;
+		start = true;
+	}
+	
+	if(start == true)
+	{
+		aitimer3 += dt;
+		
+		if(aitimer3 >= 2)
+		{
+			renderai3text_2 = false;
+			renderai3text = false;
+		}
 	}
 	
 	
@@ -2113,8 +2213,8 @@ void SceneAssignment::RenderLevel1()
 		modelStack.PopMatrix();
 		temp++;
 	}
-		//=============================================================RenderDoor=============================Credit:Andy===========================================
-	
+	//=============================================================RenderDoor=============================Credit:Andy===========================================
+
 
 }
 void SceneAssignment::RenderLevel2()
@@ -2141,11 +2241,11 @@ void SceneAssignment::RenderLevel2()
 		RenderMesh(meshList[GEO_BARRIER], true);
 		modelStack.PopMatrix();
 	}
-		modelStack.PushMatrix();
-		modelStack.Translate(-225,148,-500);
-		modelStack.Scale(130, 10, 109);
-		RenderMesh(meshList[GEO_CEILING], true);
-		modelStack.PopMatrix();
+	modelStack.PushMatrix();
+	modelStack.Translate(-225,148,-500);
+	modelStack.Scale(130, 10, 109);
+	RenderMesh(meshList[GEO_CEILING], true);
+	modelStack.PopMatrix();
 }
 void SceneAssignment::RenderLargeObjects()
 {
@@ -3820,7 +3920,7 @@ void SceneAssignment::RenderOut_Skybox()
 	modelStack.Scale(4100, 4100, 4100);
 	RenderMesh(skyboxList[SKYBOX_DOWN], false);
 	modelStack.PopMatrix();
-	
+
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 210, 329);
 	modelStack.Scale(1015, 205, 1000);
@@ -3858,7 +3958,7 @@ void SceneAssignment::RenderOut_Skybox()
 	modelStack.Scale(108, 260, 1000);
 	RenderMesh(skyboxList[SKYBOX_EXTESIDE], false);
 	modelStack.PopMatrix();
-	
+
 	//houses
 	for (int i = 0; i < House.getTotal(); ++i)
 	{
@@ -3909,58 +4009,58 @@ void SceneAssignment::RenderModelPink()
 {
 	modelStack.PushMatrix(); 
 
-	if (buttonPress3 == true && loop2 == true) {
-		if (pinkCheck[45]==false) pinkCheck[46]= AImoveZ(modelStack,pinkMove[45],-290);
-		if (pinkCheck[44]==false) pinkCheck[45]= AIrotate(modelStack,Vector3(-660,0,500),pinkMove[44],'y',-90);
-		if (pinkCheck[43]==false) pinkCheck[44]= AImoveX(modelStack,pinkMove[43],-732);
-		pinkCheck[42] = pinkCheck[43]=AIrotate(modelStack,Vector3(90,0,500),pinkMove[42],'y',90);
-	}
+		if (buttonPress3 == true && loop2 == true) {
+			if (pinkCheck[45]==false) pinkCheck[46]= AImoveZ(modelStack,pinkMove[45],-290);
+			if (pinkCheck[44]==false) pinkCheck[45]= AIrotate(modelStack,Vector3(-660,0,500),pinkMove[44],'y',-90);
+			if (pinkCheck[43]==false) pinkCheck[44]= AImoveX(modelStack,pinkMove[43],-732);
+			pinkCheck[42] = pinkCheck[43]=AIrotate(modelStack,Vector3(90,0,500),pinkMove[42],'y',90);
+		}
 
-	if (buttonPress3 == false)
-		if (pinkCheck[41] == false) for(int i=0;i<pinkSize;++i) {pinkCheck[i] = true; pinkMove[i] = 0;}
+		if (buttonPress3 == false)
+			if (pinkCheck[41] == false) for(int i=0;i<pinkSize;++i) {pinkCheck[i] = true; pinkMove[i] = 0;}
 
-	if (pinkCheck[40]==false) pinkCheck[41]= AIrotate(modelStack,Vector3(90,0,500),pinkMove[41],'y',90,speedAI*2);
-	if (pinkCheck[39]==false) pinkCheck[40]= AImoveX(modelStack,pinkMove[40],200,speedAI);
-	if (pinkCheck[38]==false) pinkCheck[39]= AIrotate(modelStack,Vector3(-110,0,500),pinkMove[39],'y',90,speedAI*2);
-	if (pinkCheck[37]==false) pinkCheck[38]= AImoveZ(modelStack,pinkMove[38],215,speedAI);
-	if (pinkCheck[36]==false) pinkCheck[37]= AIrotate(modelStack,Vector3(-110,0,285),pinkMove[37],'y',90,speedAI*2);
-	if (pinkCheck[35]==false) pinkCheck[36]= AImoveX(modelStack,pinkMove[36],-110,speedAI);
-	if (pinkCheck[34]==false) pinkCheck[35]= AIrotate(modelStack,Vector3(0,0,285),pinkMove[35],'y',-90,speedAI*2);
-	if (pinkCheck[33]==false) pinkCheck[34]= AImoveZ(modelStack,pinkMove[34],385,speedAI);
-	if (pinkCheck[32]==false) pinkCheck[33]= AIrotate(modelStack,Vector3(0,0,-100),pinkMove[33],'y',-90,speedAI*2);
-	if (pinkCheck[31]==false) pinkCheck[32]= AImoveX(modelStack,pinkMove[32],250,speedAI);
-	if (pinkCheck[30]==false) pinkCheck[31]= AIrotate(modelStack,Vector3(-250,0,-100),pinkMove[31],'y',-90,speedAI*2);
-	if (pinkCheck[29]==false) pinkCheck[30]= AImoveZ(modelStack,pinkMove[30],-75,speedAI);
-	if (pinkCheck[28]==false) pinkCheck[29]= AIrotate(modelStack,Vector3(-250,0,-25),pinkMove[29],'y',90,speedAI*2);
-	if (pinkCheck[27]==false) pinkCheck[28]= AImoveX(modelStack,pinkMove[28],100,speedAI);
-	if (pinkCheck[26]==false) pinkCheck[27]= AIrotate(modelStack,Vector3(-350,0,-25),pinkMove[27],'y',180,speedAI*2);
-	if (pinkCheck[25]==false) pinkCheck[26]= AIstop(pinkMove[26],80,speedAI);
-	if (pinkCheck[24]==false) pinkCheck[25]= AIrotate(modelStack,Vector3(-350,0,-25),pinkMove[25],'y',-90,speedAI*2);
-	if (pinkCheck[23]==false) pinkCheck[24]= AImoveZ(modelStack,pinkMove[24],100,speedAI);
-	if (pinkCheck[22]==false) pinkCheck[23]= AIrotate(modelStack,Vector3(-350,0,-125),pinkMove[23],'y',90,speedAI*2);
-	if (pinkCheck[21]==false) pinkCheck[22]= AIstop(pinkMove[22],80,speedAI);
-	if (pinkCheck[20]==false) pinkCheck[21]= AIrotate(modelStack,Vector3(-350,0,-125),pinkMove[21],'y',-90,speedAI*2);
-	if (pinkCheck[19]==false) pinkCheck[20]= AImoveZ(modelStack,pinkMove[20],100,speedAI);
-	if (pinkCheck[18]==false) pinkCheck[19]= AIrotate(modelStack,Vector3(-350,0,-225),pinkMove[19],'y',90,speedAI*2);
-	if (pinkCheck[17]==false) pinkCheck[18]= AIstop(pinkMove[18],80,speedAI);
-	if (pinkCheck[16]==false) pinkCheck[17]= AIrotate(modelStack,Vector3(-350,0,-225),pinkMove[17],'y',-90,speedAI*2);
-	if (pinkCheck[15]==false) pinkCheck[16]= AImoveZ(modelStack,pinkMove[16],50,speedAI);
-	if (pinkCheck[14]==false) pinkCheck[15]= AIrotate(modelStack,Vector3(-350,0,-275),pinkMove[15],'y',90,speedAI*2);
-	if (pinkCheck[13]==false) pinkCheck[14]= AImoveX(modelStack,pinkMove[14],-140,speedAI);
-	if (pinkCheck[12]==false) pinkCheck[13]= AIrotate(modelStack,Vector3(-210,0,-275),pinkMove[13],'y',90,speedAI*2);
-	if (pinkCheck[11]==false) pinkCheck[12]= AIstop(pinkMove[12],80,speedAI);
-	if (pinkCheck[10]==false) pinkCheck[11]= AIrotate(modelStack,Vector3(-210,0,-275),pinkMove[11],'y',-90,speedAI*2);
-	if (pinkCheck[9]==false) pinkCheck[10]= AImoveX(modelStack,pinkMove[10],-90,speedAI);
-	if (pinkCheck[8]==false) pinkCheck[9]= AIrotate(modelStack,Vector3(-120,0,-275),pinkMove[9],'y',90,speedAI*2);
-	if (pinkCheck[7]==false) pinkCheck[8]= AIstop(pinkMove[8],80,speedAI);
-	if (pinkCheck[6]==false) pinkCheck[7]= AIrotate(modelStack,Vector3(-120,0,-275),pinkMove[7],'y',-90,speedAI*2);
-	if (pinkCheck[5]==false) pinkCheck[6]= AImoveX(modelStack,pinkMove[6],-90,speedAI);
-	if (pinkCheck[4]==false) pinkCheck[5]= AIrotate(modelStack,Vector3(-30,0,-275),pinkMove[5],'y',90,speedAI*2);
-	if (pinkCheck[3]==false) pinkCheck[4]= AIstop(pinkMove[4],80,speedAI);
-	if (pinkCheck[2]==false) pinkCheck[3]= AIrotate(modelStack,Vector3(-30,0,-275),pinkMove[3],'y',-90,speedAI*2);
-	if (pinkCheck[1]==false) pinkCheck[2]= AImoveX(modelStack,pinkMove[2],-120,speedAI);
-	if (pinkCheck[0]==false) pinkCheck[1]= AIrotate(modelStack,Vector3(90,0,-275),pinkMove[1],'y',90,speedAI*2); 
-	    pinkCheck[0] = AImoveZ(modelStack,pinkMove[0],-775,speedAI);
+			if (pinkCheck[40]==false) pinkCheck[41]= AIrotate(modelStack,Vector3(90,0,500),pinkMove[41],'y',90,speedAI*2);
+			if (pinkCheck[39]==false) pinkCheck[40]= AImoveX(modelStack,pinkMove[40],200,speedAI);
+			if (pinkCheck[38]==false) pinkCheck[39]= AIrotate(modelStack,Vector3(-110,0,500),pinkMove[39],'y',90,speedAI*2);
+			if (pinkCheck[37]==false) pinkCheck[38]= AImoveZ(modelStack,pinkMove[38],215,speedAI);
+			if (pinkCheck[36]==false) pinkCheck[37]= AIrotate(modelStack,Vector3(-110,0,285),pinkMove[37],'y',90,speedAI*2);
+			if (pinkCheck[35]==false) pinkCheck[36]= AImoveX(modelStack,pinkMove[36],-110,speedAI);
+			if (pinkCheck[34]==false) pinkCheck[35]= AIrotate(modelStack,Vector3(0,0,285),pinkMove[35],'y',-90,speedAI*2);
+			if (pinkCheck[33]==false) pinkCheck[34]= AImoveZ(modelStack,pinkMove[34],385,speedAI);
+			if (pinkCheck[32]==false) pinkCheck[33]= AIrotate(modelStack,Vector3(0,0,-100),pinkMove[33],'y',-90,speedAI*2);
+			if (pinkCheck[31]==false) pinkCheck[32]= AImoveX(modelStack,pinkMove[32],250,speedAI);
+			if (pinkCheck[30]==false) pinkCheck[31]= AIrotate(modelStack,Vector3(-250,0,-100),pinkMove[31],'y',-90,speedAI*2);
+			if (pinkCheck[29]==false) pinkCheck[30]= AImoveZ(modelStack,pinkMove[30],-75,speedAI);
+			if (pinkCheck[28]==false) pinkCheck[29]= AIrotate(modelStack,Vector3(-250,0,-25),pinkMove[29],'y',90,speedAI*2);
+			if (pinkCheck[27]==false) pinkCheck[28]= AImoveX(modelStack,pinkMove[28],100,speedAI);
+			if (pinkCheck[26]==false) pinkCheck[27]= AIrotate(modelStack,Vector3(-350,0,-25),pinkMove[27],'y',180,speedAI*2);
+			if (pinkCheck[25]==false) pinkCheck[26]= AIstop(pinkMove[26],80,speedAI);
+			if (pinkCheck[24]==false) pinkCheck[25]= AIrotate(modelStack,Vector3(-350,0,-25),pinkMove[25],'y',-90,speedAI*2);
+			if (pinkCheck[23]==false) pinkCheck[24]= AImoveZ(modelStack,pinkMove[24],100,speedAI);
+			if (pinkCheck[22]==false) pinkCheck[23]= AIrotate(modelStack,Vector3(-350,0,-125),pinkMove[23],'y',90,speedAI*2);
+			if (pinkCheck[21]==false) pinkCheck[22]= AIstop(pinkMove[22],80,speedAI);
+			if (pinkCheck[20]==false) pinkCheck[21]= AIrotate(modelStack,Vector3(-350,0,-125),pinkMove[21],'y',-90,speedAI*2);
+			if (pinkCheck[19]==false) pinkCheck[20]= AImoveZ(modelStack,pinkMove[20],100,speedAI);
+			if (pinkCheck[18]==false) pinkCheck[19]= AIrotate(modelStack,Vector3(-350,0,-225),pinkMove[19],'y',90,speedAI*2);
+			if (pinkCheck[17]==false) pinkCheck[18]= AIstop(pinkMove[18],80,speedAI);
+			if (pinkCheck[16]==false) pinkCheck[17]= AIrotate(modelStack,Vector3(-350,0,-225),pinkMove[17],'y',-90,speedAI*2);
+			if (pinkCheck[15]==false) pinkCheck[16]= AImoveZ(modelStack,pinkMove[16],50,speedAI);
+			if (pinkCheck[14]==false) pinkCheck[15]= AIrotate(modelStack,Vector3(-350,0,-275),pinkMove[15],'y',90,speedAI*2);
+			if (pinkCheck[13]==false) pinkCheck[14]= AImoveX(modelStack,pinkMove[14],-140,speedAI);
+			if (pinkCheck[12]==false) pinkCheck[13]= AIrotate(modelStack,Vector3(-210,0,-275),pinkMove[13],'y',90,speedAI*2);
+			if (pinkCheck[11]==false) pinkCheck[12]= AIstop(pinkMove[12],80,speedAI);
+			if (pinkCheck[10]==false) pinkCheck[11]= AIrotate(modelStack,Vector3(-210,0,-275),pinkMove[11],'y',-90,speedAI*2);
+			if (pinkCheck[9]==false) pinkCheck[10]= AImoveX(modelStack,pinkMove[10],-90,speedAI);
+			if (pinkCheck[8]==false) pinkCheck[9]= AIrotate(modelStack,Vector3(-120,0,-275),pinkMove[9],'y',90,speedAI*2);
+			if (pinkCheck[7]==false) pinkCheck[8]= AIstop(pinkMove[8],80,speedAI);
+			if (pinkCheck[6]==false) pinkCheck[7]= AIrotate(modelStack,Vector3(-120,0,-275),pinkMove[7],'y',-90,speedAI*2);
+			if (pinkCheck[5]==false) pinkCheck[6]= AImoveX(modelStack,pinkMove[6],-90,speedAI);
+			if (pinkCheck[4]==false) pinkCheck[5]= AIrotate(modelStack,Vector3(-30,0,-275),pinkMove[5],'y',90,speedAI*2);
+			if (pinkCheck[3]==false) pinkCheck[4]= AIstop(pinkMove[4],80,speedAI);
+			if (pinkCheck[2]==false) pinkCheck[3]= AIrotate(modelStack,Vector3(-30,0,-275),pinkMove[3],'y',-90,speedAI*2);
+			if (pinkCheck[1]==false) pinkCheck[2]= AImoveX(modelStack,pinkMove[2],-120,speedAI);
+			if (pinkCheck[0]==false) pinkCheck[1]= AIrotate(modelStack,Vector3(90,0,-275),pinkMove[1],'y',90,speedAI*2); 
+			pinkCheck[0] = AImoveZ(modelStack,pinkMove[0],-775,speedAI);
 
 	modelStack.Translate(modelPink.translateVal[0].x,modelPink.translateVal[0].y,modelPink.translateVal[0].z);
 	modelStack.Rotate(modelPink.rotateVal[0],modelPink.rotateAxis[0].x,modelPink.rotateAxis[0].y,modelPink.rotateAxis[0].z);
@@ -4019,40 +4119,40 @@ void SceneAssignment::RenderModelBlue()
 {
 	modelStack.PushMatrix();
 
-	if (buttonPress3 == true && loop2 == true) {
-		if (blueCheck[26]==false) blueCheck[27]= AImoveZ(modelStack,blueMove[27],-350);
-		if (blueCheck[25]==false) blueCheck[26]= AIrotate(modelStack,Vector3(625,0,550),blueMove[26],'y',90); 
-		if (blueCheck[24]==false) blueCheck[25]= AImoveX(modelStack,blueMove[25],465);
-		if (blueCheck[23]==false) blueCheck[24]= AIrotate(modelStack,Vector3(160,0,550),blueMove[24],'y',-90); 
-		blueCheck[23] = AIstop(blueMove[23],80);
-	}
+		if (buttonPress3 == true && loop2 == true) {
+			if (blueCheck[26]==false) blueCheck[27]= AImoveZ(modelStack,blueMove[27],-350);
+			if (blueCheck[25]==false) blueCheck[26]= AIrotate(modelStack,Vector3(625,0,550),blueMove[26],'y',90); 
+			if (blueCheck[24]==false) blueCheck[25]= AImoveX(modelStack,blueMove[25],465);
+			if (blueCheck[23]==false) blueCheck[24]= AIrotate(modelStack,Vector3(160,0,550),blueMove[24],'y',-90); 
+			blueCheck[23] = AIstop(blueMove[23],80);
+		}
 
-	if (buttonPress3 == false)
-		if (blueCheck[22] == false) for(int i=0;i<blueSize;++i) {blueCheck[i] = true; blueMove[i] = 0;}
+		if (buttonPress3 == false)
+			if (blueCheck[22] == false) for(int i=0;i<blueSize;++i) {blueCheck[i] = true; blueMove[i] = 0;}
 
-	if (blueCheck[21]==false) blueCheck[22]= AIrotate(modelStack,Vector3(160,0,550),blueMove[22],'y',90,speedAI*2); 
-	if (blueCheck[20]==false) blueCheck[21]= AImoveX(modelStack,blueMove[21],290,speedAI*2);
-	if (blueCheck[19]==false) blueCheck[20]= AIrotate(modelStack,Vector3(-130,0,550),blueMove[20],'y',90,speedAI*2); 
-	if (blueCheck[18]==false) blueCheck[19]= AImoveZ(modelStack,blueMove[19],320,speedAI);
-	if (blueCheck[17]==false) blueCheck[18]= AIrotate(modelStack,Vector3(-130,0,230),blueMove[18],'y',90,speedAI*2); 
-	if (blueCheck[16]==false) blueCheck[17]= AIstop(blueMove[17],80,speedAI);
-	if (blueCheck[15]==false) blueCheck[16]= AIrotate(modelStack,Vector3(-130,0,230),blueMove[16],'y',-90,speedAI*2); 
-	if (blueCheck[14]==false) blueCheck[15]= AImoveZ(modelStack,blueMove[15],415,speedAI);
-	if (blueCheck[13]==false) blueCheck[14]= AIrotate(modelStack,Vector3(-130,0,-185),blueMove[14],'y',180,speedAI*2); 
-	if (blueCheck[12]==false) blueCheck[13]= AIstop(blueMove[13],80,speedAI);
-	if (blueCheck[11]==false) blueCheck[12]= AIrotate(modelStack,Vector3(-130,0,-185),blueMove[12],'y',-90,speedAI*2); 
-	if (blueCheck[10]==false) blueCheck[11]= AImoveX(modelStack,blueMove[11],-290,speedAI);
-	if (blueCheck[9]==false) blueCheck[10]= AIrotate(modelStack,Vector3(160,0,-185),blueMove[10],'y',90,speedAI*2); 
-	if (blueCheck[8]==false) blueCheck[9]= AIstop(blueMove[9],80,speedAI);
-	if (blueCheck[7]==false) blueCheck[8]= AImoveZ(modelStack,blueMove[8],-190,speedAI);
-	if (blueCheck[6]==false) blueCheck[7]= AIrotate(modelStack,Vector3(160,0,5),blueMove[7],'y',90,speedAI*2); 
-	if (blueCheck[5]==false) blueCheck[6]= AIstop(blueMove[6],80,speedAI);
-	if (blueCheck[4]==false) blueCheck[5]= AIrotate(modelStack,Vector3(160,0,5),blueMove[5],'y',-90,speedAI*2); 
-	if (blueCheck[3]==false) blueCheck[4]= AImoveZ(modelStack,blueMove[4],-105,speedAI);
-	if (blueCheck[2]==false) blueCheck[3]= AIrotate(modelStack,Vector3(160,0,110),blueMove[3],'y',90,speedAI*2); 
-	if (blueCheck[1]==false) blueCheck[2]= AIstop(blueMove[2],80,speedAI);
-	if (blueCheck[0]==false) blueCheck[1]= AIrotate(modelStack,Vector3(160,0,110),blueMove[1],'y',-90,speedAI*2); 
-	blueCheck[0] = AImoveZ(modelStack,blueMove[0],-440,speedAI);
+			if (blueCheck[21]==false) blueCheck[22]= AIrotate(modelStack,Vector3(160,0,550),blueMove[22],'y',90,speedAI*2); 
+			if (blueCheck[20]==false) blueCheck[21]= AImoveX(modelStack,blueMove[21],290,speedAI*2);
+			if (blueCheck[19]==false) blueCheck[20]= AIrotate(modelStack,Vector3(-130,0,550),blueMove[20],'y',90,speedAI*2); 
+			if (blueCheck[18]==false) blueCheck[19]= AImoveZ(modelStack,blueMove[19],320,speedAI);
+			if (blueCheck[17]==false) blueCheck[18]= AIrotate(modelStack,Vector3(-130,0,230),blueMove[18],'y',90,speedAI*2); 
+			if (blueCheck[16]==false) blueCheck[17]= AIstop(blueMove[17],80,speedAI);
+			if (blueCheck[15]==false) blueCheck[16]= AIrotate(modelStack,Vector3(-130,0,230),blueMove[16],'y',-90,speedAI*2); 
+			if (blueCheck[14]==false) blueCheck[15]= AImoveZ(modelStack,blueMove[15],415,speedAI);
+			if (blueCheck[13]==false) blueCheck[14]= AIrotate(modelStack,Vector3(-130,0,-185),blueMove[14],'y',180,speedAI*2); 
+			if (blueCheck[12]==false) blueCheck[13]= AIstop(blueMove[13],80,speedAI);
+			if (blueCheck[11]==false) blueCheck[12]= AIrotate(modelStack,Vector3(-130,0,-185),blueMove[12],'y',-90,speedAI*2); 
+			if (blueCheck[10]==false) blueCheck[11]= AImoveX(modelStack,blueMove[11],-290,speedAI);
+			if (blueCheck[9]==false) blueCheck[10]= AIrotate(modelStack,Vector3(160,0,-185),blueMove[10],'y',90,speedAI*2); 
+			if (blueCheck[8]==false) blueCheck[9]= AIstop(blueMove[9],80,speedAI);
+			if (blueCheck[7]==false) blueCheck[8]= AImoveZ(modelStack,blueMove[8],-190,speedAI);
+			if (blueCheck[6]==false) blueCheck[7]= AIrotate(modelStack,Vector3(160,0,5),blueMove[7],'y',90,speedAI*2); 
+			if (blueCheck[5]==false) blueCheck[6]= AIstop(blueMove[6],80,speedAI);
+			if (blueCheck[4]==false) blueCheck[5]= AIrotate(modelStack,Vector3(160,0,5),blueMove[5],'y',-90,speedAI*2); 
+			if (blueCheck[3]==false) blueCheck[4]= AImoveZ(modelStack,blueMove[4],-105,speedAI);
+			if (blueCheck[2]==false) blueCheck[3]= AIrotate(modelStack,Vector3(160,0,110),blueMove[3],'y',90,speedAI*2); 
+			if (blueCheck[1]==false) blueCheck[2]= AIstop(blueMove[2],80,speedAI);
+			if (blueCheck[0]==false) blueCheck[1]= AIrotate(modelStack,Vector3(160,0,110),blueMove[1],'y',-90,speedAI*2); 
+			blueCheck[0] = AImoveZ(modelStack,blueMove[0],-440,speedAI);
 
 	modelStack.Translate(modelBlue.translateVal[0].x,modelBlue.translateVal[0].y,modelBlue.translateVal[0].z);
 	modelStack.Rotate(modelBlue.rotateVal[0],modelBlue.rotateAxis[0].x,modelBlue.rotateAxis[0].y,modelBlue.rotateAxis[0].z);
@@ -4111,45 +4211,46 @@ void SceneAssignment::RenderModelOrange()
 {
 	modelStack.PushMatrix();
 
-	if (buttonPress3 == true && loop2 == true) {
-		if (orangeCheck[27]==false) AImoveZ(modelStack,orangeMove[28],2410);
-		if (orangeCheck[26]==false) orangeCheck[27] = AIrotate(modelStack,Vector3(90,0,600),orangeMove[27],'y',-180);
-		orangeCheck[26] = AIstop(orangeMove[26],160);
-	}
+		if (buttonPress3 == true && loop2 == true) {
+			if (orangeCheck[27]==false) AImoveZ(modelStack,orangeMove[28],2410);
+			if (orangeCheck[26]==false) orangeCheck[27] = AIrotate(modelStack,Vector3(90,0,600),orangeMove[27],'y',-180);
+			orangeCheck[26] = AIstop(orangeMove[26],160);
+		}
 
-	if (buttonPress3 == false)
-		if (orangeCheck[25] == false) for(int i=0;i<orangeSize;++i) {orangeCheck[i] = true; orangeMove[i] = 0;}
+		if (buttonPress3 == false)
+			if (orangeCheck[25] == false) for(int i=0;i<orangeSize;++i) {orangeCheck[i] = true; orangeMove[i] = 0;}
 
-	if (orangeCheck[24]==false) orangeCheck[25]= AIrotate(modelStack,Vector3(90,0,600),orangeMove[25],'y',90,speedAI*2);
-	if (orangeCheck[23]==false) orangeCheck[24]= AImoveX(modelStack,orangeMove[24],134,speedAI);
-	if (orangeCheck[22]==false) orangeCheck[23]= AIrotate(modelStack,Vector3(-44,0,600),orangeMove[23],'y',90,speedAI*2);
-	if (orangeCheck[20]==false) orangeCheck[22]= AImoveZ(modelStack,orangeMove[22],480,speedAI);
-	if (orangeCheck[19]==false) {
-		orangeCheck[20]= AImoveY (modelStack,orangeMove[20],-150,speedAI);
-					     AImoveZ (modelStack,orangeMove[21],345,speedAI);
-	}
-	if (orangeCheck[18]==false) orangeCheck[19]= AImoveZ(modelStack,orangeMove[19],75,speedAI);
-	if (orangeCheck[17]==false) orangeCheck[18]= AIrotate(modelStack,Vector3(-44,0,-300),orangeMove[18],'y',-90,speedAI*2);
-	if (orangeCheck[16]==false) orangeCheck[17]= AImoveX(modelStack,orangeMove[17],111,speedAI);
-	if (orangeCheck[15]==false) orangeCheck[16]= AIrotate(modelStack,Vector3(-155,0,-300),orangeMove[16],'y',-90,speedAI*2);
-	if (orangeCheck[14]==false) orangeCheck[15]= AImoveZ(modelStack,orangeMove[15],-230,speedAI);
-	if (orangeCheck[13]==false) orangeCheck[14]= AIrotate(modelStack,Vector3(-155,0,-70),orangeMove[14],'y',-90,speedAI*2);
-	if (orangeCheck[12]==false) orangeCheck[13]= AImoveX(modelStack,orangeMove[13],-505,speedAI);
-	if (orangeCheck[11]==false) orangeCheck[12]= AIrotate(modelStack,Vector3(350,0,-70),orangeMove[12],'y',-90,speedAI*2);
-	if (orangeCheck[10]==false) orangeCheck[11]= AImoveZ(modelStack,orangeMove[11],230,speedAI);
-	if (orangeCheck[9]==false) orangeCheck[10]= AIrotate(modelStack,Vector3(350,0,-300),orangeMove[10],'y',-90,speedAI*2);
-	if (orangeCheck[8]==false) orangeCheck[9]= AImoveX(modelStack,orangeMove[9],315,speedAI);
-	if (orangeCheck[7]==false) orangeCheck[8]= AIrotate(modelStack,Vector3(35,0,-300),orangeMove[8],'y',-90,speedAI*2); 
-	if (orangeCheck[5]==false) orangeCheck[7]= AImoveZ(modelStack,orangeMove[7],-85,speedAI);
-	if (orangeCheck[4]==false) {
-		orangeCheck[5]= AImoveY (modelStack,orangeMove[5],150,speedAI);
-					    AImoveZ (modelStack,orangeMove[6],-345,speedAI);
-	}
-	if (orangeCheck[3]==false) orangeCheck[4]= AImoveZ(modelStack,orangeMove[4],-90,speedAI);
-	if (orangeCheck[2]==false) orangeCheck[3]= AIrotate(modelStack,Vector3(35,0,220),orangeMove[3],'y',-90,speedAI*2); 
-	if (orangeCheck[1]==false) orangeCheck[2]= AImoveX(modelStack,orangeMove[2],-55,speedAI);
-	if (orangeCheck[0]==false) orangeCheck[1]= AIrotate(modelStack,Vector3(90,0,220),orangeMove[1],'y',90,speedAI*2); 
-	orangeCheck[0] = AImoveZ(modelStack,orangeMove[0],-380,speedAI);
+			if (orangeCheck[24]==false) orangeCheck[25]= AIrotate(modelStack,Vector3(90,0,600),orangeMove[25],'y',90,speedAI*2);
+			if (orangeCheck[23]==false) orangeCheck[24]= AImoveX(modelStack,orangeMove[24],134,speedAI);
+			if (orangeCheck[22]==false) orangeCheck[23]= AIrotate(modelStack,Vector3(-44,0,600),orangeMove[23],'y',90,speedAI*2);
+			if (orangeCheck[20]==false) orangeCheck[22]= AImoveZ(modelStack,orangeMove[22],480,speedAI);
+			if (orangeCheck[19]==false) {
+				orangeCheck[20]= AImoveY (modelStack,orangeMove[20],-150,speedAI);
+				AImoveZ (modelStack,orangeMove[21],345,speedAI);
+			}
+			if (orangeCheck[18]==false) orangeCheck[19]= AImoveZ(modelStack,orangeMove[19],75,speedAI);
+			if (orangeCheck[17]==false) orangeCheck[18]= AIrotate(modelStack,Vector3(-44,0,-300),orangeMove[18],'y',-90,speedAI*2);
+			if (orangeCheck[16]==false) orangeCheck[17]= AImoveX(modelStack,orangeMove[17],111,speedAI);
+			if (orangeCheck[15]==false) orangeCheck[16]= AIrotate(modelStack,Vector3(-155,0,-300),orangeMove[16],'y',-90,speedAI*2);
+			if (orangeCheck[14]==false) orangeCheck[15]= AImoveZ(modelStack,orangeMove[15],-230,speedAI);
+			if (orangeCheck[13]==false) orangeCheck[14]= AIrotate(modelStack,Vector3(-155,0,-70),orangeMove[14],'y',-90,speedAI*2);
+			if (orangeCheck[12]==false) orangeCheck[13]= AImoveX(modelStack,orangeMove[13],-505,speedAI);
+			if (orangeCheck[11]==false) orangeCheck[12]= AIrotate(modelStack,Vector3(350,0,-70),orangeMove[12],'y',-90,speedAI*2);
+			if (orangeCheck[10]==false) orangeCheck[11]= AImoveZ(modelStack,orangeMove[11],230,speedAI);
+			if (orangeCheck[9]==false) orangeCheck[10]= AIrotate(modelStack,Vector3(350,0,-300),orangeMove[10],'y',-90,speedAI*2);
+			if (orangeCheck[8]==false) orangeCheck[9]= AImoveX(modelStack,orangeMove[9],315,speedAI);
+			if (orangeCheck[7]==false) orangeCheck[8]= AIrotate(modelStack,Vector3(35,0,-300),orangeMove[8],'y',-90,speedAI*2); 
+			if (orangeCheck[5]==false) orangeCheck[7]= AImoveZ(modelStack,orangeMove[7],-85,speedAI);
+			if (orangeCheck[4]==false) {
+				orangeCheck[5]= AImoveY (modelStack,orangeMove[5],150,speedAI);
+				AImoveZ (modelStack,orangeMove[6],-345,speedAI);
+			}
+			if (orangeCheck[3]==false) orangeCheck[4]= AImoveZ(modelStack,orangeMove[4],-90,speedAI);
+			if (orangeCheck[2]==false) orangeCheck[3]= AIrotate(modelStack,Vector3(35,0,220),orangeMove[3],'y',-90,speedAI*2); 
+			if (orangeCheck[1]==false) orangeCheck[2]= AImoveX(modelStack,orangeMove[2],-55,speedAI);
+			if (orangeCheck[0]==false) orangeCheck[1]= AIrotate(modelStack,Vector3(90,0,220),orangeMove[1],'y',90,speedAI*2); 
+			orangeCheck[0] = AImoveZ(modelStack,orangeMove[0],-380,speedAI);
+
 	modelStack.Translate(modelOrange.translateVal[0].x,modelOrange.translateVal[0].y,modelOrange.translateVal[0].z);
 	modelStack.Rotate(modelOrange.rotateVal[0],modelOrange.rotateAxis[0].x,modelOrange.rotateAxis[0].y,modelOrange.rotateAxis[0].z);
 	modelStack.Scale(modelOrange.scaleVal[0].x,modelOrange.scaleVal[0].y,modelOrange.scaleVal[0].z);
@@ -4205,24 +4306,24 @@ void SceneAssignment::RenderModelOrange()
 }
 void SceneAssignment::RenderModelRed()
 {
-		modelStack.PushMatrix(); 
+	modelStack.PushMatrix(); 
 
 		if (redCheck[14] == false) for(int i=0;i<redSize;++i) {redCheck[i] = true; redMove[i] = 0;}
-	if (redCheck[13]==false) redCheck[14]= AIrotate(modelStack,Vector3(-660,0,220),redMove[14],'y',-180); 
-	if (redCheck[12]==false) redCheck[13]= AImoveZ(modelStack,redMove[13],-205);
-	if (redCheck[11]==false) redCheck[12]= AIrotate(modelStack,Vector3(-660,0,425),redMove[12],'y',-90); 
-	if (redCheck[10]==false) redCheck[11]= AImoveX(modelStack,redMove[11],-1300);
-	if (redCheck[9]==false) redCheck[10]= AIrotate(modelStack,Vector3(640,0,425),redMove[10],'y',-90);  
-	if (redCheck[8]==false) redCheck[9]= AImoveZ(modelStack,redMove[9],225);
-	if (redCheck[7]==false) redCheck[8]= AIrotate(modelStack,Vector3(640,0,200),redMove[8],'y',180); 
-	if (redCheck[6]==false) redCheck[7]= AImoveZ(modelStack,redMove[7],-225);
-	if (redCheck[5]==false) redCheck[6]= AIrotate(modelStack,Vector3(640,0,425),redMove[6],'y',90);  
-	if (redCheck[4]==false) redCheck[5]= AImoveX(modelStack,redMove[5],1300);
-	if (redCheck[3]==false) redCheck[4]= AIrotate(modelStack,Vector3(-660,0,425),redMove[4],'y',-180);  
-	if (redCheck[2]==false) redCheck[3]= AIstop(redMove[3],160);
-	if (redCheck[1]==false) redCheck[2]= AIrotate(modelStack,Vector3(-660,0,425),redMove[2],'y',-90); 
-	if (redCheck[0]==false) redCheck[1]= AImoveZ(modelStack,redMove[1],225);
-	redCheck[0] = AIstop(redMove[0],1350);
+		if (redCheck[13]==false) redCheck[14]= AIrotate(modelStack,Vector3(-660,0,220),redMove[14],'y',-180,speedAI*2); 
+		if (redCheck[12]==false) redCheck[13]= AImoveZ(modelStack,redMove[13],-205,speedAI);
+		if (redCheck[11]==false) redCheck[12]= AIrotate(modelStack,Vector3(-660,0,425),redMove[12],'y',-90,speedAI*2); 
+		if (redCheck[10]==false) redCheck[11]= AImoveX(modelStack,redMove[11],-1300,speedAI);
+		if (redCheck[9]==false) redCheck[10]= AIrotate(modelStack,Vector3(640,0,425),redMove[10],'y',-90,speedAI*2);  
+		if (redCheck[8]==false) redCheck[9]= AImoveZ(modelStack,redMove[9],225,speedAI);
+		if (redCheck[7]==false) redCheck[8]= AIrotate(modelStack,Vector3(640,0,200),redMove[8],'y',180,speedAI*2); 
+		if (redCheck[6]==false) redCheck[7]= AImoveZ(modelStack,redMove[7],-225,speedAI);
+		if (redCheck[5]==false) redCheck[6]= AIrotate(modelStack,Vector3(640,0,425),redMove[6],'y',90,speedAI*2);  
+		if (redCheck[4]==false) redCheck[5]= AImoveX(modelStack,redMove[5],1300,speedAI);
+		if (redCheck[3]==false) redCheck[4]= AIrotate(modelStack,Vector3(-660,0,425),redMove[4],'y',-180,speedAI*2);  
+		if (redCheck[2]==false) redCheck[3]= AIstop(redMove[3],160,speedAI);
+		if (redCheck[1]==false) redCheck[2]= AIrotate(modelStack,Vector3(-660,0,425),redMove[2],'y',-90,speedAI*2); 
+		if (redCheck[0]==false) redCheck[1]= AImoveZ(modelStack,redMove[1],225,speedAI);
+		redCheck[0] = AIstop(redMove[0],1350,speedAI);
 
 	modelStack.Translate(modelRed.translateVal[0].x,modelRed.translateVal[0].y,modelRed.translateVal[0].z);
 	modelStack.Rotate(modelRed.rotateVal[0],modelRed.rotateAxis[0].x,modelRed.rotateAxis[0].y,modelRed.rotateAxis[0].z);
@@ -4280,18 +4381,17 @@ void SceneAssignment::RenderModelRed()
 void SceneAssignment::RenderModelYellow()
 {
 	modelStack.PushMatrix(); 
-
-	if (redCheck[14] == false) for(int i=0;i<yellowSize;++i) {yellowCheck[i] = true; yellowMove[i] = 0;}
-	if (yellowCheck[8]==false) yellowCheck[9]= AIrotate(modelStack,Vector3(640,0,200),yellowMove[9],'y',180); 
-	if (yellowCheck[7]==false) yellowCheck[8]= AImoveZ(modelStack,yellowMove[8],-250);
-	if (yellowCheck[6]==false) yellowCheck[7]= AIrotate(modelStack,Vector3(640,0,450),yellowMove[7],'y',90); 
-	if (yellowCheck[5]==false) yellowCheck[6]= AImoveX(modelStack,yellowMove[6],1300);
-	if (yellowCheck[4]==false) yellowCheck[5]= AIrotate(modelStack,Vector3(-660,0,450),yellowMove[5],'y',180);  
-	if (yellowCheck[3]==false) yellowCheck[4]= AIstop(yellowMove[4],150);
-	if (yellowCheck[2]==false) yellowCheck[3]= AIstop(yellowMove[3],30);
-	if (yellowCheck[1]==false) yellowCheck[2]= AImoveX(modelStack,yellowMove[2],-1300); 
-	if (yellowCheck[0]==false) yellowCheck[1]= AIrotate(modelStack,Vector3(640,0,450),yellowMove[1],'y',-90); 
-	yellowCheck[0] = AImoveZ(modelStack,yellowMove[0],250);
+		if (redCheck[14] == false) for(int i=0;i<yellowSize;++i) {yellowCheck[i] = true; yellowMove[i] = 0;}
+		if (yellowCheck[8]==false) yellowCheck[9]= AIrotate(modelStack,Vector3(640,0,200),yellowMove[9],'y',180,speedAI*2); 
+		if (yellowCheck[7]==false) yellowCheck[8]= AImoveZ(modelStack,yellowMove[8],-250,speedAI);
+		if (yellowCheck[6]==false) yellowCheck[7]= AIrotate(modelStack,Vector3(640,0,450),yellowMove[7],'y',90,speedAI*2); 
+		if (yellowCheck[5]==false) yellowCheck[6]= AImoveX(modelStack,yellowMove[6],1300,speedAI);
+		if (yellowCheck[4]==false) yellowCheck[5]= AIrotate(modelStack,Vector3(-660,0,450),yellowMove[5],'y',180,speedAI*2);  
+		if (yellowCheck[3]==false) yellowCheck[4]= AIstop(yellowMove[4],150,speedAI);
+		if (yellowCheck[2]==false) yellowCheck[3]= AIstop(yellowMove[3],30,speedAI);
+		if (yellowCheck[1]==false) yellowCheck[2]= AImoveX(modelStack,yellowMove[2],-1300,speedAI); 
+		if (yellowCheck[0]==false) yellowCheck[1]= AIrotate(modelStack,Vector3(640,0,450),yellowMove[1],'y',-90,speedAI*2); 
+		yellowCheck[0] = AImoveZ(modelStack,yellowMove[0],250,speedAI);
 
 	modelStack.Translate(modelYellow.translateVal[0].x,modelYellow.translateVal[0].y,modelYellow.translateVal[0].z);
 	modelStack.Rotate(modelYellow.rotateVal[0],modelYellow.rotateAxis[0].x,modelYellow.rotateAxis[0].y,modelYellow.rotateAxis[0].z);
@@ -4398,6 +4498,9 @@ void SceneAssignment::RenderModels()
 		speedAI = 5;
 	else
 		speedAI = 1;
+
+	if (isPaused==true)
+		speedAI=0;
 
 	RenderModelPink();
 	RenderModelBlue();
@@ -4737,17 +4840,6 @@ void SceneAssignment::Render()
 	modelStack.PopMatrix();
 
 
-	//=========================================Firealarm======================================================================
-	for(int i = 0;i<firealarm.getTotal();++i)
-	{
-		modelStack.PushMatrix();
-		modelStack.Translate(firealarm.translateVal[i].x,firealarm.translateVal[i].y,firealarm.translateVal[i].z);
-		modelStack.Rotate(firealarm.rotateVal[i],firealarm.rotateAxis[i].x,firealarm.rotateAxis[i].y,firealarm.rotateAxis[i].z);
-		modelStack.Scale(firealarm.scaleVal[i].x,firealarm.scaleVal[i].y,firealarm.scaleVal[i].z);
-		RenderMesh(meshList[GEO_ALARM], false);
-		modelStack.PopMatrix();
-	}
-
 	RenderLevel2();
 	RenderLargeObjects();
 	RenderChar();
@@ -4833,7 +4925,7 @@ void SceneAssignment::Render()
 		RenderMesh(meshList[GEO_CAN1], false);
 		modelStack.PopMatrix();
 	}
-		if(renderscenerio3text == false)
+	if(renderscenerio3text == false)
 	{
 		//template for 'F' function triggers
 		modelStack.PushMatrix();
@@ -4857,7 +4949,7 @@ void SceneAssignment::Render()
 	ss3 << "X:" << playerCamera.position.x;
 	ss4 << "Y:" << playerCamera.position.y;
 	ss5 << "Z:" << playerCamera.position.z;
-		if(renderscenerio3 == false)
+	if(renderscenerio3 == false)
 	{
 		modelStack.PushMatrix();
 		RenderQuadOnScreen(meshList[GEO_UI], 80, 100, 0.5, 0.7);
@@ -4867,7 +4959,7 @@ void SceneAssignment::Render()
 		RenderTextOnScreen(meshList[GEO_TEXT], "press [E] to start game" , Color(0, 0.7, 1), 3.5, 6, 8.2);
 
 	}
-	
+
 	modelStack.PushMatrix();
 	RenderTextOnScreen(meshList[GEO_TEXT], ss.str(), Color(0.7, 0, 1), 3, 0.5, 19.5);
 	RenderTextOnScreen(meshList[GEO_TEXT], ss2.str(), Color(0.7, 0, 1), 3, 0.5, 18.5);
@@ -4883,17 +4975,17 @@ void SceneAssignment::Render()
 	{
 		if (render1 == false && render2 == false && render3 == false && render5 == false && render6 == false && render7 == false && render8 == false)
 		{
-				modelStack.PushMatrix();
-		RenderQuadOnScreen(meshList[GEO_UI], 38, 60, 1.6, 0.5);
-		modelStack.PopMatrix();
+			modelStack.PushMatrix();
+			RenderQuadOnScreen(meshList[GEO_UI], 38, 60, 1.6, 0.5);
+			modelStack.PopMatrix();
 			RenderTextOnScreen(meshList[GEO_TEXT], "Checklist:", Color(0, 1 ,0), 3, 15.3, 5.3);
 		}
 		else
 		{
 
 			modelStack.PushMatrix();
-		RenderQuadOnScreen(meshList[GEO_UI], 38, 60, 1.6, 0.5);
-		modelStack.PopMatrix();
+			RenderQuadOnScreen(meshList[GEO_UI], 38, 60, 1.6, 0.5);
+			modelStack.PopMatrix();
 
 			RenderTextOnScreen(meshList[GEO_TEXT], "Checklist:", Color(1, 0 ,0), 3, 15.3, 5.3);
 		}
@@ -4929,10 +5021,10 @@ void SceneAssignment::Render()
 		{
 			if (render1 == true)
 			{
-		//template for 'F' function triggers
-		modelStack.PushMatrix();
-		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
-		modelStack.PopMatrix();
+				//template for 'F' function triggers
+				modelStack.PushMatrix();
+				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
+				modelStack.PopMatrix();
 				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to pick up the item." , Color(0, 0.7, 1), 4, 3.6, 5.2);
 			}
 		}
@@ -4940,10 +5032,10 @@ void SceneAssignment::Render()
 		{
 			if (render2 == true)
 			{
-			//template for 'F' function triggers
-		modelStack.PushMatrix();
-		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
-		modelStack.PopMatrix();
+				//template for 'F' function triggers
+				modelStack.PushMatrix();
+				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
+				modelStack.PopMatrix();
 				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to pick up the item." , Color(0, 0.7, 1), 4, 3.6, 5.2);
 			}
 		}
@@ -4952,9 +5044,9 @@ void SceneAssignment::Render()
 			if (render3 == true)
 			{
 				//template for 'F' function triggers
-		modelStack.PushMatrix();
-		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
-		modelStack.PopMatrix();
+				modelStack.PushMatrix();
+				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
+				modelStack.PopMatrix();
 				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to pick up the item." , Color(0, 0.7, 1), 4, 3.6, 5.2);
 			}
 		}
@@ -4963,9 +5055,9 @@ void SceneAssignment::Render()
 			if (render5 == true)
 			{
 				//template for 'F' function triggers
-		modelStack.PushMatrix();
-		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
-		modelStack.PopMatrix();
+				modelStack.PushMatrix();
+				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
+				modelStack.PopMatrix();
 				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to pick up the item." , Color(0, 0.7, 1), 4, 3.6, 5.2);
 			}
 		}
@@ -4974,9 +5066,9 @@ void SceneAssignment::Render()
 			if (render6 == true)
 			{
 				//template for 'F' function triggers
-		modelStack.PushMatrix();
-		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
-		modelStack.PopMatrix();
+				modelStack.PushMatrix();
+				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
+				modelStack.PopMatrix();
 				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to pick up the item." , Color(0, 0.7, 1), 4, 3.6, 5.2);
 			}
 		}
@@ -4985,9 +5077,9 @@ void SceneAssignment::Render()
 			if (render7 == true)
 			{
 				//template for 'F' function triggers
-		modelStack.PushMatrix();
-		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
-		modelStack.PopMatrix();
+				modelStack.PushMatrix();
+				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
+				modelStack.PopMatrix();
 				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to pick up the item." , Color(0, 0.7, 1), 4, 3.6, 5.2);
 			}
 		}
@@ -4997,13 +5089,13 @@ void SceneAssignment::Render()
 			if (render8 == true)
 			{
 				//template for 'F' function triggers
-		modelStack.PushMatrix();
-		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
-		modelStack.PopMatrix();
+				modelStack.PushMatrix();
+				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
+				modelStack.PopMatrix();
 				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to pick up the item." , Color(0, 0.7, 1), 4, 3.6, 5.2);
 			}
 		}
-}
+	}
 
 	if (Collision(playerCamera.position,ObjectList,5,1))
 	{
@@ -5012,17 +5104,17 @@ void SceneAssignment::Render()
 			if (loop1 == true && loop2 == false)
 			{
 				//template for 'F' function triggers
-		modelStack.PushMatrix();
-		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
-		modelStack.PopMatrix();
+				modelStack.PushMatrix();
+				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
+				modelStack.PopMatrix();
 				RenderTextOnScreen(meshList[GEO_TEXT], "Please make your way out." , Color(1, 0, 0), 4, 3.6, 5.2);
 			}
 			else if (render4 == true)
 			{
 				//template for 'F' function triggers
-		modelStack.PushMatrix();
-		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
-		modelStack.PopMatrix();
+				modelStack.PushMatrix();
+				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
+				modelStack.PopMatrix();
 				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to start the game." , Color(0, 0.7, 1), 4, 3.7, 5.2);
 			}	
 
@@ -5038,9 +5130,9 @@ void SceneAssignment::Render()
 
 		else if (gameEnd == false) {
 			//template for 'F' function triggers
-		modelStack.PushMatrix();
-		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
-		modelStack.PopMatrix();
+			modelStack.PushMatrix();
+			RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
+			modelStack.PopMatrix();
 			RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to end the game." , Color(0, 0.7, 1), 4, 3.6, 5.2);
 		}
 
@@ -5049,7 +5141,7 @@ void SceneAssignment::Render()
 
 			if (render1 == true || render2 == true || render3 == true || render5 == true || render6 == true || render7 == true || render8 == true || gameTime > 80) 
 			{
-				
+
 				//template for 'F' function triggers
 				modelStack.PushMatrix();
 				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
@@ -5066,10 +5158,10 @@ void SceneAssignment::Render()
 			}
 
 			else {
-			//template for 'F' function triggers
-		modelStack.PushMatrix();
-		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
-		modelStack.PopMatrix();
+				//template for 'F' function triggers
+				modelStack.PushMatrix();
+				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
+				modelStack.PopMatrix();
 				RenderTextOnScreen(meshList[GEO_TEXT], "You win. Thanks for playing!" , Color(0, 1, 0), 4, 3.6, 5.2);
 				if(musicStop == true){ 
 					engine->stopAllSounds(); 
@@ -5086,7 +5178,7 @@ void SceneAssignment::Render()
 	ss7 << "Time:" << gameTime;
 	if(startgame == false)
 	{
-	ss6 << "Time:" << timer;
+		ss6 << "Time:" << timer;
 	}
 	if(startgame ==false)
 	{
@@ -5108,82 +5200,131 @@ void SceneAssignment::Render()
 		modelStack.PushMatrix();
 		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
 		modelStack.PopMatrix();
-			RenderTextOnScreen(meshList[GEO_TEXT], "PRESS 'F' TO ACTIVATE ALARM!!!" , Color(1, 0, 0), 4, 3.6, 5); 
+		RenderTextOnScreen(meshList[GEO_TEXT], "PRESS 'F' TO ACTIVATE ALARM!!!" , Color(1, 0, 0), 4, 3.6, 5); 
 	}
-		RenderBGM();
-		RenderMusic();
-		
-	
+	RenderBGM();
+	RenderMusic();
+
+
 	if(startgame == false)
 	{
-	if(place1 == false)
-	{
-		modelStack.PushMatrix();
-		modelStack.Translate(342,0,-282);
-		modelStack.Rotate(180,0,1,0);
-		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_PINKAI], false);
-		modelStack.PopMatrix();
-	}
-	if(place2 == false)
-	{
-		modelStack.PushMatrix();
-		modelStack.Translate(-55,0,418);
-		modelStack.Rotate(180,0,1,0);
-		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_PINKAI], false);
-		modelStack.PopMatrix();
-	}
-	if(place3 == false)
-	{
-		modelStack.PushMatrix();
-		modelStack.Translate(-33,150,282);
-		modelStack.Rotate(180,0,1,0);
-		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_PINKAI], false);
-		modelStack.PopMatrix();
-	}
-	if(place4 == false)
-	{
-		modelStack.PushMatrix();
-		modelStack.Translate(-756,0,193);
-		modelStack.Rotate(180,0,1,0);
-		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_PINKAI], false);
-		modelStack.PopMatrix();
-	}
-	if(place5 == false)
-	{
-		modelStack.PushMatrix();
-		modelStack.Translate(-25,150,159);
-		modelStack.Rotate(180,0,1,0);
-		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_PINKAI], false);
-		modelStack.PopMatrix();
-	}
-	if(gameover == false)
+		if(place1 == false)
 		{
-		//template for 'F' function triggers
-		modelStack.PushMatrix();
-		RenderQuadOnScreen(meshList[GEO_UI], 50, 40, 0.8, 0.9);
-		modelStack.PopMatrix();
-		modelStack.PushMatrix();
-		RenderTextOnScreen(meshList[GEO_TEXT], "GameOver" , Color(0, 0.7, 1), 6, 5.2, 3.8);
-		modelStack.PopMatrix();
-	}
-	
-	if(caught == false)
+			modelStack.PushMatrix();
+			modelStack.Translate(342,0,-282);
+			modelStack.Rotate(180,0,1,0);
+			modelStack.Scale(5,5,5);
+			RenderMesh(meshList[GEO_PINKAI], false);
+			modelStack.PopMatrix();
+		}
+		if(place2 == false)
 		{
-		//template for 'F' function triggers
-		modelStack.PushMatrix();
-		RenderQuadOnScreen(meshList[GEO_UI], 50, 30,0.8, 1.02);
-		modelStack.PopMatrix();
-		RenderTextOnScreen(meshList[GEO_TEXT], "Press [F] to catch" , Color(0, 0.7, 1), 4, 5.9, 5.2);
-	}
+			modelStack.PushMatrix();
+			modelStack.Translate(-55,0,418);
+			modelStack.Rotate(180,0,1,0);
+			modelStack.Scale(5,5,5);
+			RenderMesh(meshList[GEO_PINKAI], false);
+			modelStack.PopMatrix();
+		}
+		if(place3 == false)
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-33,150,282);
+			modelStack.Rotate(180,0,1,0);
+			modelStack.Scale(5,5,5);
+			RenderMesh(meshList[GEO_PINKAI], false);
+			modelStack.PopMatrix();
+		}
+		if(place4 == false)
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-756,0,193);
+			modelStack.Rotate(180,0,1,0);
+			modelStack.Scale(5,5,5);
+			RenderMesh(meshList[GEO_PINKAI], false);
+			modelStack.PopMatrix();
+		}
+		if(place5 == false)
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-25,150,159);
+			modelStack.Rotate(180,0,1,0);
+			modelStack.Scale(5,5,5);
+			RenderMesh(meshList[GEO_PINKAI], false);
+			modelStack.PopMatrix();
+		}
+		if(gameover == false)
+		{
+			//template for 'F' function triggers
+			modelStack.PushMatrix();
+			RenderQuadOnScreen(meshList[GEO_UI], 50, 40, 0.8, 0.9);
+			modelStack.PopMatrix();
+			modelStack.PushMatrix();
+			RenderTextOnScreen(meshList[GEO_TEXT], "GameOver" , Color(0, 0.7, 1), 6, 5.2, 3.8);
+			modelStack.PopMatrix();
+		}
+		//need to add collision detection for this UI to work properly - Glenn
+		if(caught == false)
+		{
+			//template for 'F' function triggers
+			modelStack.PushMatrix();
+			RenderQuadOnScreen(meshList[GEO_UI], 50, 30,0.8, 1.02);
+			modelStack.PopMatrix();
+			RenderTextOnScreen(meshList[GEO_TEXT], "Press [F] to catch" , Color(0, 0.7, 1), 4, 5.9, 5.2);
+		}
 	}
 
-		
+	if (isPaused == true) {
+		modelStack.PushMatrix();
+		RenderQuadOnScreen(meshList[GEO_UI], 40, 150,1.05, 0.55);
+		modelStack.PopMatrix();
+		if (iChoice == 1)
+			RenderTextOnScreen(meshList[GEO_TEXT], "Reset" , Color(0, 1, 0), 4, 9.9, 10.2);
+		else 
+			RenderTextOnScreen(meshList[GEO_TEXT], "Reset" , Color(1, 0, 0), 4, 9.9, 10.2);
+
+		if (iChoice == 2)
+			RenderTextOnScreen(meshList[GEO_TEXT], "Exit" , Color(0, 1, 0), 4, 9.9, 8.2);
+		else 
+			RenderTextOnScreen(meshList[GEO_TEXT], "Exit" , Color(1, 0, 0), 4, 9.9, 8.2);
+
+		if (iChoice == 3)
+			RenderTextOnScreen(meshList[GEO_TEXT], "Back" , Color(0, 1, 0), 4, 9.9, 6.2);
+		else 
+			RenderTextOnScreen(meshList[GEO_TEXT], "Back" , Color(1, 0, 0), 4, 9.9, 6.2);
+	}
+
+
+	int oldChoice = iChoice;
+
+	if (Application::IsKeyPressed(VK_DOWN))
+		if (iChoice < 3 ){
+			iChoice++;
+			Sleep(150);	
+		}
+
+
+		if (Application::IsKeyPressed(VK_UP)) 
+			if (iChoice > 1){
+				iChoice--;
+				Sleep(150);	
+			}
+
+		if (Application::IsKeyPressed(VK_RETURN)) {
+			if (iChoice == 1) {
+					bReset = true;
+			}
+			if (iChoice == 2) {
+					exit(0);
+			}
+			if (iChoice == 3) {
+					isPaused = false;
+					engine->setAllSoundsPaused(false);
+			}
+		}
+
 }
+
 void SceneAssignment::Exit()
 {
 	glDeleteVertexArrays(1, &m_vertexArrayID);
