@@ -779,7 +779,7 @@ void SceneAssignment::InitCollision()
 		}
 		
 	}
-	Shelf.collisionRad = 20;
+	Shelf.collisionRad = 30;
 	
 	ObjectList.push_back(Shelf);
 
@@ -862,49 +862,22 @@ void SceneAssignment::InitCollision()
 	Barrier.rotateAxis.push_back(Vector3(0,1,0));
 	Barrier.scaleVal.push_back(Vector3(10, 5, 18));
 
+		//updated from Glenn
+	for(int i = 0; i < 4; i++)
+	{
+		Barrier.collisionPos.push_back(Vector3(-80, 180, -140 - (i*32.5)));
+		Barrier.collisionPos.push_back(Vector3(-90, 180, -140 - (i*32.5)));
 
-	//left part of barrier
-	Barrier.collisionPos.push_back(Vector3(80,180,-190));
-	Barrier.collisionPos.push_back(Vector3(100,180,-190));
+		Barrier.collisionPos.push_back(Vector3(80, 180, -140 - (i*32.5)));
+		Barrier.collisionPos.push_back(Vector3(90, 180, -140 - (i*32.5)));
+	}
 
-	Barrier.collisionPos.push_back(Vector3(80,180,-220));
-	Barrier.collisionPos.push_back(Vector3(100,180,-220));
-	
-	Barrier.collisionPos.push_back(Vector3(80,180,-250));
-	Barrier.collisionPos.push_back(Vector3(100,180,-250));
+	Barrier.collisionPos.push_back(Vector3(-5, 180, -240));
 
-	//right part of barrier
-	Barrier.collisionPos.push_back(Vector3(-80,180,-190));
-	Barrier.collisionPos.push_back(Vector3(-100,180,-190));
-
-	Barrier.collisionPos.push_back(Vector3(-80,180,-220));
-	Barrier.collisionPos.push_back(Vector3(-100,180,-220));
-	
-	Barrier.collisionPos.push_back(Vector3(-80,180,-250));
-	Barrier.collisionPos.push_back(Vector3(-100,180,-250));
-
-	//middle part of barrier
-	Barrier.collisionPos.push_back(Vector3(80,180, -170));
-	Barrier.collisionPos.push_back(Vector3(100,180,-170));
-
-	Barrier.collisionPos.push_back(Vector3(40,180, -170));
-	Barrier.collisionPos.push_back(Vector3(20,180,-170));
-
-	Barrier.collisionPos.push_back(Vector3(10,180, -170));
-	Barrier.collisionPos.push_back(Vector3(-10,180,-170));
-
-	Barrier.collisionPos.push_back(Vector3(-20,180, -170));
-	Barrier.collisionPos.push_back(Vector3(-40,180,-170));
-
-	Barrier.collisionPos.push_back(Vector3(-50,180, -170));
-	Barrier.collisionPos.push_back(Vector3(-70,180,-170));
-	//right
-	Barrier.collisionPos.push_back(Vector3(-80,180, -170));
-	Barrier.collisionPos.push_back(Vector3(-100,180,-170));
 	
 	Barrier.scaleVal.push_back(Vector3(10,7,20));
 	
-	Barrier.collisionRad = 25;
+	Barrier.collisionRad = 30;
 	ObjectList.push_back(Barrier);
 
 		//Houses on left side
@@ -921,14 +894,6 @@ void SceneAssignment::InitCollision()
 		
 		House.collisionPos.push_back(Vector3(House.translateVal[2*i].x, 30, House.translateVal[2*i].z-30));
 		House.collisionPos.push_back(Vector3(House.translateVal[2*i].x+60, 30, House.translateVal[2*i].z-30));
-
-		//collision on 2nd house
-		House.collisionPos.push_back(Vector3(House.translateVal[2*i].x + 200, 30, House.translateVal[2*i].z));
-		House.collisionPos.push_back(Vector3(House.translateVal[2*i].x+260, 30, House.translateVal[2*i].z));
-		
-		House.collisionPos.push_back(Vector3(House.translateVal[2*i].x + 200,30,House.translateVal[2*i].z-30));
-		House.collisionPos.push_back(Vector3(House.translateVal[2*i].x+260,30,House.translateVal[2*i].z-30));
-
 	}
 	
 	//Houses on right side
