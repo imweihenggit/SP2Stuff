@@ -137,6 +137,13 @@ void SceneAssignment::InitObjects()
 	meshList[GEO_TENT]->material.kSpecular.Set(1.0f, 1.0f, 1.0f);
 	meshList[GEO_TENT]->material.kShininess = 50.f;
 
+	meshList[GEO_MOUTAIN] = MeshBuilder::GenerateOBJ("tent", "OBJ//moutain.obj");
+	meshList[GEO_MOUTAIN]->textureID = LoadTGA("Image//moutain.tga");
+	meshList[GEO_MOUTAIN]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_MOUTAIN]->material.kDiffuse.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_MOUTAIN]->material.kSpecular.Set(1.0f, 1.0f, 1.0f);
+	meshList[GEO_MOUTAIN]->material.kShininess = 50.f;
+
 	meshList[GEO_DOORMAN] = MeshBuilder::GenerateOBJ("doorman", "OBJ//doorman.obj");
 	meshList[GEO_DOORMAN]->textureID = LoadTGA("Image//doorman.tga");
 	meshList[GEO_DOORMAN]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
@@ -1918,21 +1925,21 @@ void SceneAssignment::Update(double dt)
 	}
 
 	//test test
-	if (car2.translateX > 2000)
+	if (car2.translateX > 3600)
 	{
-		car2.translateX = -2000;
+		car2.translateX = -3600;
 	}
-	if (-car4.translateX < -2000)
+	if (-car4.translateX < -3600)
 	{
-		car4.translateX = -2000;
+		car4.translateX = -3600;
 	}
-	if (truck1.translateX > 2000)
+	if (truck1.translateX > 3600)
 	{
-		truck1.translateX = -2000;
+		truck1.translateX = -3600;
 	}
-	if (-bus1.translateX < -2000)
+	if (-bus1.translateX < -3600)
 	{
-		bus1.translateX = -2000;
+		bus1.translateX = -3600;
 	}
 }
 void SceneAssignment::RenderMesh(Mesh *mesh, bool enableLight)
@@ -3679,44 +3686,43 @@ void SceneAssignment::RenderSmallObjects()
 void SceneAssignment::RenderOut_Skybox()
 {
 	modelStack.PushMatrix();
-	modelStack.Translate(0, 250, -1550);
+	modelStack.Translate(0, 0, -2650);
 	modelStack.Translate(playerCamera.position.x, 0, playerCamera.position.z);
-	modelStack.Scale(3110, 3110, 3110);
+	modelStack.Scale(5320, 5320, 5320);
 	RenderMesh(skyboxList[SKYBOX_FRONT], false);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0,250, 1550);
+	modelStack.Translate(0,0,2650);
 	modelStack.Translate(playerCamera.position.x, 0, playerCamera.position.z);
-	modelStack.Rotate(180, -1, 0, 0);
-	modelStack.Rotate(180, 0, 0, 1);
-	modelStack.Scale(3110, 3110, 3110);
+	modelStack.Rotate(180, 0, 1, 0);
+	modelStack.Scale(5320, 5320, 5320);
 	RenderMesh(skyboxList[SKYBOX_BACK], false);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(-1550, 250, 0);
+	modelStack.Translate(-2650, 0, 0);
 	modelStack.Translate(playerCamera.position.x, 0, playerCamera.position.z);
 	modelStack.Rotate(90, 0, 1, 0);
-	modelStack.Scale(3110, 3110, 3110);
+	modelStack.Scale(5320, 5320, 5320);
 	RenderMesh(skyboxList[SKYBOX_RIGHT], false);
 	modelStack.PopMatrix();
 
 
 	modelStack.PushMatrix();
-	modelStack.Translate(1550,250, 0);
+	modelStack.Translate(2650,0, 0);
 	modelStack.Translate(playerCamera.position.x, 0, playerCamera.position.z);
 	modelStack.Rotate(-90, 0, 1, 0);
-	modelStack.Scale(3110, 3110, 3110);
+	modelStack.Scale(5320, 5320, 5320);
 	RenderMesh(skyboxList[SKYBOX_LEFT], false);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, 1800, 0);
-	modelStack.Translate(playerCamera.position.x, 0, playerCamera.position.z);
-	modelStack.Rotate(90, 0, 1, 0);
+	modelStack.Translate(0, 2650, 0);
+	modelStack.Translate(playerCamera.position.x, 0, playerCamera.position.z);;
 	modelStack.Rotate(90, 1, 0, 0);
-	modelStack.Scale(3110, 3110, 3110);
+	modelStack.Rotate(-90, 0, 0, 1);
+	modelStack.Scale(5320, 5320, 5320);
 	RenderMesh(skyboxList[SKYBOX_UP], false);
 	modelStack.PopMatrix();
 
@@ -3783,6 +3789,20 @@ void SceneAssignment::RenderOut_Skybox()
 	modelStack.Rotate(180,0,1,0);
 	modelStack.Scale(5,5,5);
 	RenderMesh(meshList[GEO_PINKAI], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(-600,-1850,-400);
+	modelStack.Rotate(180,0,1,0);
+	modelStack.Scale(1200,1300,1200);
+	RenderMesh(meshList[GEO_MOUTAIN], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(-6000,-1850,-400);
+	modelStack.Rotate(180,0,1,0);
+	modelStack.Scale(1200,1300,1200);
+	RenderMesh(meshList[GEO_MOUTAIN], false);
 	modelStack.PopMatrix();
 }
 void SceneAssignment::RenderChar()

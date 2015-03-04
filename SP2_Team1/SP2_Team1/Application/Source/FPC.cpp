@@ -161,7 +161,7 @@ void FPC::Update(double dt, vector<CObjects> list)
 				position -= right * moveSpeed * dt;
 				target -= right * moveSpeed * dt;
 				
-				if (position.x > 988 || position.x <-988 || position.z > 695 || position.z < -938|| (collideA == true && collideD == false))
+				if (position.x > 1100 || position.x <-1100 || position.z > 695 || position.z < -230|| (collideA == true && collideD == false))
 				{
 					if (position.z >= -35 && position.z <= 45 && position.x >= 395 && position.x <= 495) {
 					}
@@ -187,7 +187,7 @@ void FPC::Update(double dt, vector<CObjects> list)
 				position += right * moveSpeed * dt;
 				target += right * moveSpeed * dt;
 
-				if (position.x > 988 || position.x <-988 || position.z > 695 || position.z < -938 || (collideD == true && collideA == false))
+				if (position.x > 1100 || position.x <-1100 || position.z > 695 || position.z < -230 || (collideD == true && collideA == false))
 				{
 					if (position.z >= -35 && position.z <= 45 && position.x >= 395 && position.x <= 495) {
 					}
@@ -210,11 +210,10 @@ void FPC::Update(double dt, vector<CObjects> list)
 				position += view * moveSpeed * dt;
 				target += view * moveSpeed * dt;
 
-				if (position.x > 988 || position.x <-988 || position.z > 695 || position.z < -938 || (collideW == true && collideS == false))
+				if (position.x > 1100 || position.x <-1100 || position.z > 695 || position.z < -230 || (collideW == true && collideS == false))
 				{
 					if (position.z >= -35 && position.z <= 45 && position.x >= 395 && position.x <= 495) {
 					}
-
 					else
 					{
 						position -= view * moveSpeed * dt;
@@ -233,7 +232,7 @@ void FPC::Update(double dt, vector<CObjects> list)
 				position -= view * moveSpeed * dt;
 				target -= view * moveSpeed * dt;
 
-				if (position.x > 988 || position.x <-988 || position.z > 695 || position.z < -938 || (collideS == true && collideW == false))
+				if (position.x > 1100 || position.x <-1100 || position.z > 695 || position.z < -230 || (collideS == true && collideW == false))
 				{
 					if (position.z >= -35 && position.z <= 45 && position.x >= 395 && position.x <= 495) {
 					}
