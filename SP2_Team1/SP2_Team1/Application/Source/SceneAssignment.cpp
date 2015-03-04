@@ -32,6 +32,11 @@ SceneAssignment::~SceneAssignment()
 {
 }
 SceneAssignment car1, car2, car4, truck1, bus1;
+/******************************************************************************/
+/*!
+\brief
+Initialize the walls and doors used for level 1
+/******************************************************************************/
 void SceneAssignment::InitLevel1()
 {
 	//Level1 of the supermarket
@@ -87,6 +92,11 @@ void SceneAssignment::InitLevel1()
 	meshList[GEO_LIGHTBALL] = MeshBuilder::GenerateSphere("lightball", Color(1 ,1, 1), 10, 10, 1);
 	
 }
+/******************************************************************************/
+/*!
+\brief
+Initialize the walls and doors used for level 2
+/******************************************************************************/
 void SceneAssignment::InitLevel2()
 {
 	//Lv 2 of supermarket
@@ -130,6 +140,11 @@ void SceneAssignment::InitLevel2()
 	meshList[GEO_BACK2]->material.kSpecular.Set(1.0f, 1.0f, 1.0f);
 	meshList[GEO_BACK2]->material.kShininess = 50.f;
 }
+/******************************************************************************/
+/*!
+\brief
+Initialize all the objects that are going to be used in the program
+/******************************************************************************/
 void SceneAssignment::InitObjects()
 {
 	//lift
@@ -347,6 +362,11 @@ void SceneAssignment::InitObjects()
 	meshList[GEO_YELLOWAI] ->textureID = LoadTGA("Image//yellow.tga");
 
 }
+/******************************************************************************/
+/*!
+\brief
+Initialize the individual parts of the body for our blue NPC
+/******************************************************************************/
 void SceneAssignment::InitModelBlue()
 {
 	//body
@@ -385,6 +405,11 @@ void SceneAssignment::InitModelBlue()
 	modelList2[MODEL_RIGHT_LEG_LOWER_BLUE] = MeshBuilder::GenerateOBJ("blue", "OBJ//model_right_leg_lower.obj");
 	modelList2[MODEL_RIGHT_LEG_LOWER_BLUE] ->textureID = LoadTGA("Image//blue.tga");
 }
+/******************************************************************************/
+/*!
+\brief
+Initialize the individual parts of the body for our orange NPC
+/******************************************************************************/
 void SceneAssignment::InitModelOrange()
 {
 	//body
@@ -423,6 +448,11 @@ void SceneAssignment::InitModelOrange()
 	modelList6[MODEL_RIGHT_LEG_LOWER_ORANGE] = MeshBuilder::GenerateOBJ("orange", "OBJ//orange_right_leg_lower.obj");
 	modelList6[MODEL_RIGHT_LEG_LOWER_ORANGE] ->textureID = LoadTGA("Image//orange_.tga");
 }
+/******************************************************************************/
+/*!
+\brief
+Initialize the individual parts of the body for our pink NPC
+/******************************************************************************/
 void SceneAssignment::InitModelPink()
 {
 	//body
@@ -461,6 +491,11 @@ void SceneAssignment::InitModelPink()
 	modelList7[MODEL_RIGHT_LEG_LOWER_PINK] = MeshBuilder::GenerateOBJ("pink", "OBJ//model_right_leg_lower.obj");
 	modelList7[MODEL_RIGHT_LEG_LOWER_PINK] ->textureID = LoadTGA("Image//pink.tga");
 }
+/******************************************************************************/
+/*!
+\brief
+Initialize the individual parts of the body for our red NPC
+/******************************************************************************/
 void SceneAssignment::InitModelRed()
 {
 		//body
@@ -498,7 +533,11 @@ void SceneAssignment::InitModelRed()
 	//right leg lower
 	modelList3[MODEL_RIGHT_LEG_LOWER_RED] = MeshBuilder::GenerateOBJ("red", "OBJ//red_right_leg_lower.obj");
 	modelList3[MODEL_RIGHT_LEG_LOWER_RED] ->textureID = LoadTGA("Image//red.tga");
-}
+}/******************************************************************************/
+/*!
+\brief
+Initialize the individual parts of the body for our yellow NPC
+/******************************************************************************/
 void SceneAssignment::InitModelYellow()
 {
 		//body
@@ -537,6 +576,11 @@ void SceneAssignment::InitModelYellow()
 	modelList4[MODEL_RIGHT_LEG_LOWER_YELLOW] = MeshBuilder::GenerateOBJ("yellow", "OBJ//yellow_right_leg_lower.obj");
 	modelList4[MODEL_RIGHT_LEG_LOWER_YELLOW] ->textureID = LoadTGA("Image//yellow.tga");
 }
+/******************************************************************************/
+/*!
+\brief
+Initialize the quards that produce the landscape ooutside of the suermarket
+/******************************************************************************/
 void SceneAssignment::InitExtSkybox()
 {
 	//external skybox
@@ -564,6 +608,11 @@ void SceneAssignment::InitExtSkybox()
 	skyboxList[SKYBOX_EXTESIDE] = MeshBuilder::GenerateQuad("ext_banner", Color(1, 1, 1), 1.f);
 	skyboxList[SKYBOX_EXTESIDE]->textureID = LoadTGA("Image//supermarket_banner_side.tga");
 }
+/******************************************************************************/
+/*!
+\brief
+Initialize add some collision for most of our large objects
+/******************************************************************************/
 void SceneAssignment::InitCollision()
 {
 	//Objects
@@ -961,6 +1010,11 @@ void SceneAssignment::InitCollision()
 	PickUp7.scaleVal.push_back(Vector3(5,5,5)); 
 	/*-------------------------------------------------!! UPDATE NEEDED (WEI HENG) !!----------------------------------------------------*/
 }
+/******************************************************************************/
+/*!
+\brief
+Initialize the combined parts of the body for our scripted movement NPCs
+/******************************************************************************/
 void SceneAssignment::InitAI()
 {
 	openStart = 0; 
@@ -1019,6 +1073,11 @@ void SceneAssignment::InitAI()
 
 	for(int i=0;i<redSize;++i) {redCheck.push_back(true); redMove.push_back(0);}
 }
+/******************************************************************************/
+/*!
+\brief
+Initialize define our variables and also call all other Init and initialise our lights
+/******************************************************************************/
 void SceneAssignment::Init()
 {
 	//Pause
@@ -1255,6 +1314,11 @@ static float SCALE_LIMIT = 5.f;
 static float CSPEED = 20.f;
 static float RSPEED = 145.f;
 static float ROTATE_SPEED = 30.f;
+/******************************************************************************/
+/*!
+\brief
+Update all of our different viewmode such as wireframe mode
+/******************************************************************************/
 void SceneAssignment::UpdateViewMode(double dt)
 {
 	if(Application::IsKeyPressed('1')) //enable back face culling
@@ -1266,6 +1330,11 @@ void SceneAssignment::UpdateViewMode(double dt)
 	if(Application::IsKeyPressed('4'))
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); //wireframe mode
 }
+/******************************************************************************/
+/*!
+\brief
+Update the lift movement and the lift door also
+/******************************************************************************/
 void SceneAssignment::UpdateLift(double dt)
 {
 	//Elevator codes============================================================================================================
@@ -1407,6 +1476,11 @@ void SceneAssignment::UpdateLift(double dt)
 		
 	}
 }
+/******************************************************************************/
+/*!
+\brief
+Update the exit and entrance door for the player and moving NPCs to enter and exit
+/******************************************************************************/
 void SceneAssignment::UpdateDoor(double dt)
 {
 	openStart += dt; 
@@ -1546,6 +1620,11 @@ void SceneAssignment::UpdateDoor(double dt)
 //============================================================END===============================================================================================
 
 }
+/******************************************************************************/
+/*!
+\brief
+Update the light effect when there is fire alarm
+/******************************************************************************/
 void SceneAssignment::UpdateLight(double dt)
 {
 	if(Application::IsKeyPressed('I'))
@@ -1561,6 +1640,11 @@ void SceneAssignment::UpdateLight(double dt)
 	if(Application::IsKeyPressed('P'))
 		lights[0].position.y += (float)(LSPEED * dt);
 }
+/******************************************************************************/
+/*!
+\brief
+Update the player and moving NPCs to be able to use the travelator
+/******************************************************************************/
 void SceneAssignment::UpdateTravel(double dt)
 {
 	//========================================================Travelator Up========================================================================================
@@ -1618,6 +1702,11 @@ void SceneAssignment::UpdateModelGlenn(double dt)
 		rotateDir = -rotateDir;
 	rotateAngle += (float)(rotateDir * ROTATE_SPEED * dt);
 }
+/******************************************************************************/
+/*!
+\brief
+Update to call all other update functions and also update the games and scenerios in our program
+/******************************************************************************/
 void SceneAssignment::Update(double dt)
 {
 	if(Application::IsKeyPressed('P')) {
