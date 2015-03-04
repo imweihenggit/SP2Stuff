@@ -90,7 +90,7 @@ void SceneAssignment::InitLevel2()
 	//Top
 	meshList[GEO_TOP2] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f);
 	meshList[GEO_TOP2]->textureID = LoadTGA("Image//blue_top.tga");
-	meshList[GEO_TOP2]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_TOP2]->material.kAmbient.Set(0.5f, 0.5f, 0.5f);
 	meshList[GEO_TOP2]->material.kDiffuse.Set(0.5f, 0.5f, 0.5f);
 	meshList[GEO_TOP2]->material.kSpecular.Set(1.0f, 1.0f, 1.0f);
 	meshList[GEO_TOP2]->material.kShininess = 50.f;
@@ -98,7 +98,7 @@ void SceneAssignment::InitLevel2()
 	//Left
 	meshList[GEO_LEFT2] = MeshBuilder::GenerateQuad("left", Color(1, 1, 1), 1.f);
 	meshList[GEO_LEFT2]->textureID = LoadTGA("Image//blue_dnup_lift.tga");
-	meshList[GEO_LEFT2]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_LEFT2]->material.kAmbient.Set(0.5f, 0.5f, 0.5f);
 	meshList[GEO_LEFT2]->material.kDiffuse.Set(0.5f, 0.5f, 0.5f);
 	meshList[GEO_LEFT2]->material.kSpecular.Set(1.0f, 1.0f, 1.0f);
 	meshList[GEO_LEFT2]->material.kShininess = 50.f;
@@ -106,7 +106,7 @@ void SceneAssignment::InitLevel2()
 	//right
 	meshList[GEO_RIGHT2] = MeshBuilder::GenerateQuad("right", Color(1, 1, 1), 1.f);
 	meshList[GEO_RIGHT2]->textureID = LoadTGA("Image//blue_dnup.tga");
-	meshList[GEO_RIGHT2]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_RIGHT2]->material.kAmbient.Set(0.5f, 0.5f, 0.5f);
 	meshList[GEO_RIGHT2]->material.kDiffuse.Set(0.5f, 0.5f, 0.5f);
 	meshList[GEO_RIGHT2]->material.kSpecular.Set(1.0f, 1.0f, 1.0f);
 	meshList[GEO_RIGHT2]->material.kShininess = 50.f;
@@ -114,7 +114,7 @@ void SceneAssignment::InitLevel2()
 	//Front
 	meshList[GEO_FRONT2] = MeshBuilder::GenerateQuad("front", Color(1, 1, 1), 1.f);
 	meshList[GEO_FRONT2]->textureID = LoadTGA("Image//blue_updn.tga");
-	meshList[GEO_FRONT2]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_FRONT2]->material.kAmbient.Set(0.5f, 0.5f, 0.5f);
 	meshList[GEO_FRONT2]->material.kDiffuse.Set(0.5f, 0.5f, 0.5f);
 	meshList[GEO_FRONT2]->material.kSpecular.Set(1.0f, 1.0f, 1.0f);
 	meshList[GEO_FRONT2]->material.kShininess = 50.f;
@@ -122,7 +122,7 @@ void SceneAssignment::InitLevel2()
 	//back
 	meshList[GEO_BACK2] = MeshBuilder::GenerateQuad("back", Color(1, 1, 1), 1.f);
 	meshList[GEO_BACK2]->textureID = LoadTGA("Image//blue_updn.tga");
-	meshList[GEO_BACK2]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_BACK2]->material.kAmbient.Set(0.5f, 0.5f, 0.5f);
 	meshList[GEO_BACK2]->material.kDiffuse.Set(0.5f, 0.5f, 0.5f);
 	meshList[GEO_BACK2]->material.kSpecular.Set(1.0f, 1.0f, 1.0f);
 	meshList[GEO_BACK2]->material.kShininess = 50.f;
@@ -290,7 +290,7 @@ void SceneAssignment::InitObjects()
 
 	meshList[GEO_CEILING] = MeshBuilder::GenerateOBJ("ceiling", "OBJ//ceiling.obj");
 	meshList[GEO_CEILING]->textureID = LoadTGA("Image//ceiling.tga");
-	meshList[GEO_CEILING]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_CEILING]->material.kAmbient.Set(0.8f,0.8f, 0.8f);
 	meshList[GEO_CEILING]->material.kDiffuse.Set(0.5f, 0.5f, 0.5f);
 	meshList[GEO_CEILING]->material.kSpecular.Set(1.0f, 1.0f, 1.0f);
 	meshList[GEO_CEILING]->material.kShininess = 50.f;
@@ -1710,7 +1710,8 @@ void SceneAssignment::Update(double dt)
 		meshList[GEO_BOTTOM_L1]->material.kAmbient.Set(1.0f, 0.f, 0.f);
 		meshList[GEO_FRONT_L1]->material.kAmbient.Set(1.0f, 0.f, 0.f);
 		meshList[GEO_BACK_L1]->material.kAmbient.Set(1.0f, 0.f, 0.f);
-
+		meshList[GEO_CEILING]->material.kAmbient.Set(1.0f, 0.f, 0.f);
+		
 	}
 	if (loop2)
 	{
@@ -1721,6 +1722,7 @@ void SceneAssignment::Update(double dt)
 		meshList[GEO_BOTTOM_L1]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
 		meshList[GEO_FRONT_L1]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
 		meshList[GEO_BACK_L1]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+			meshList[GEO_CEILING]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
 	}
 
 
@@ -2042,13 +2044,13 @@ void SceneAssignment::RenderLevel2()
 		modelStack.Translate(Barrier.translateVal[i].x,Barrier.translateVal[i].y,Barrier.translateVal[i].z);
 		modelStack.Rotate(Barrier.rotateVal[i],Barrier.rotateAxis[i].x,Barrier.rotateAxis[i].y,Barrier.rotateAxis[i].z);
 		modelStack.Scale(Barrier.scaleVal[i].x, Barrier.scaleVal[i].y, Barrier.scaleVal[i].z);
-		RenderMesh(meshList[GEO_BARRIER], false);
+		RenderMesh(meshList[GEO_BARRIER], true);
 		modelStack.PopMatrix();
 	}
 		modelStack.PushMatrix();
 		modelStack.Translate(-225,148,-500);
 		modelStack.Scale(130, 10, 109);
-		RenderMesh(meshList[GEO_CEILING], false);
+		RenderMesh(meshList[GEO_CEILING], true);
 		modelStack.PopMatrix();
 }
 void SceneAssignment::RenderLargeObjects()
@@ -3132,7 +3134,7 @@ void SceneAssignment::RenderMiddleColumn()
 		//modelStack.Rotate(90, 0, 1, 0);
 		modelStack.Translate(5*num-105, 154, -97);//-217
 		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_CAN1], false);
+		RenderMesh(meshList[GEO_CAN1], true);
 		modelStack.PopMatrix();
 	}
 	for(int num = 0; num < 40; num++)
@@ -3141,7 +3143,7 @@ void SceneAssignment::RenderMiddleColumn()
 		//modelStack.Rotate(90, 0, 1, 0);
 		modelStack.Translate(5*num-105, 154, -102);
 		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_CAN1], false);
+		RenderMesh(meshList[GEO_CAN1], true);
 		modelStack.PopMatrix();
 	}
 	//middle/2 last from back/middle row///////////////////////////////////
@@ -3151,7 +3153,7 @@ void SceneAssignment::RenderMiddleColumn()
 		//modelStack.Rotate(90, 0, 1, 0);
 		modelStack.Translate(5*num-105, 167, -97);
 		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_CAN1], false);
+		RenderMesh(meshList[GEO_CAN1], true);
 		modelStack.PopMatrix();
 	}
 	for(int num = 0; num < 40; num++)
@@ -3160,7 +3162,7 @@ void SceneAssignment::RenderMiddleColumn()
 		//modelStack.Rotate(90, 0, 1, 0);
 		modelStack.Translate(5*num-105, 167, -102);
 		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_CAN1], false);
+		RenderMesh(meshList[GEO_CAN1], true);
 		modelStack.PopMatrix();
 	}
 	//middle/2 last from back/top row////////////////////////////////////////////////
@@ -3170,7 +3172,7 @@ void SceneAssignment::RenderMiddleColumn()
 		//modelStack.Rotate(90, 0, 1, 0);
 		modelStack.Translate(5*num-105, 179, -97);
 		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_CAN1], false);
+		RenderMesh(meshList[GEO_CAN1], true);
 		modelStack.PopMatrix();
 	}
 	for(int num = 0; num < 40; num++)
@@ -3179,7 +3181,7 @@ void SceneAssignment::RenderMiddleColumn()
 		//modelStack.Rotate(90, 0, 1, 0);
 		modelStack.Translate(5*num-105, 179, -102);
 		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_CAN1], false);
+		RenderMesh(meshList[GEO_CAN1], true);
 		modelStack.PopMatrix();
 	}
 	//middle/ 3 last from back/bottom row//////////////////////////////////
@@ -3189,7 +3191,7 @@ void SceneAssignment::RenderMiddleColumn()
 		//modelStack.Rotate(90, 0, 1, 0);
 		modelStack.Translate(5*num-105, 154, 3);//-217
 		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_CAN1], false);
+		RenderMesh(meshList[GEO_CAN1], true);
 		modelStack.PopMatrix();
 	}
 	for(int num = 0; num < 40; num++)
@@ -3198,7 +3200,7 @@ void SceneAssignment::RenderMiddleColumn()
 		//modelStack.Rotate(90, 0, 1, 0);
 		modelStack.Translate(5*num-105, 154, -2);
 		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_CAN1], false);
+		RenderMesh(meshList[GEO_CAN1], true);
 		modelStack.PopMatrix();
 	}
 	//middle/3 last from back/middle row///////////////////////////////////
@@ -3208,7 +3210,7 @@ void SceneAssignment::RenderMiddleColumn()
 		//modelStack.Rotate(90, 0, 1, 0);
 		modelStack.Translate(5*num-105, 167, 3);
 		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_CAN1], false);
+		RenderMesh(meshList[GEO_CAN1], true);
 		modelStack.PopMatrix();
 	}
 	for(int num = 0; num < 40; num++)
@@ -3217,7 +3219,7 @@ void SceneAssignment::RenderMiddleColumn()
 		//modelStack.Rotate(90, 0, 1, 0);
 		modelStack.Translate(5*num-105, 167, -2);
 		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_CAN1], false);
+		RenderMesh(meshList[GEO_CAN1], true);
 		modelStack.PopMatrix();
 	}
 	//middle/3 last from back/top row////////////////////////////////////////////////
@@ -3227,7 +3229,7 @@ void SceneAssignment::RenderMiddleColumn()
 		//modelStack.Rotate(90, 0, 1, 0);
 		modelStack.Translate(5*num-105, 179, 3);
 		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_CAN1], false);
+		RenderMesh(meshList[GEO_CAN1], true);
 		modelStack.PopMatrix();
 	}
 	for(int num = 0; num < 40; num++)
@@ -3236,7 +3238,7 @@ void SceneAssignment::RenderMiddleColumn()
 		//modelStack.Rotate(90, 0, 1, 0);
 		modelStack.Translate(5*num-105, 179, -2);
 		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_CAN1], false);
+		RenderMesh(meshList[GEO_CAN1], true);
 		modelStack.PopMatrix();
 	}
 	//middle/4 last from back/bottom row//////////////////////////////////
@@ -3246,7 +3248,7 @@ void SceneAssignment::RenderMiddleColumn()
 		//modelStack.Rotate(90, 0, 1, 0);
 		modelStack.Translate(5*num-105, 154, 103);//-217
 		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_CAN1], false);
+		RenderMesh(meshList[GEO_CAN1], true);
 		modelStack.PopMatrix();
 	}
 	for(int num = 0; num < 40; num++)
@@ -3255,7 +3257,7 @@ void SceneAssignment::RenderMiddleColumn()
 		//modelStack.Rotate(90, 0, 1, 0);
 		modelStack.Translate(5*num-105, 154, 98);
 		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_CAN1], false);
+		RenderMesh(meshList[GEO_CAN1], true);
 		modelStack.PopMatrix();
 	}
 	//middle/4 last from back/middle row///////////////////////////////////
@@ -3265,7 +3267,7 @@ void SceneAssignment::RenderMiddleColumn()
 		//modelStack.Rotate(90, 0, 1, 0);
 		modelStack.Translate(5*num-105, 167, 103);
 		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_CAN1], false);
+		RenderMesh(meshList[GEO_CAN1], true);
 		modelStack.PopMatrix();
 	}
 	for(int num = 0; num < 40; num++)
@@ -3274,7 +3276,7 @@ void SceneAssignment::RenderMiddleColumn()
 		//modelStack.Rotate(90, 0, 1, 0);
 		modelStack.Translate(5*num-105, 167, 98);
 		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_CAN1], false);
+		RenderMesh(meshList[GEO_CAN1], true);
 		modelStack.PopMatrix();
 	}
 	//middle/4 last from back/top row////////////////////////////////////////////////
@@ -3284,7 +3286,7 @@ void SceneAssignment::RenderMiddleColumn()
 		//modelStack.Rotate(90, 0, 1, 0);
 		modelStack.Translate(5*num-105, 179, 103);
 		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_CAN1], false);
+		RenderMesh(meshList[GEO_CAN1], true);
 		modelStack.PopMatrix();
 	}
 	for(int num = 0; num < 40; num++)
@@ -3293,7 +3295,7 @@ void SceneAssignment::RenderMiddleColumn()
 		//modelStack.Rotate(90, 0, 1, 0);
 		modelStack.Translate(5*num-105, 179, 98);
 		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_CAN1], false);
+		RenderMesh(meshList[GEO_CAN1], true);
 		modelStack.PopMatrix();
 	}
 	//middle/5 last from back/bottom row//////////////////////////////////
@@ -3303,7 +3305,7 @@ void SceneAssignment::RenderMiddleColumn()
 		//modelStack.Rotate(90, 0, 1, 0);
 		modelStack.Translate(5*num-105, 154, 203);//-217
 		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_CAN1], false);
+		RenderMesh(meshList[GEO_CAN1], true);
 		modelStack.PopMatrix();
 	}
 	for(int num = 0; num < 40; num++)
@@ -3312,7 +3314,7 @@ void SceneAssignment::RenderMiddleColumn()
 		//modelStack.Rotate(90, 0, 1, 0);
 		modelStack.Translate(5*num-105, 154, 198);
 		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_CAN1], false);
+		RenderMesh(meshList[GEO_CAN1], true);
 		modelStack.PopMatrix();
 	}
 	//middle/5 last from back/middle row///////////////////////////////////
@@ -3322,7 +3324,7 @@ void SceneAssignment::RenderMiddleColumn()
 		//modelStack.Rotate(90, 0, 1, 0);
 		modelStack.Translate(5*num-105, 167, 203);
 		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_CAN1], false);
+		RenderMesh(meshList[GEO_CAN1], true);
 		modelStack.PopMatrix();
 	}
 	for(int num = 0; num < 40; num++)
@@ -3331,7 +3333,7 @@ void SceneAssignment::RenderMiddleColumn()
 		//modelStack.Rotate(90, 0, 1, 0);
 		modelStack.Translate(5*num-105, 167, 198);
 		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_CAN1], false);
+		RenderMesh(meshList[GEO_CAN1], true);
 		modelStack.PopMatrix();
 	}
 	//middle/5 last from back/top row////////////////////////////////////////////////
@@ -3341,7 +3343,7 @@ void SceneAssignment::RenderMiddleColumn()
 		//modelStack.Rotate(90, 0, 1, 0);
 		modelStack.Translate(5*num-105, 179, 203);
 		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_CAN1], false);
+		RenderMesh(meshList[GEO_CAN1], true);
 		modelStack.PopMatrix();
 	}
 	for(int num = 0; num < 40; num++)
@@ -3350,7 +3352,7 @@ void SceneAssignment::RenderMiddleColumn()
 		//modelStack.Rotate(90, 0, 1, 0);
 		modelStack.Translate(5*num-105, 179, 198);
 		modelStack.Scale(5,5,5);
-		RenderMesh(meshList[GEO_CAN1], false);
+		RenderMesh(meshList[GEO_CAN1], true);
 		modelStack.PopMatrix();
 	}
 }
@@ -4368,7 +4370,6 @@ void SceneAssignment::RenderMusic()
 {
 	ISound* music;
 
-	engine->setRolloffFactor(0.1);
 	engine2->setRolloffFactor(0.1);
 	if (musicAlarm == true)
 	{
@@ -4395,11 +4396,13 @@ void SceneAssignment::RenderBGM()
 	ISound* music2; 
 	ISound* music3; 
 
+	engine->setRolloffFactor(0.01); 
+
 	if (musicBGM == true) {
 		
 		/*ISound**/ music3 = engine->play3D("../irrKlang/media/crowd.wav",vec3df(0,0,0),true); 
 		/*ISound* */music2 = engine->play3D("../irrKlang/media/LifeofRiley.mp3",vec3df(0,0,0),true); 
-		engine->setRolloffFactor(0); 
+		
 
 		musicBGM = false; 
 		musicCrowd = false; 
