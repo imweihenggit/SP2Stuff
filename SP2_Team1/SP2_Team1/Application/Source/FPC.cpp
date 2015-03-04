@@ -161,7 +161,7 @@ void FPC::Update(double dt, vector<CObjects> list)
 				position -= right * moveSpeed * dt;
 				target -= right * moveSpeed * dt;
 				
-				if (position.x > 1100 || position.x <-1100 || position.z > 695 || position.z < -230|| (collideA == true && collideD == false))
+				if (position.x > 1100 || position.x <-1100 || position.z > 695 || position.z < -935|| (collideA == true && collideD == false))
 				{
 					position += right * moveSpeed * dt;
 					target += right * moveSpeed * dt;
@@ -188,7 +188,7 @@ void FPC::Update(double dt, vector<CObjects> list)
 				position += right * moveSpeed * dt;
 				target += right * moveSpeed * dt;
 
-				if (position.x > 1100 || position.x <-1100 || position.z > 695 || position.z < -230 || (collideD == true && collideA == false))
+				if (position.x > 1100 || position.x <-1100 || position.z > 695 || position.z < -935 || (collideD == true && collideA == false))
 				{
 					position -= right * moveSpeed * dt;
 					target -= right * moveSpeed * dt;
@@ -212,7 +212,7 @@ void FPC::Update(double dt, vector<CObjects> list)
 				position += view * moveSpeed * dt;
 				target += view * moveSpeed * dt;
 
-				if (position.x > 1100 || position.x <-1100 || position.z > 695 || position.z < -230 || (collideW == true && collideS == false))
+				if (position.x > 1100 || position.x <-1100 || position.z > 695 || position.z < -935 || (collideW == true && collideS == false))
 				{
 					position -= view * moveSpeed * dt;
 					target -= view * moveSpeed * dt;
@@ -237,7 +237,7 @@ void FPC::Update(double dt, vector<CObjects> list)
 				position -= view * moveSpeed * dt;
 				target -= view * moveSpeed * dt;
 
-				if (position.x > 1100 || position.x <-1100 || position.z > 695 || position.z < -230 || (collideS == true && collideW == false))
+				if (position.x > 1100 || position.x <-1100 || position.z > 695 || position.z < -935 || (collideS == true && collideW == false))
 				{
 					position += view * moveSpeed * dt;
 					target += view * moveSpeed * dt;
