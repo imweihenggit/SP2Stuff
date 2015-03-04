@@ -4380,7 +4380,6 @@ void SceneAssignment::RenderMusic()
 	}
 	if (coin == true)
 	{
-		engine->setRolloffFactor(0);
 		engine->play2D("../irrKlang/media/coin.wav",false);
 		coin = false;
 	}
@@ -4400,8 +4399,8 @@ void SceneAssignment::RenderBGM()
 
 	if (musicBGM == true) {
 		
-		/*ISound**/ music3 = engine->play3D("../irrKlang/media/crowd.wav",vec3df(0,0,0),true); 
-		/*ISound* */music2 = engine->play3D("../irrKlang/media/LifeofRiley.mp3",vec3df(0,0,0),true); 
+		 music3 = engine->play3D("../irrKlang/media/crowd.wav",vec3df(0,0,0),true); 
+		 music2 = engine->play3D("../irrKlang/media/LifeofRiley.mp3",vec3df(0,0,0),true); 
 		
 
 		musicBGM = false; 
