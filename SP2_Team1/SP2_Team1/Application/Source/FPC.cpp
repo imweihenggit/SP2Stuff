@@ -214,12 +214,6 @@ void FPC::Update(double dt, vector<CObjects> list)
 
 				if (position.x > 1100 || position.x <-1100 || position.z > 695 || position.z < -230 || (collideW == true && collideS == false))
 				{
-
-					if (position.z >= -35 && position.z <= 45 && position.x >= 395 && position.x <= 495) {
-					}
-					else
-					{
-
 					position -= view * moveSpeed * dt;
 					target -= view * moveSpeed * dt;
 				}
@@ -381,6 +375,7 @@ void FPC::Update(double dt, vector<CObjects> list)
 		Reset();
 	}
 }
+
 
 /******************************************************************************/
 /*!
