@@ -1,0 +1,496 @@
+﻿Build started 3/4/2015 1:03:34 PM.
+     1>Project "C:\Users\L532\Downloads\SP2_Team1\SP2_Team1\Application\Application.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Release\Application.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IC:\Users\L532\Downloads\SP2_Team1\SP2_Team1\\irrKlang\include /IC:\Users\L532\Downloads\SP2_Team1\SP2_Team1\\glew\include /IC:\Users\L532\Downloads\SP2_Team1\SP2_Team1\\glfw\include /IC:\Users\L532\Downloads\SP2_Team1\SP2_Team1\\Common\Source /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Source\SceneAssignment.cpp
+         SceneAssignment.cpp
+     1>Source\SceneAssignment.cpp(591): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(596): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(597): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(598): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(604): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(649): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(650): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(651): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(656): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(657): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(667): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(678): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(695): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(702): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(719): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(722): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(723): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(725): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(728): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(729): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(734): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(734): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(737): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(737): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(738): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(738): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(744): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(744): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(747): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(747): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(748): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(748): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(756): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(759): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(760): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(762): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(765): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(766): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(773): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(773): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(776): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(776): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(777): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(777): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(789): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(790): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(803): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(817): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(817): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(829): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(829): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(844): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(913): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(937): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(1260): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Source\SceneAssignment.cpp(1425): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(1426): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(1427): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(1428): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(1429): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(1430): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(1431): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(1465): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(1477): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(1489): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(1646): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>Source\SceneAssignment.cpp(1647): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(1736): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(1793): warning C4305: '=' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(1826): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(1930): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(1939): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(1945): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2152): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2161): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2170): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2180): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2189): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2198): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2208): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2217): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2226): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2236): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2245): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2254): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2264): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2273): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2282): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2292): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2301): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2310): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2320): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2329): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2338): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2348): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2357): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2366): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2376): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2385): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2394): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2404): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2413): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2422): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2432): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2441): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2450): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2460): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2469): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2478): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2488): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2497): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2506): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2516): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2525): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2534): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2544): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2553): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2562): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2572): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2581): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2590): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2600): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2609): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2618): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2628): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2637): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2646): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2660): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2669): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2678): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2688): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2697): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2706): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2716): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2725): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2734): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2744): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2753): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2762): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2772): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2781): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2790): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2800): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2809): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2818): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2828): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2837): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2846): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2856): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2865): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2874): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2884): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2893): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2902): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2912): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2921): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2930): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2940): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2949): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2958): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2968): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2977): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2986): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(2996): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3005): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3014): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3024): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3033): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3042): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3052): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3061): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3070): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3080): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3089): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3098): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3108): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3117): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3126): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3136): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3145): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3154): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3168): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3177): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3187): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3196): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3206): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3215): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3225): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3234): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3244): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3253): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3263): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3272): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3282): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3291): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3301): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3310): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3320): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3329): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3339): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3348): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3358): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3367): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3377): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3386): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3401): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3405): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3409): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3422): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3426): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3430): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3443): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3447): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3451): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3464): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3468): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3472): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3484): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3488): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3492): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3506): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3510): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3514): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3528): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3532): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3536): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3548): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3552): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3556): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3569): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3573): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3577): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3590): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3594): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3598): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3611): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3615): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3619): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3632): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3636): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3640): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3644): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3657): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3661): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3665): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3669): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3683): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3687): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3700): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3704): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3791): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(3797): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(3827): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3848): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3849): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3850): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3851): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3852): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3853): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3854): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3855): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3856): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3857): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3858): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3859): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3860): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3861): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3862): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3863): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3864): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3865): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3866): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3867): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3868): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3869): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3870): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3871): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3872): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3873): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3874): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3875): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3876): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3877): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3878): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3879): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3880): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3881): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3882): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3883): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3884): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3885): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3886): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3887): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3888): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3889): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3959): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3960): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3961): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3962): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3963): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3964): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3965): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3966): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3967): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3968): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3969): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3970): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3971): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3972): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3973): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3974): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3975): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3976): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3977): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3978): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3979): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3980): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(3981): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(4049): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(4050): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(4051): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(4052): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(4054): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(4055): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(4057): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(4058): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(4059): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(4060): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(4061): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(4062): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(4063): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(4064): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(4065): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(4066): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(4067): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(4068): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(4069): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(4071): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(4072): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(4074): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(4075): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(4076): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(4077): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(4078): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\SceneAssignment.cpp(4406): warning C4305: 'argument' : truncation from 'double' to 'irrklang::ik_f32'
+     1>Source\SceneAssignment.cpp(4407): warning C4305: 'argument' : truncation from 'double' to 'irrklang::ik_f32'
+     1>Source\SceneAssignment.cpp(4447): warning C4305: 'argument' : truncation from 'double' to 'irrklang::ik_f32'
+     1>Source\SceneAssignment.cpp(4618): warning C4018: '<' : signed/unsigned mismatch
+     1>Source\SceneAssignment.cpp(4620): warning C4018: '<' : signed/unsigned mismatch
+     1>Source\SceneAssignment.cpp(4692): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4694): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4694): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4699): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4701): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4701): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4701): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4702): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4702): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4715): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4717): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4718): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4718): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4718): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4719): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4719): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4724): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4725): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4726): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4727): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4728): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4739): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4741): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4741): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4747): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4750): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4750): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4753): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4755): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4757): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4759): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4761): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4763): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4765): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4767): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4769): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4771): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4773): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4775): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4777): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4786): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4788): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4788): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4788): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4797): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4799): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4799): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4799): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4808): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4810): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4810): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4810): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4819): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4821): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4821): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4821): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4830): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4832): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4832): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4832): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4841): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4843): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4843): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4843): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4853): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4855): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4855): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4855): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4868): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4870): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4870): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4876): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4878): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4878): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4878): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4885): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4885): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4887): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4887): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4894): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4896): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4896): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4896): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4907): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4910): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4910): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4923): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4925): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4925): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4946): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4946): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4948): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4953): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4953): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4955): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4961): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(4963): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(5020): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(5020): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(5023): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(5023): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(5023): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(5031): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(5031): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(5033): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(5033): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Source\SceneAssignment.cpp(5033): warning C4305: 'argument' : truncation from 'double' to 'float'
+       Link:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\L532\Downloads\SP2_Team1\SP2_Team1\Release\Application.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:C:\Users\L532\Downloads\SP2_Team1\SP2_Team1\\irrKlang\lib /LIBPATH:C:\Users\L532\Downloads\SP2_Team1\SP2_Team1\Release /LIBPATH:C:\Users\L532\Downloads\SP2_Team1\SP2_Team1\\glew\lib /LIBPATH:"C:\Users\L532\Downloads\SP2_Team1\SP2_Team1\\glfw\lib-msvc100" irrKlang.lib glew32.lib glfw3.lib opengl32.lib winmm.lib Common.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\Application.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\L532\Downloads\SP2_Team1\SP2_Team1\Release\Application.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\L532\Downloads\SP2_Team1\SP2_Team1\Release\Application.lib" /MACHINE:X86 Release\MatrixStack.obj
+         Release\Mtx44.obj
+         Release\timer.obj
+         Release\Vector3.obj
+         Release\Application.obj
+         Release\Camera.obj
+         Release\Camera3.obj
+         Release\FPC.obj
+         Release\functions.obj
+         Release\LoadOBJ.obj
+         Release\LoadTGA.obj
+         Release\main.obj
+         Release\Mesh.obj
+         Release\MeshBuilder.obj
+         Release\MoveAI.obj
+         Release\Objects.obj
+         Release\SceneAssignment.obj
+         Release\shader.obj
+         Release\Utility.obj
+         Generating code
+         Finished generating code
+         Application.vcxproj -> C:\Users\L532\Downloads\SP2_Team1\SP2_Team1\Release\Application.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\L532\Downloads\SP2_Team1\SP2_Team1\Release\Application.exe;#1" /manifest Release\Application.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         Deleting file "Release\Application.unsuccessfulbuild".
+         Touching "Release\Application.lastbuildstate".
+     1>Done Building Project "C:\Users\L532\Downloads\SP2_Team1\SP2_Team1\Application\Application.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:06.63
