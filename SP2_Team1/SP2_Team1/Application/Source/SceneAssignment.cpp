@@ -4120,7 +4120,7 @@ void SceneAssignment::RenderModelRed()
 {
 		modelStack.PushMatrix(); 
 
-	if (redCheck[14] == false) for(int i=0;i<redSize;++i) {redCheck[i] = true; redMove[i] = 0;}
+		if (redCheck[14] == false) for(int i=0;i<redSize;++i) {redCheck[i] = true; redMove[i] = 0;}
 	if (redCheck[13]==false) redCheck[14]= AIrotate(modelStack,Vector3(-660,0,220),redMove[14],'y',-180); 
 	if (redCheck[12]==false) redCheck[13]= AImoveZ(modelStack,redMove[13],-205);
 	if (redCheck[11]==false) redCheck[12]= AIrotate(modelStack,Vector3(-660,0,425),redMove[12],'y',-90); 
