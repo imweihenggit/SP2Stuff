@@ -119,7 +119,7 @@ class SceneAssignment : public Scene
 		GEO_BOX1,
 		GEO_CAN1,
 		GEO_ARROW,
-		//Andy's work		
+		GEO_SWITCH,
 		GEO_LIFT,
 		GEO_DOOR,
 		GEO_ALARM,
@@ -281,6 +281,7 @@ public:
 	void RenderMusic();
 	void RenderBGM(); 
 	void RenderMission();
+	void RenderMission2();
 	void RenderModelGlenn();
 	void RenderQuadOnScreen(Mesh* mesh, float x_size, float y_size, float x, float y);
 	void ReadFromText();	//this should be linked to RenderTextOnScreen function
@@ -326,20 +327,23 @@ private:
 	float eley;
 	float LiftDoor;
 	float LiftDoor2;
-	float waitTime, waitTime2,waitTime3;
+	float waitTime, waitTime2,waitTime3,waitTime4;
 	bool up;
 	bool down;
 	bool Lopen;
 	bool Lclose;
 	bool Lopen2;
 	bool Lclose2;
-	bool buttonPress, buttonPress2,buttonPress3;
+	bool buttonPress, buttonPress2,buttonPress3,buttonPress4;
 
 	//travelator - Andy's work
 	bool travel;
 	bool travelDwn;
 	//music
-	bool musicAlarm, loop1, loop2,musicStop, musicBGM, musicCrowd, Mission, coin;
+	bool musicAlarm, loop1, loop2,musicStop, musicStop2, musicBGM, musicCrowd, Mission,Mission2 , coin, lightson,lightsoff;
+	bool startfire, endfire;
+	bool entrance, exit;
+	int timerez;
 	
 	//entrance
 	bool open2;
@@ -370,7 +374,7 @@ private:
 	vector<CObjects> ObjectList;
 
 	CObjects Skybox1, Skybox2, Basket, Cooler, Shelf, Travellator, Cashier, Elevator, Register, Barrier,firealarm, House,
-		     PickUp1, PickUp2, PickUp3, PickUp4, PickUp5, PickUp6, PickUp7,scenerio3;	
+		     PickUp1, PickUp2, PickUp3, PickUp4, PickUp5, PickUp6, PickUp7,scenerio3, light;	
 
 
 	int FPS;
