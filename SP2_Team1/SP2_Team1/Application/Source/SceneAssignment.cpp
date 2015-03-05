@@ -18,9 +18,6 @@
 using namespace std;
 using namespace irrklang;
 
-ISoundEngine* engine = createIrrKlangDevice(ESOD_AUTO_DETECT,ESEO_MULTI_THREADED | ESEO_LOAD_PLUGINS | ESEO_USE_3D_BUFFERS);
-
-ISoundEngine* engine2 = createIrrKlangDevice(ESOD_AUTO_DETECT,ESEO_MULTI_THREADED | ESEO_LOAD_PLUGINS | ESEO_USE_3D_BUFFERS); 
 
 bool SceneAssignment::bReset = false;
 
@@ -33,6 +30,16 @@ bool SceneAssignment::bReset = false;
 		All items are rendered here
 */
 /******************************************************************************/
+ISoundEngine* engine = createIrrKlangDevice(ESOD_AUTO_DETECT,ESEO_MULTI_THREADED | ESEO_LOAD_PLUGINS | ESEO_USE_3D_BUFFERS);
+
+ISoundEngine* engine2 = createIrrKlangDevice(ESOD_AUTO_DETECT,ESEO_MULTI_THREADED | ESEO_LOAD_PLUGINS | ESEO_USE_3D_BUFFERS); 
+
+ISoundEngine* engine3 = createIrrKlangDevice(ESOD_AUTO_DETECT,ESEO_MULTI_THREADED | ESEO_LOAD_PLUGINS | ESEO_USE_3D_BUFFERS); 
+
+ISoundEngine* engine4 = createIrrKlangDevice(ESOD_AUTO_DETECT,ESEO_MULTI_THREADED | ESEO_LOAD_PLUGINS | ESEO_USE_3D_BUFFERS); 
+
+ISoundEngine* engine5 = createIrrKlangDevice(ESOD_AUTO_DETECT,ESEO_MULTI_THREADED | ESEO_LOAD_PLUGINS | ESEO_USE_3D_BUFFERS); 
+
 
 SceneAssignment::SceneAssignment()
 {
@@ -377,6 +384,9 @@ void SceneAssignment::InitObjects()
 	meshList[GEO_YELLOWAI] = MeshBuilder::GenerateOBJ("yellow", "OBJ//yellow.obj");
 	meshList[GEO_YELLOWAI] ->textureID = LoadTGA("Image//yellow.tga");
 
+	meshList[GEO_SWITCH] = MeshBuilder::GenerateOBJ("switch", "OBJ//power.obj");
+	meshList[GEO_SWITCH] ->textureID = LoadTGA("Image//power.tga");
+
 }
 /******************************************************************************/
 /*!
@@ -699,7 +709,11 @@ void SceneAssignment::InitCollision()
 	firealarm.rotateVal.push_back(270);
 	firealarm.rotateAxis.push_back(Vector3(0,1,0));
 	firealarm.scaleVal.push_back(Vector3(15,14,15));
-
+	//switch
+	light.translateVal.push_back(Vector3(-418,130,50));
+	light.rotateVal.push_back(90);
+	light.rotateAxis.push_back(Vector3(0,1,0));
+	light.scaleVal.push_back(Vector3(15,14,15));
 	//Skybox2
 	/*--TOP--*/
 	Skybox2.translateVal.push_back(Vector3(0,296,0));
@@ -1001,7 +1015,7 @@ void SceneAssignment::InitCollision()
 		House.collisionPos.push_back(Vector3(620+60+(200*i), 30, 250-30));
 	}
 	
-	House.collisionRad = 70;
+	House.collisionRad = 50;
 	ObjectList.push_back(House);
 
 	/*-------------------------------------------------!! UPDATE NEEDED (WEI HENG) !!----------------------------------------------------*/
@@ -1151,13 +1165,17 @@ void SceneAssignment::Init()
 	Lclose = false;
 	Lopen2 = false;
 	Lclose2 = false;
-	waitTime = waitTime2 = waitTime3 = 0;
-	buttonPress = buttonPress2 = buttonPress3 =false;
+	waitTime = waitTime2 = waitTime3 = waitTime4 = 0;
+	buttonPress = buttonPress2 = buttonPress3 = buttonPress4 =  false;
 	//music
 	musicAlarm = coin = false; 
- 	musicBGM = musicCrowd = Mission = true;
-	loop1 = false;
-	loop2 = musicStop = false;
+ 	musicBGM = musicCrowd = Mission = Mission2 = true;
+
+	lightson = lightsoff = false;
+	loop1 = startfire = endfire = false;
+	loop2 = musicStop = musicStop2 = false;
+	entrance = exit = false;
+	timerez = 0;
 	//debug
 	debug = false;
 
@@ -1533,11 +1551,16 @@ void SceneAssignment::UpdateDoor(double dt)
 		DX -=(float)(30 * dt);
 		DX2 +=(float)(30 * dt);
 	}
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!THIS PART NEED UPDATE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 	if (((playerCamera.position.z >= 250)&&(playerCamera.position.z <= 300))&&((playerCamera.position.x >= -166)&&(playerCamera.position.x <= -60))&&(close == false))
-		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!THIS PART NEED UPDATE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	{
 		open = true;
+
+		if (exit == false) {
+			engine5->play2D("../irrKlang/media/bye.wav",false);
+			exit = true;
+			entrance = false;
+		}
 	}
 
 	if (buttonPress3 == false) {
@@ -1602,9 +1625,13 @@ void SceneAssignment::UpdateDoor(double dt)
 		D2X2 +=(float)(30 * dt);
 	}
 	if (((playerCamera.position.z >= 350)&&(playerCamera.position.z <= 465))&&((playerCamera.position.x >= 70)&&(playerCamera.position.x <= 150))&&(close2 == false))
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!THIS PART NEED UPDATE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	{
 		open2 = true;
+		if (entrance == false) {
+			engine5->play2D("../irrKlang/media/welcome.wav",false);
+			entrance = true;
+			exit = false;
+		}
 	}
 
 	if (buttonPress3 == false) {
@@ -1625,7 +1652,7 @@ void SceneAssignment::UpdateDoor(double dt)
 		} 
 	}
 
-	if (openStart >= 2 && openStart <= 4) { 
+	if (openStart >= 1 && openStart <= 3) { 
 		open2 = true; 
 	} 
 
@@ -1742,6 +1769,9 @@ void SceneAssignment::Update(double dt)
 		isPaused = true;
 		engine->setAllSoundsPaused(true);
 		engine2->setAllSoundsPaused(true);
+		engine3->setAllSoundsPaused(true);
+		engine4->setAllSoundsPaused(true);
+		engine5->setAllSoundsPaused(true);
 	}
 
 
@@ -1885,10 +1915,12 @@ void SceneAssignment::Update(double dt)
 
 		if (Application::IsKeyPressed('F') && (playerCamera.position.x >= 350 &&((playerCamera.position.z >= -150)&&(playerCamera.position.z <= -130))&&(playerCamera.position.y <= 50)) && (musicAlarm == false)&&(buttonPress3 ==false))
 		{
+			lightson = false;
+			lightsoff = false;
 			musicStop = false; 
-			musicAlarm = true; 
-			loop1 = true;	
+ 			musicAlarm = true; 
 			buttonPress3 = true;
+			startfire = true;
 		}
 		if(buttonPress3 == true)
 		{
@@ -1905,143 +1937,231 @@ void SceneAssignment::Update(double dt)
 
 		//=================================================!! UPDATE NEEDED (ANDY)1/3/15!!===================================================
 
-		if(Application::IsKeyPressed('I'))
-		{
-			//to do: switch light type to POINT and pass the information to shader
-			lights[0].power = 0.5;
-			glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
+
+
+
+
+	if (Application::IsKeyPressed('F') && (playerCamera.position.x >= 350 && playerCamera.position.x <= 400 && ((playerCamera.position.z >= -150)&&(playerCamera.position.z <= -130))&&(playerCamera.position.y <= 50)) && (musicAlarm == false)&&(buttonPress3 ==false))
+	{
+		lightson = false;
+		lightsoff = false;
+		musicStop = false; 
+ 		musicAlarm = true; 
+		buttonPress3 = true;
+		startfire = true;
+		
+	}
+	if(buttonPress3 == true)
+	{
+		
+		if (waitTime3 < 1500){
+			
+			timerez++;
+			if(timerez %8 != 0)
+			{
+				loop2= false;
+				loop1 = true;
+			}
+			if(timerez %8 == 0)
+			{
+				loop2= true;
+				loop1 = false;
+			}
+			waitTime3++;
 		}
-		else if(Application::IsKeyPressed('O'))
-		{
-			//to do: switch light type to DIRECTIONAL and pass the information to shader
-			lights[0].power = 0.1;
-			glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
-
-
+		else{
+			musicStop = true;
+			loop1 = false;
+			loop2 = true;
+			endfire = true;
 		}
-		else if(Application::IsKeyPressed('P'))
-		{
-			//to do: switch light type to SPOT and pass the information to shader
+		
+	}
 
-		}
-		//scenerio3
-		if(game3 == true && gameover1 == true)
-		{
-			if ((playerCamera.position.x<=545 && playerCamera.position.x>=525) && (playerCamera.position.z<=262 && playerCamera.position.z>=245) && (renderscenerio3== true)&& (startgame == true))
-			{
-				renderscenerio3text = false;
-			}
-			else
-			{
-				renderscenerio3text = true;
-			}
-			if (renderscenerio3text == false && Application::IsKeyPressed('F'))
-			{
-				renderscenerio3 = false;
+	//=================================================!! UPDATE NEEDED (ANDY)1/3/15!!===================================================
+	if(lightson)
+	{
+		lights[0].power = 0.8;
+		glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
+		glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
+		meshList[GEO_LEFT_L1]->material.kAmbient.Set(0.8f, 0.8f, 0.8f);
+		meshList[GEO_RIGHT_L1]->material.kAmbient.Set(0.8f, 0.8f, 0.8f);
+		meshList[GEO_BOTTOM_L1]->material.kAmbient.Set(0.8f, 0.8f, 0.8f);
+		meshList[GEO_FRONT_L1]->material.kAmbient.Set(0.8f, 0.8f, 0.8f);
+		meshList[GEO_BACK_L1]->material.kAmbient.Set(0.8f, 0.8f, 0.8f);
+		meshList[GEO_CEILING]->material.kAmbient.Set(0.8f, 0.8f, 0.8f);
+		meshList[GEO_LEFT2]->material.kAmbient.Set(0.5f, 0.5f, 0.5f);
+		meshList[GEO_RIGHT2]->material.kAmbient.Set(0.5f, 0.5f, 0.5f);
+		meshList[GEO_TOP2]->material.kAmbient.Set(0.5f, 0.5f, 0.5f);
+		meshList[GEO_FRONT2]->material.kAmbient.Set(0.5f, 0.5f, 0.5f);
+		meshList[GEO_BACK2]->material.kAmbient.Set(0.5f, 0.5f, 0.5f);
+		
+	}
+	if(lightsoff)
+	{
+		lights[0].power = 0.1;
+		glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
+		meshList[GEO_LEFT_L1]->material.kAmbient.Set(0.0f, 0.f, 0.f);
+		meshList[GEO_RIGHT_L1]->material.kAmbient.Set(0.0f, 0.f, 0.f);
+		meshList[GEO_BOTTOM_L1]->material.kAmbient.Set(0.0f, 0.f, 0.f);
+		meshList[GEO_FRONT_L1]->material.kAmbient.Set(0.0f, 0.f, 0.f);
+		meshList[GEO_BACK_L1]->material.kAmbient.Set(0.0f, 0.f, 0.f);
+		meshList[GEO_CEILING]->material.kAmbient.Set(0.0f, 0.f, 0.f);
+		meshList[GEO_LEFT2]->material.kAmbient.Set(0.0f, 0.f, 0.f);
+		meshList[GEO_RIGHT2]->material.kAmbient.Set(0.0f, 0.f, 0.f);
+		meshList[GEO_TOP2]->material.kAmbient.Set(0.0f, 0.f, 0.f);
+		meshList[GEO_FRONT2]->material.kAmbient.Set(0.0f, 0.f, 0.f);
+		meshList[GEO_BACK2]->material.kAmbient.Set(0.0f, 0.f, 0.f);
+	}//switchlights
+	if(Application::IsKeyPressed('F') && playerCamera.position.z >20 && playerCamera.position.z <40 && playerCamera.position.x <-370 && lightson == true)
+	{
+		lightson = false;
+		lightsoff = true;
+		Sleep(100);
+	}
+	if(Application::IsKeyPressed('F') && playerCamera.position.z >20 && playerCamera.position.z <40 && playerCamera.position.x <-370 && lightson == false)
+	{
+		lightsoff = false;
+		lightson = true;
+		Sleep(100);
+	}
+	//scenerio3
+	if(game3 == true)
+	{
+	if ((playerCamera.position.x<=545 && playerCamera.position.x>=525) && (playerCamera.position.z<=262 && playerCamera.position.z>=245) && (renderscenerio3== true)&& (startgame == true))
+	{
+		renderscenerio3text = false;
+	}
+	else
+	{
+		renderscenerio3text = true;
+	}
+	if (renderscenerio3text == false && Application::IsKeyPressed('F'))
+	{
+		renderscenerio3 = false;
 
-			}
-			if(renderscenerio3 == false && Application::IsKeyPressed('E'))
-			{
-				startgame = false;
-				renderscenerio3 = true;
-			}
-			if(startgame == false)
-			{
-				timer += dt;
-				if(timer<=20)
-				{
-					place1 = false;
-				}
-				else
-				{
-					place1 = true;
-				}
-				if(timer<=40 && timer>=20)
-				{
-					place2 = false;
-				}
-				else
-				{
-					place2 = true;
-				}
-				if(timer<=60 && timer>=40)
-				{
-					place3 = false;
-				}
-				else
-				{
-					place3 = true;
-				}
-				if(timer<=80 && timer>=60)
-				{
-					place4 = false;
-				}
-				else
-				{
-					place4 = true;
-				}
-				if(timer<=100 && timer>=80)
-				{
-					place5 = false;
-				}
-				else
-				{
-					place5 = true;
-				}
-				if(timer>=10)
-				{
-					gameover = false;
-				}
+	}
+	if(renderscenerio3 == false && Application::IsKeyPressed('E'))
+	{
+		startgame = false;
+		renderscenerio3 = true;
+		Mission2 == true;
+		RenderMission2();
+	}
+	if(startgame == false)
+	{
+		timer += dt;
+	if(timer<=20)
+	{
+		place1 = false;
+	}
+	else
+	{
+		place1 = true;
+	}
+	if(timer<=40 && timer>=20)
+	{
+		place2 = false;
+	}
+	else
+	{
+		place2 = true;
+	}
+	if(timer<=60 && timer>=40)
+	{
+		place3 = false;
+	}
+	else
+	{
+		place3 = true;
+	}
+	if(timer<=80 && timer>=60)
+	{
+		place4 = false;
+	}
+	else
+	{
+		place4 = true;
+	}
+	if(timer<=100 && timer>=80)
+	{
+		place5 = false;
+	}
+	else
+	{
+		place5 = true;
+	}
+	if(timer >=10 && timer < 10.1)
+	{
+		gameover = false;
 
-				if(timer>15)
-				{
-					gameover = true;
-					gameover1 = false;
-				}
-				//place1
-				if((playerCamera.position.x<=352 && playerCamera.position.x>=332) && (playerCamera.position.z<=-272 && playerCamera.position.z>=-292)&& timer<=20)
-				{
-					caught = false;	 
-				}
-				//place2
-				else if((playerCamera.position.x<=-45 && playerCamera.position.x>=-65) && (playerCamera.position.z<=428 && playerCamera.position.z>=408)&&(timer<=40 && timer>=20))
-				{
-					caught = false;
-				}
-				//place3
-				else if((playerCamera.position.x<=-20 && playerCamera.position.x>=-40) && (playerCamera.position.z<=292 && playerCamera.position.z>=272)&&(timer<=60 && timer>=40))
-				{
-					caught = false;
-				}
-				//place4
-				else if((playerCamera.position.x<=-766 && playerCamera.position.x>=-746) && (playerCamera.position.z<=203 && playerCamera.position.z>=183)&&(timer<=80 && timer>=60))
-				{
-					caught = false;
-				}
-				//place5
-				else if((playerCamera.position.x<=-35 && playerCamera.position.x>=-15) && (playerCamera.position.z<=169 && playerCamera.position.z>=149)&&(timer<=100 && timer>=80))
-				{
-					caught = false;
-				}
-				else
-				{
-					caught = true;
-				}
-				if(caught == false && Application::IsKeyPressed('F'))
-				{
-					congrat = false;
-					caught = true;
-					startgame = true;
-				}
+		musicStop2= true;
 
-			}
-			if(congrat == false && Application::IsKeyPressed('E'))
-			{
-				congrat = true;
-				game3 = false;
-			}
-		}
-		engine->setListenerPosition(vec3df(playerCamera.position.x,playerCamera.position.y,playerCamera.position.z),vec3df(0,0,0),vec3df(playerCamera.up.x,playerCamera.up.y,playerCamera.up.z));
+		if(musicStop2 == true){ 
+			engine4->stopAllSounds();
+			engine4->play2D("../irrKlang/media/fail.wav",false); 
+			engine->setAllSoundsPaused(false);
+			musicStop2 = false; 
+		} 
+	}
+	
+	if(timer>13)
+	{
+		gameover = true;
+	}
+	//place1
+	if((playerCamera.position.x<=352 && playerCamera.position.x>=332) && (playerCamera.position.z<=-272 && playerCamera.position.z>=-292)&& timer<=20)
+	{
+		caught = false;	 
+	}
+	//place2
+	else if((playerCamera.position.x<=-45 && playerCamera.position.x>=-65) && (playerCamera.position.z<=428 && playerCamera.position.z>=408)&&(timer<=40 && timer>=20))
+	{
+		caught = false;
+	}
+	//place3
+	else if((playerCamera.position.x<=-20 && playerCamera.position.x>=-40) && (playerCamera.position.z<=292 && playerCamera.position.z>=272)&&(timer<=60 && timer>=40))
+	{
+		caught = false;
+	}
+	//place4
+	else if((playerCamera.position.x<=-766 && playerCamera.position.x>=-746) && (playerCamera.position.z<=203 && playerCamera.position.z>=183)&&(timer<=80 && timer>=60))
+	{
+		caught = false;
+	}
+	//place5
+	else if((playerCamera.position.x<=-35 && playerCamera.position.x>=-15) && (playerCamera.position.z<=169 && playerCamera.position.z>=149)&&(timer<=100 && timer>=80))
+	{
+		caught = false;
+	}
+	else
+	{
+		caught = true;
+	}
+	if(caught == false && Application::IsKeyPressed('F'))
+	{
+		congrat = false;
+		caught = true;
+		startgame = true;
+	}
+	
+	}
+	if(congrat == false && Application::IsKeyPressed('E')&& buttonPress4 == false)
+	{
+		game3 = false;
+
+		musicStop2= true;
+
+		if(musicStop2 == true){ 
+			engine4->stopAllSounds();
+			engine4->play2D("../irrKlang/media/win.wav",false); 
+			engine->setAllSoundsPaused(false);
+			musicStop2 = false; 
+		} 
+		congrat = true;
+	}
+}
+	engine->setListenerPosition(vec3df(playerCamera.position.x,playerCamera.position.y,playerCamera.position.z),vec3df(0,0,0),vec3df(playerCamera.up.x,playerCamera.up.y,playerCamera.up.z));
 
 
 		//go out of carpark
@@ -2113,6 +2233,9 @@ void SceneAssignment::Update(double dt)
 	{
 		renderai1text_2 = true;
 		start1 = true;
+		engine5->play2D("../irrKlang/media/pinky.wav",false); 
+		Sleep(100);
+
 	}
 	
 	if(start1 == true)
@@ -2139,8 +2262,10 @@ void SceneAssignment::Update(double dt)
 	}
 	if (renderai2text == true && Application::IsKeyPressed('F'))
 	{
-		renderai2text_2 = true;
+		renderai2text_2 = true;f
 		start2 = true;
+		engine5->play2D("../irrKlang/media/red.wav",false); 
+		Sleep(100);
 	}
 	
 	if(start2 == true)
@@ -2169,6 +2294,8 @@ void SceneAssignment::Update(double dt)
 	{
 		renderai3text_2 = true;
 		start3 = true;
+		engine5->play2D("../irrKlang/media/yellow.wav",false); 
+		Sleep(100);
 	}
 	
 	if(start3 == true)
@@ -4131,58 +4258,58 @@ void SceneAssignment::RenderModelPink()
 {
 	modelStack.PushMatrix(); 
 
-		if (buttonPress3 == true && loop2 == true) {
-			if (pinkCheck[45]==false) pinkCheck[46]= AImoveZ(modelStack,pinkMove[45],-290);
-			if (pinkCheck[44]==false) pinkCheck[45]= AIrotate(modelStack,Vector3(-660,0,500),pinkMove[44],'y',-90);
-			if (pinkCheck[43]==false) pinkCheck[44]= AImoveX(modelStack,pinkMove[43],-732);
-			pinkCheck[42] = pinkCheck[43]=AIrotate(modelStack,Vector3(90,0,500),pinkMove[42],'y',90);
-		}
+	if (buttonPress3 == true && endfire == true) {
+		if (pinkCheck[45]==false) pinkCheck[46]= AImoveZ(modelStack,pinkMove[45],-290);
+		if (pinkCheck[44]==false) pinkCheck[45]= AIrotate(modelStack,Vector3(-660,0,500),pinkMove[44],'y',-90);
+		if (pinkCheck[43]==false) pinkCheck[44]= AImoveX(modelStack,pinkMove[43],-732);
+		pinkCheck[42] = pinkCheck[43]=AIrotate(modelStack,Vector3(90,0,500),pinkMove[42],'y',90);
+	}
 
-		if (buttonPress3 == false)
-			if (pinkCheck[41] == false) for(int i=0;i<pinkSize;++i) {pinkCheck[i] = true; pinkMove[i] = 0;}
+	if (buttonPress3 == false)
+		if (pinkCheck[41] == false) for(int i=0;i<pinkSize;++i) {pinkCheck[i] = true; pinkMove[i] = 0;}
 
-			if (pinkCheck[40]==false) pinkCheck[41]= AIrotate(modelStack,Vector3(90,0,500),pinkMove[41],'y',90,speedAI*2);
-			if (pinkCheck[39]==false) pinkCheck[40]= AImoveX(modelStack,pinkMove[40],200,speedAI);
-			if (pinkCheck[38]==false) pinkCheck[39]= AIrotate(modelStack,Vector3(-110,0,500),pinkMove[39],'y',90,speedAI*2);
-			if (pinkCheck[37]==false) pinkCheck[38]= AImoveZ(modelStack,pinkMove[38],215,speedAI);
-			if (pinkCheck[36]==false) pinkCheck[37]= AIrotate(modelStack,Vector3(-110,0,285),pinkMove[37],'y',90,speedAI*2);
-			if (pinkCheck[35]==false) pinkCheck[36]= AImoveX(modelStack,pinkMove[36],-110,speedAI);
-			if (pinkCheck[34]==false) pinkCheck[35]= AIrotate(modelStack,Vector3(0,0,285),pinkMove[35],'y',-90,speedAI*2);
-			if (pinkCheck[33]==false) pinkCheck[34]= AImoveZ(modelStack,pinkMove[34],385,speedAI);
-			if (pinkCheck[32]==false) pinkCheck[33]= AIrotate(modelStack,Vector3(0,0,-100),pinkMove[33],'y',-90,speedAI*2);
-			if (pinkCheck[31]==false) pinkCheck[32]= AImoveX(modelStack,pinkMove[32],250,speedAI);
-			if (pinkCheck[30]==false) pinkCheck[31]= AIrotate(modelStack,Vector3(-250,0,-100),pinkMove[31],'y',-90,speedAI*2);
-			if (pinkCheck[29]==false) pinkCheck[30]= AImoveZ(modelStack,pinkMove[30],-75,speedAI);
-			if (pinkCheck[28]==false) pinkCheck[29]= AIrotate(modelStack,Vector3(-250,0,-25),pinkMove[29],'y',90,speedAI*2);
-			if (pinkCheck[27]==false) pinkCheck[28]= AImoveX(modelStack,pinkMove[28],100,speedAI);
-			if (pinkCheck[26]==false) pinkCheck[27]= AIrotate(modelStack,Vector3(-350,0,-25),pinkMove[27],'y',180,speedAI*2);
-			if (pinkCheck[25]==false) pinkCheck[26]= AIstop(pinkMove[26],80,speedAI);
-			if (pinkCheck[24]==false) pinkCheck[25]= AIrotate(modelStack,Vector3(-350,0,-25),pinkMove[25],'y',-90,speedAI*2);
-			if (pinkCheck[23]==false) pinkCheck[24]= AImoveZ(modelStack,pinkMove[24],100,speedAI);
-			if (pinkCheck[22]==false) pinkCheck[23]= AIrotate(modelStack,Vector3(-350,0,-125),pinkMove[23],'y',90,speedAI*2);
-			if (pinkCheck[21]==false) pinkCheck[22]= AIstop(pinkMove[22],80,speedAI);
-			if (pinkCheck[20]==false) pinkCheck[21]= AIrotate(modelStack,Vector3(-350,0,-125),pinkMove[21],'y',-90,speedAI*2);
-			if (pinkCheck[19]==false) pinkCheck[20]= AImoveZ(modelStack,pinkMove[20],100,speedAI);
-			if (pinkCheck[18]==false) pinkCheck[19]= AIrotate(modelStack,Vector3(-350,0,-225),pinkMove[19],'y',90,speedAI*2);
-			if (pinkCheck[17]==false) pinkCheck[18]= AIstop(pinkMove[18],80,speedAI);
-			if (pinkCheck[16]==false) pinkCheck[17]= AIrotate(modelStack,Vector3(-350,0,-225),pinkMove[17],'y',-90,speedAI*2);
-			if (pinkCheck[15]==false) pinkCheck[16]= AImoveZ(modelStack,pinkMove[16],50,speedAI);
-			if (pinkCheck[14]==false) pinkCheck[15]= AIrotate(modelStack,Vector3(-350,0,-275),pinkMove[15],'y',90,speedAI*2);
-			if (pinkCheck[13]==false) pinkCheck[14]= AImoveX(modelStack,pinkMove[14],-140,speedAI);
-			if (pinkCheck[12]==false) pinkCheck[13]= AIrotate(modelStack,Vector3(-210,0,-275),pinkMove[13],'y',90,speedAI*2);
-			if (pinkCheck[11]==false) pinkCheck[12]= AIstop(pinkMove[12],80,speedAI);
-			if (pinkCheck[10]==false) pinkCheck[11]= AIrotate(modelStack,Vector3(-210,0,-275),pinkMove[11],'y',-90,speedAI*2);
-			if (pinkCheck[9]==false) pinkCheck[10]= AImoveX(modelStack,pinkMove[10],-90,speedAI);
-			if (pinkCheck[8]==false) pinkCheck[9]= AIrotate(modelStack,Vector3(-120,0,-275),pinkMove[9],'y',90,speedAI*2);
-			if (pinkCheck[7]==false) pinkCheck[8]= AIstop(pinkMove[8],80,speedAI);
-			if (pinkCheck[6]==false) pinkCheck[7]= AIrotate(modelStack,Vector3(-120,0,-275),pinkMove[7],'y',-90,speedAI*2);
-			if (pinkCheck[5]==false) pinkCheck[6]= AImoveX(modelStack,pinkMove[6],-90,speedAI);
-			if (pinkCheck[4]==false) pinkCheck[5]= AIrotate(modelStack,Vector3(-30,0,-275),pinkMove[5],'y',90,speedAI*2);
-			if (pinkCheck[3]==false) pinkCheck[4]= AIstop(pinkMove[4],80,speedAI);
-			if (pinkCheck[2]==false) pinkCheck[3]= AIrotate(modelStack,Vector3(-30,0,-275),pinkMove[3],'y',-90,speedAI*2);
-			if (pinkCheck[1]==false) pinkCheck[2]= AImoveX(modelStack,pinkMove[2],-120,speedAI);
-			if (pinkCheck[0]==false) pinkCheck[1]= AIrotate(modelStack,Vector3(90,0,-275),pinkMove[1],'y',90,speedAI*2); 
-			pinkCheck[0] = AImoveZ(modelStack,pinkMove[0],-775,speedAI);
+	if (pinkCheck[40]==false) pinkCheck[41]= AIrotate(modelStack,Vector3(90,0,500),pinkMove[41],'y',90,speedAI*2);
+	if (pinkCheck[39]==false) pinkCheck[40]= AImoveX(modelStack,pinkMove[40],200,speedAI);
+	if (pinkCheck[38]==false) pinkCheck[39]= AIrotate(modelStack,Vector3(-110,0,500),pinkMove[39],'y',90,speedAI*2);
+	if (pinkCheck[37]==false) pinkCheck[38]= AImoveZ(modelStack,pinkMove[38],215,speedAI);
+	if (pinkCheck[36]==false) pinkCheck[37]= AIrotate(modelStack,Vector3(-110,0,285),pinkMove[37],'y',90,speedAI*2);
+	if (pinkCheck[35]==false) pinkCheck[36]= AImoveX(modelStack,pinkMove[36],-110,speedAI);
+	if (pinkCheck[34]==false) pinkCheck[35]= AIrotate(modelStack,Vector3(0,0,285),pinkMove[35],'y',-90,speedAI*2);
+	if (pinkCheck[33]==false) pinkCheck[34]= AImoveZ(modelStack,pinkMove[34],385,speedAI);
+	if (pinkCheck[32]==false) pinkCheck[33]= AIrotate(modelStack,Vector3(0,0,-100),pinkMove[33],'y',-90,speedAI*2);
+	if (pinkCheck[31]==false) pinkCheck[32]= AImoveX(modelStack,pinkMove[32],250,speedAI);
+	if (pinkCheck[30]==false) pinkCheck[31]= AIrotate(modelStack,Vector3(-250,0,-100),pinkMove[31],'y',-90,speedAI*2);
+	if (pinkCheck[29]==false) pinkCheck[30]= AImoveZ(modelStack,pinkMove[30],-75,speedAI);
+	if (pinkCheck[28]==false) pinkCheck[29]= AIrotate(modelStack,Vector3(-250,0,-25),pinkMove[29],'y',90,speedAI*2);
+	if (pinkCheck[27]==false) pinkCheck[28]= AImoveX(modelStack,pinkMove[28],100,speedAI);
+	if (pinkCheck[26]==false) pinkCheck[27]= AIrotate(modelStack,Vector3(-350,0,-25),pinkMove[27],'y',180,speedAI*2);
+	if (pinkCheck[25]==false) pinkCheck[26]= AIstop(pinkMove[26],80,speedAI);
+	if (pinkCheck[24]==false) pinkCheck[25]= AIrotate(modelStack,Vector3(-350,0,-25),pinkMove[25],'y',-90,speedAI*2);
+	if (pinkCheck[23]==false) pinkCheck[24]= AImoveZ(modelStack,pinkMove[24],100,speedAI);
+	if (pinkCheck[22]==false) pinkCheck[23]= AIrotate(modelStack,Vector3(-350,0,-125),pinkMove[23],'y',90,speedAI*2);
+	if (pinkCheck[21]==false) pinkCheck[22]= AIstop(pinkMove[22],80,speedAI);
+	if (pinkCheck[20]==false) pinkCheck[21]= AIrotate(modelStack,Vector3(-350,0,-125),pinkMove[21],'y',-90,speedAI*2);
+	if (pinkCheck[19]==false) pinkCheck[20]= AImoveZ(modelStack,pinkMove[20],100,speedAI);
+	if (pinkCheck[18]==false) pinkCheck[19]= AIrotate(modelStack,Vector3(-350,0,-225),pinkMove[19],'y',90,speedAI*2);
+	if (pinkCheck[17]==false) pinkCheck[18]= AIstop(pinkMove[18],80,speedAI);
+	if (pinkCheck[16]==false) pinkCheck[17]= AIrotate(modelStack,Vector3(-350,0,-225),pinkMove[17],'y',-90,speedAI*2);
+	if (pinkCheck[15]==false) pinkCheck[16]= AImoveZ(modelStack,pinkMove[16],50,speedAI);
+	if (pinkCheck[14]==false) pinkCheck[15]= AIrotate(modelStack,Vector3(-350,0,-275),pinkMove[15],'y',90,speedAI*2);
+	if (pinkCheck[13]==false) pinkCheck[14]= AImoveX(modelStack,pinkMove[14],-140,speedAI);
+	if (pinkCheck[12]==false) pinkCheck[13]= AIrotate(modelStack,Vector3(-210,0,-275),pinkMove[13],'y',90,speedAI*2);
+	if (pinkCheck[11]==false) pinkCheck[12]= AIstop(pinkMove[12],80,speedAI);
+	if (pinkCheck[10]==false) pinkCheck[11]= AIrotate(modelStack,Vector3(-210,0,-275),pinkMove[11],'y',-90,speedAI*2);
+	if (pinkCheck[9]==false) pinkCheck[10]= AImoveX(modelStack,pinkMove[10],-90,speedAI);
+	if (pinkCheck[8]==false) pinkCheck[9]= AIrotate(modelStack,Vector3(-120,0,-275),pinkMove[9],'y',90,speedAI*2);
+	if (pinkCheck[7]==false) pinkCheck[8]= AIstop(pinkMove[8],80,speedAI);
+	if (pinkCheck[6]==false) pinkCheck[7]= AIrotate(modelStack,Vector3(-120,0,-275),pinkMove[7],'y',-90,speedAI*2);
+	if (pinkCheck[5]==false) pinkCheck[6]= AImoveX(modelStack,pinkMove[6],-90,speedAI);
+	if (pinkCheck[4]==false) pinkCheck[5]= AIrotate(modelStack,Vector3(-30,0,-275),pinkMove[5],'y',90,speedAI*2);
+	if (pinkCheck[3]==false) pinkCheck[4]= AIstop(pinkMove[4],80,speedAI);
+	if (pinkCheck[2]==false) pinkCheck[3]= AIrotate(modelStack,Vector3(-30,0,-275),pinkMove[3],'y',-90,speedAI*2);
+	if (pinkCheck[1]==false) pinkCheck[2]= AImoveX(modelStack,pinkMove[2],-120,speedAI);
+	if (pinkCheck[0]==false) pinkCheck[1]= AIrotate(modelStack,Vector3(90,0,-275),pinkMove[1],'y',90,speedAI*2); 
+	    pinkCheck[0] = AImoveZ(modelStack,pinkMove[0],-775,speedAI);
 
 	modelStack.Translate(modelPink.translateVal[0].x,modelPink.translateVal[0].y,modelPink.translateVal[0].z);
 	modelStack.Rotate(modelPink.rotateVal[0],modelPink.rotateAxis[0].x,modelPink.rotateAxis[0].y,modelPink.rotateAxis[0].z);
@@ -4246,40 +4373,40 @@ void SceneAssignment::RenderModelBlue()
 {
 	modelStack.PushMatrix();
 
-		if (buttonPress3 == true && loop2 == true) {
-			if (blueCheck[26]==false) blueCheck[27]= AImoveZ(modelStack,blueMove[27],-350);
-			if (blueCheck[25]==false) blueCheck[26]= AIrotate(modelStack,Vector3(625,0,550),blueMove[26],'y',90); 
-			if (blueCheck[24]==false) blueCheck[25]= AImoveX(modelStack,blueMove[25],465);
-			if (blueCheck[23]==false) blueCheck[24]= AIrotate(modelStack,Vector3(160,0,550),blueMove[24],'y',-90); 
-			blueCheck[23] = AIstop(blueMove[23],80);
-		}
+	if (buttonPress3 == true && endfire == true) {
+		if (blueCheck[26]==false) blueCheck[27]= AImoveZ(modelStack,blueMove[27],-350);
+		if (blueCheck[25]==false) blueCheck[26]= AIrotate(modelStack,Vector3(625,0,550),blueMove[26],'y',90); 
+		if (blueCheck[24]==false) blueCheck[25]= AImoveX(modelStack,blueMove[25],465);
+		if (blueCheck[23]==false) blueCheck[24]= AIrotate(modelStack,Vector3(160,0,550),blueMove[24],'y',-90); 
+		blueCheck[23] = AIstop(blueMove[23],80);
+	}
 
-		if (buttonPress3 == false)
-			if (blueCheck[22] == false) for(int i=0;i<blueSize;++i) {blueCheck[i] = true; blueMove[i] = 0;}
+	if (buttonPress3 == false)
+		if (blueCheck[22] == false) for(int i=0;i<blueSize;++i) {blueCheck[i] = true; blueMove[i] = 0;}
 
-			if (blueCheck[21]==false) blueCheck[22]= AIrotate(modelStack,Vector3(160,0,550),blueMove[22],'y',90,speedAI*2); 
-			if (blueCheck[20]==false) blueCheck[21]= AImoveX(modelStack,blueMove[21],290,speedAI*2);
-			if (blueCheck[19]==false) blueCheck[20]= AIrotate(modelStack,Vector3(-130,0,550),blueMove[20],'y',90,speedAI*2); 
-			if (blueCheck[18]==false) blueCheck[19]= AImoveZ(modelStack,blueMove[19],320,speedAI);
-			if (blueCheck[17]==false) blueCheck[18]= AIrotate(modelStack,Vector3(-130,0,230),blueMove[18],'y',90,speedAI*2); 
-			if (blueCheck[16]==false) blueCheck[17]= AIstop(blueMove[17],80,speedAI);
-			if (blueCheck[15]==false) blueCheck[16]= AIrotate(modelStack,Vector3(-130,0,230),blueMove[16],'y',-90,speedAI*2); 
-			if (blueCheck[14]==false) blueCheck[15]= AImoveZ(modelStack,blueMove[15],415,speedAI);
-			if (blueCheck[13]==false) blueCheck[14]= AIrotate(modelStack,Vector3(-130,0,-185),blueMove[14],'y',180,speedAI*2); 
-			if (blueCheck[12]==false) blueCheck[13]= AIstop(blueMove[13],80,speedAI);
-			if (blueCheck[11]==false) blueCheck[12]= AIrotate(modelStack,Vector3(-130,0,-185),blueMove[12],'y',-90,speedAI*2); 
-			if (blueCheck[10]==false) blueCheck[11]= AImoveX(modelStack,blueMove[11],-290,speedAI);
-			if (blueCheck[9]==false) blueCheck[10]= AIrotate(modelStack,Vector3(160,0,-185),blueMove[10],'y',90,speedAI*2); 
-			if (blueCheck[8]==false) blueCheck[9]= AIstop(blueMove[9],80,speedAI);
-			if (blueCheck[7]==false) blueCheck[8]= AImoveZ(modelStack,blueMove[8],-190,speedAI);
-			if (blueCheck[6]==false) blueCheck[7]= AIrotate(modelStack,Vector3(160,0,5),blueMove[7],'y',90,speedAI*2); 
-			if (blueCheck[5]==false) blueCheck[6]= AIstop(blueMove[6],80,speedAI);
-			if (blueCheck[4]==false) blueCheck[5]= AIrotate(modelStack,Vector3(160,0,5),blueMove[5],'y',-90,speedAI*2); 
-			if (blueCheck[3]==false) blueCheck[4]= AImoveZ(modelStack,blueMove[4],-105,speedAI);
-			if (blueCheck[2]==false) blueCheck[3]= AIrotate(modelStack,Vector3(160,0,110),blueMove[3],'y',90,speedAI*2); 
-			if (blueCheck[1]==false) blueCheck[2]= AIstop(blueMove[2],80,speedAI);
-			if (blueCheck[0]==false) blueCheck[1]= AIrotate(modelStack,Vector3(160,0,110),blueMove[1],'y',-90,speedAI*2); 
-			blueCheck[0] = AImoveZ(modelStack,blueMove[0],-440,speedAI);
+	if (blueCheck[21]==false) blueCheck[22]= AIrotate(modelStack,Vector3(160,0,550),blueMove[22],'y',90,speedAI*2); 
+	if (blueCheck[20]==false) blueCheck[21]= AImoveX(modelStack,blueMove[21],290,speedAI*2);
+	if (blueCheck[19]==false) blueCheck[20]= AIrotate(modelStack,Vector3(-130,0,550),blueMove[20],'y',90,speedAI*2); 
+	if (blueCheck[18]==false) blueCheck[19]= AImoveZ(modelStack,blueMove[19],320,speedAI);
+	if (blueCheck[17]==false) blueCheck[18]= AIrotate(modelStack,Vector3(-130,0,230),blueMove[18],'y',90,speedAI*2); 
+	if (blueCheck[16]==false) blueCheck[17]= AIstop(blueMove[17],80,speedAI);
+	if (blueCheck[15]==false) blueCheck[16]= AIrotate(modelStack,Vector3(-130,0,230),blueMove[16],'y',-90,speedAI*2); 
+	if (blueCheck[14]==false) blueCheck[15]= AImoveZ(modelStack,blueMove[15],415,speedAI);
+	if (blueCheck[13]==false) blueCheck[14]= AIrotate(modelStack,Vector3(-130,0,-185),blueMove[14],'y',180,speedAI*2); 
+	if (blueCheck[12]==false) blueCheck[13]= AIstop(blueMove[13],80,speedAI);
+	if (blueCheck[11]==false) blueCheck[12]= AIrotate(modelStack,Vector3(-130,0,-185),blueMove[12],'y',-90,speedAI*2); 
+	if (blueCheck[10]==false) blueCheck[11]= AImoveX(modelStack,blueMove[11],-290,speedAI);
+	if (blueCheck[9]==false) blueCheck[10]= AIrotate(modelStack,Vector3(160,0,-185),blueMove[10],'y',90,speedAI*2); 
+	if (blueCheck[8]==false) blueCheck[9]= AIstop(blueMove[9],80,speedAI);
+	if (blueCheck[7]==false) blueCheck[8]= AImoveZ(modelStack,blueMove[8],-190,speedAI);
+	if (blueCheck[6]==false) blueCheck[7]= AIrotate(modelStack,Vector3(160,0,5),blueMove[7],'y',90,speedAI*2); 
+	if (blueCheck[5]==false) blueCheck[6]= AIstop(blueMove[6],80,speedAI);
+	if (blueCheck[4]==false) blueCheck[5]= AIrotate(modelStack,Vector3(160,0,5),blueMove[5],'y',-90,speedAI*2); 
+	if (blueCheck[3]==false) blueCheck[4]= AImoveZ(modelStack,blueMove[4],-105,speedAI);
+	if (blueCheck[2]==false) blueCheck[3]= AIrotate(modelStack,Vector3(160,0,110),blueMove[3],'y',90,speedAI*2); 
+	if (blueCheck[1]==false) blueCheck[2]= AIstop(blueMove[2],80,speedAI);
+	if (blueCheck[0]==false) blueCheck[1]= AIrotate(modelStack,Vector3(160,0,110),blueMove[1],'y',-90,speedAI*2); 
+	blueCheck[0] = AImoveZ(modelStack,blueMove[0],-440,speedAI);
 
 	modelStack.Translate(modelBlue.translateVal[0].x,modelBlue.translateVal[0].y,modelBlue.translateVal[0].z);
 	modelStack.Rotate(modelBlue.rotateVal[0],modelBlue.rotateAxis[0].x,modelBlue.rotateAxis[0].y,modelBlue.rotateAxis[0].z);
@@ -4343,46 +4470,45 @@ void SceneAssignment::RenderModelOrange()
 {
 	modelStack.PushMatrix();
 
-		if (buttonPress3 == true && loop2 == true) {
-			if (orangeCheck[27]==false) AImoveZ(modelStack,orangeMove[28],2410);
-			if (orangeCheck[26]==false) orangeCheck[27] = AIrotate(modelStack,Vector3(90,0,600),orangeMove[27],'y',-180);
-			orangeCheck[26] = AIstop(orangeMove[26],160);
-		}
+	if (buttonPress3 == true && endfire == true) {
+		if (orangeCheck[27]==false) AImoveZ(modelStack,orangeMove[28],2410);
+		if (orangeCheck[26]==false) orangeCheck[27] = AIrotate(modelStack,Vector3(90,0,600),orangeMove[27],'y',-180);
+		orangeCheck[26] = AIstop(orangeMove[26],160);
+	}
 
-		if (buttonPress3 == false)
-			if (orangeCheck[25] == false) for(int i=0;i<orangeSize;++i) {orangeCheck[i] = true; orangeMove[i] = 0;}
+	if (buttonPress3 == false)
+		if (orangeCheck[25] == false) for(int i=0;i<orangeSize;++i) {orangeCheck[i] = true; orangeMove[i] = 0;}
 
-			if (orangeCheck[24]==false) orangeCheck[25]= AIrotate(modelStack,Vector3(90,0,600),orangeMove[25],'y',90,speedAI*2);
-			if (orangeCheck[23]==false) orangeCheck[24]= AImoveX(modelStack,orangeMove[24],134,speedAI);
-			if (orangeCheck[22]==false) orangeCheck[23]= AIrotate(modelStack,Vector3(-44,0,600),orangeMove[23],'y',90,speedAI*2);
-			if (orangeCheck[20]==false) orangeCheck[22]= AImoveZ(modelStack,orangeMove[22],480,speedAI);
-			if (orangeCheck[19]==false) {
-				orangeCheck[20]= AImoveY (modelStack,orangeMove[20],-150,speedAI);
-				AImoveZ (modelStack,orangeMove[21],345,speedAI);
-			}
-			if (orangeCheck[18]==false) orangeCheck[19]= AImoveZ(modelStack,orangeMove[19],75,speedAI);
-			if (orangeCheck[17]==false) orangeCheck[18]= AIrotate(modelStack,Vector3(-44,0,-300),orangeMove[18],'y',-90,speedAI*2);
-			if (orangeCheck[16]==false) orangeCheck[17]= AImoveX(modelStack,orangeMove[17],111,speedAI);
-			if (orangeCheck[15]==false) orangeCheck[16]= AIrotate(modelStack,Vector3(-155,0,-300),orangeMove[16],'y',-90,speedAI*2);
-			if (orangeCheck[14]==false) orangeCheck[15]= AImoveZ(modelStack,orangeMove[15],-230,speedAI);
-			if (orangeCheck[13]==false) orangeCheck[14]= AIrotate(modelStack,Vector3(-155,0,-70),orangeMove[14],'y',-90,speedAI*2);
-			if (orangeCheck[12]==false) orangeCheck[13]= AImoveX(modelStack,orangeMove[13],-505,speedAI);
-			if (orangeCheck[11]==false) orangeCheck[12]= AIrotate(modelStack,Vector3(350,0,-70),orangeMove[12],'y',-90,speedAI*2);
-			if (orangeCheck[10]==false) orangeCheck[11]= AImoveZ(modelStack,orangeMove[11],230,speedAI);
-			if (orangeCheck[9]==false) orangeCheck[10]= AIrotate(modelStack,Vector3(350,0,-300),orangeMove[10],'y',-90,speedAI*2);
-			if (orangeCheck[8]==false) orangeCheck[9]= AImoveX(modelStack,orangeMove[9],315,speedAI);
-			if (orangeCheck[7]==false) orangeCheck[8]= AIrotate(modelStack,Vector3(35,0,-300),orangeMove[8],'y',-90,speedAI*2); 
-			if (orangeCheck[5]==false) orangeCheck[7]= AImoveZ(modelStack,orangeMove[7],-85,speedAI);
-			if (orangeCheck[4]==false) {
-				orangeCheck[5]= AImoveY (modelStack,orangeMove[5],150,speedAI);
-				AImoveZ (modelStack,orangeMove[6],-345,speedAI);
-			}
-			if (orangeCheck[3]==false) orangeCheck[4]= AImoveZ(modelStack,orangeMove[4],-90,speedAI);
-			if (orangeCheck[2]==false) orangeCheck[3]= AIrotate(modelStack,Vector3(35,0,220),orangeMove[3],'y',-90,speedAI*2); 
-			if (orangeCheck[1]==false) orangeCheck[2]= AImoveX(modelStack,orangeMove[2],-55,speedAI);
-			if (orangeCheck[0]==false) orangeCheck[1]= AIrotate(modelStack,Vector3(90,0,220),orangeMove[1],'y',90,speedAI*2); 
-			orangeCheck[0] = AImoveZ(modelStack,orangeMove[0],-380,speedAI);
-
+	if (orangeCheck[24]==false) orangeCheck[25]= AIrotate(modelStack,Vector3(90,0,600),orangeMove[25],'y',90,speedAI*2);
+	if (orangeCheck[23]==false) orangeCheck[24]= AImoveX(modelStack,orangeMove[24],134,speedAI);
+	if (orangeCheck[22]==false) orangeCheck[23]= AIrotate(modelStack,Vector3(-44,0,600),orangeMove[23],'y',90,speedAI*2);
+	if (orangeCheck[20]==false) orangeCheck[22]= AImoveZ(modelStack,orangeMove[22],480,speedAI);
+	if (orangeCheck[19]==false) {
+		orangeCheck[20]= AImoveY (modelStack,orangeMove[20],-150,speedAI);
+					     AImoveZ (modelStack,orangeMove[21],345,speedAI);
+	}
+	if (orangeCheck[18]==false) orangeCheck[19]= AImoveZ(modelStack,orangeMove[19],75,speedAI);
+	if (orangeCheck[17]==false) orangeCheck[18]= AIrotate(modelStack,Vector3(-44,0,-300),orangeMove[18],'y',-90,speedAI*2);
+	if (orangeCheck[16]==false) orangeCheck[17]= AImoveX(modelStack,orangeMove[17],111,speedAI);
+	if (orangeCheck[15]==false) orangeCheck[16]= AIrotate(modelStack,Vector3(-155,0,-300),orangeMove[16],'y',-90,speedAI*2);
+	if (orangeCheck[14]==false) orangeCheck[15]= AImoveZ(modelStack,orangeMove[15],-230,speedAI);
+	if (orangeCheck[13]==false) orangeCheck[14]= AIrotate(modelStack,Vector3(-155,0,-70),orangeMove[14],'y',-90,speedAI*2);
+	if (orangeCheck[12]==false) orangeCheck[13]= AImoveX(modelStack,orangeMove[13],-505,speedAI);
+	if (orangeCheck[11]==false) orangeCheck[12]= AIrotate(modelStack,Vector3(350,0,-70),orangeMove[12],'y',-90,speedAI*2);
+	if (orangeCheck[10]==false) orangeCheck[11]= AImoveZ(modelStack,orangeMove[11],230,speedAI);
+	if (orangeCheck[9]==false) orangeCheck[10]= AIrotate(modelStack,Vector3(350,0,-300),orangeMove[10],'y',-90,speedAI*2);
+	if (orangeCheck[8]==false) orangeCheck[9]= AImoveX(modelStack,orangeMove[9],315,speedAI);
+	if (orangeCheck[7]==false) orangeCheck[8]= AIrotate(modelStack,Vector3(35,0,-300),orangeMove[8],'y',-90,speedAI*2); 
+	if (orangeCheck[5]==false) orangeCheck[7]= AImoveZ(modelStack,orangeMove[7],-85,speedAI);
+	if (orangeCheck[4]==false) {
+		orangeCheck[5]= AImoveY (modelStack,orangeMove[5],150,speedAI);
+					    AImoveZ (modelStack,orangeMove[6],-345,speedAI);
+	}
+	if (orangeCheck[3]==false) orangeCheck[4]= AImoveZ(modelStack,orangeMove[4],-90,speedAI);
+	if (orangeCheck[2]==false) orangeCheck[3]= AIrotate(modelStack,Vector3(35,0,220),orangeMove[3],'y',-90,speedAI*2); 
+	if (orangeCheck[1]==false) orangeCheck[2]= AImoveX(modelStack,orangeMove[2],-55,speedAI);
+	if (orangeCheck[0]==false) orangeCheck[1]= AIrotate(modelStack,Vector3(90,0,220),orangeMove[1],'y',90,speedAI*2); 
+	orangeCheck[0] = AImoveZ(modelStack,orangeMove[0],-380,speedAI);
 	modelStack.Translate(modelOrange.translateVal[0].x,modelOrange.translateVal[0].y,modelOrange.translateVal[0].z);
 	modelStack.Rotate(modelOrange.rotateVal[0],modelOrange.rotateAxis[0].x,modelOrange.rotateAxis[0].y,modelOrange.rotateAxis[0].z);
 	modelStack.Scale(modelOrange.scaleVal[0].x,modelOrange.scaleVal[0].y,modelOrange.scaleVal[0].z);
@@ -4745,26 +4871,25 @@ Render music for siren and pickup sound
 /******************************************************************************/
 void SceneAssignment::RenderMusic()
 {
-	ISound* music;
-
 	engine2->setRolloffFactor(0.1);
+
 	if (musicAlarm == true)
 	{
 		engine->stopAllSounds();
-		music = engine->play3D("../irrKlang/media/siren.wav",vec3df(0,0,0),true);
-		music = engine2->play3D("../irrKlang/media/panic.mp3",vec3df(10,10,10),true);
+		engine2->play3D("../irrKlang/media/siren.wav",vec3df(0,0,0),true);
+		engine2->play3D("../irrKlang/media/panic.mp3",vec3df(10,10,10),true);
 		musicAlarm = false;
 	}
 	if (coin == true)
 	{
-		engine->play2D("../irrKlang/media/coin.wav",false);
+		engine3->play2D("../irrKlang/media/coin.wav",false);
 		coin = false;
 	}
+
 	if(musicStop == true)
 	{
 		engine->stopAllSounds();
 		engine2->stopAllSounds();
-
 	}
 }
 /******************************************************************************/
@@ -4774,16 +4899,14 @@ Render music for the background
 /******************************************************************************/
 void SceneAssignment::RenderBGM()
 { 
-	ISound* music2; 
-	ISound* music3; 
+
 
 	engine->setRolloffFactor(0.01); 
 
 	if (musicBGM == true) {
 		
-		 music3 = engine->play3D("../irrKlang/media/crowd.wav",vec3df(0,0,0),true); 
-		 music2 = engine->play3D("../irrKlang/media/LifeofRiley.mp3",vec3df(0,0,0),true); 
-		
+		engine->play3D("../irrKlang/media/crowd.wav",vec3df(0,0,0),true); 
+		engine->play3D("../irrKlang/media/LifeofRiley.mp3",vec3df(0,0,0),true); 
 
 		musicBGM = false; 
 		musicCrowd = false; 
@@ -4795,18 +4918,25 @@ void SceneAssignment::RenderBGM()
 Render music for the games
 /******************************************************************************/
 void SceneAssignment::RenderMission() 
-{ 
-	ISound* music4; 
-
-	engine->setRolloffFactor(0.1); 
-
+{
+	engine->setAllSoundsPaused(true);
+	engine3->setRolloffFactor(0.1); 
 	if (Mission == true) 
 	{ 
-		engine->stopAllSounds(); 
-		music4 = engine->play2D("../irrKlang/media/mission.mp3",true); 
+		engine3->play2D("../irrKlang/media/mission.mp3",true); 
 		Mission = false; 
 	}
 
+}
+void SceneAssignment::RenderMission2()
+{
+	engine->setAllSoundsPaused(true);
+	engine4->setRolloffFactor(0.1); 
+	if (Mission2 == true) 
+	{ 
+		engine4->play2D("../irrKlang/media/mission.mp3",true); 
+		Mission2 = false; 
+	}
 }
 //update is required for read from text. the code is working.
 /******************************************************************************/
@@ -5047,6 +5177,17 @@ void SceneAssignment::Render()
 	}
 
 
+	for(int i = 0;i<light.getTotal();++i)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(light.translateVal[i].x,light.translateVal[i].y,light.translateVal[i].z);
+		modelStack.Rotate(light.rotateVal[i],light.rotateAxis[i].x,light.rotateAxis[i].y,light.rotateAxis[i].z);
+		modelStack.Scale(light.scaleVal[i].x,light.scaleVal[i].y,light.scaleVal[i].z);
+		RenderMesh(meshList[GEO_SWITCH], false);
+		modelStack.PopMatrix();
+	}
+
+
 	RenderLevel2();
 	RenderLargeObjects();
 	RenderChar();
@@ -5068,8 +5209,8 @@ void SceneAssignment::Render()
 			{
 				modelStack.PushMatrix();
 				modelStack.Translate(ObjectList[i].collisionPos[j].x,ObjectList[i].collisionPos[j].y,ObjectList[i].collisionPos[j].z);
-				modelStack.Scale(1, 1, 1);
-				RenderMesh(meshList[GEO_MOUTAIN], false);
+				modelStack.Scale(2, 2, 2);
+				RenderMesh(meshList[GEO_DOORMAN], false);
 				modelStack.PopMatrix();
 			}
 		}
@@ -5176,7 +5317,7 @@ void SceneAssignment::Render()
 
 	if ((Collision(playerCamera.position,ObjectList,5,1)) == 0 && render4 == false && gameEnd == false) { 
 		gameStart = true;
-		RenderMission(); 
+		RenderMission();
 	}
 	if (gameStart == true && gameEnd == false) 
 	{
@@ -5356,10 +5497,9 @@ void SceneAssignment::Render()
 
 				RenderTextOnScreen(meshList[GEO_TEXT], "You lose. Try again next time!" , Color(1, 0.0, 0), 4, 3.6, 6);
 				if(musicStop == true){ 
-					engine->stopAllSounds(); 
-					engine->play2D("../irrKlang/media/fail.wav",false); 
-					engine->play3D("../irrKlang/media/crowd.wav",vec3df(0,0,0),true); 
-					engine->play3D("../irrKlang/media/LifeofRiley.mp3",vec3df(0,0,0),true); 
+					engine3->stopAllSounds();
+					engine3->play2D("../irrKlang/media/fail.wav",false); 
+					engine->setAllSoundsPaused(false);
 					musicStop = false; 
 				} 
 			}
@@ -5371,10 +5511,9 @@ void SceneAssignment::Render()
 		modelStack.PopMatrix();
 				RenderTextOnScreen(meshList[GEO_TEXT], "You win. Thanks for playing!" , Color(0, 1, 0), 4, 3.6, 6);
 				if(musicStop == true){ 
-					engine->stopAllSounds(); 
-					engine->play2D("../irrKlang/media/win.wav",false); 
-					engine->play3D("../irrKlang/media/crowd.wav",vec3df(0,0,0),true); 
-					engine->play3D("../irrKlang/media/LifeofRiley.mp3",vec3df(0,0,0),true); 
+					engine3->stopAllSounds();
+					engine3->play2D("../irrKlang/media/win.wav",false); 
+					engine->setAllSoundsPaused(false);
 					musicStop = false; 
 				} 
 			}
@@ -5401,7 +5540,7 @@ void SceneAssignment::Render()
 		modelStack.PopMatrix();
 		RenderTextOnScreen(meshList[GEO_TEXT], ss7.str(), Color(0, 0.7, 1), 3, 10, 19.5);
 	}
-	if(playerCamera.position.x >= 350 &&((playerCamera.position.z >= -150)&&(playerCamera.position.z <= -130))&&(playerCamera.position.y <= 50)&&buttonPress3==false) 
+	if(playerCamera.position.x >= 350 && playerCamera.position.x <= 400 && ((playerCamera.position.z >= -150)&&(playerCamera.position.z <= -130))&&(playerCamera.position.y <= 50)&&buttonPress3==false) 
 	{
 		//template for 'F' function triggers
 		modelStack.PushMatrix();
@@ -5409,9 +5548,20 @@ void SceneAssignment::Render()
 		modelStack.PopMatrix();
 		RenderTextOnScreen(meshList[GEO_TEXT], "PRESS 'F' TO ACTIVATE ALARM!!!" , Color(1, 0, 0), 4, 3.6, 6); 
 	}
+
+
+	if( playerCamera.position.z >20 && playerCamera.position.z <40 && playerCamera.position.x <-370) 
+	{
+		//template for 'F' function triggers
+		modelStack.PushMatrix();
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
+		modelStack.PopMatrix();
+			RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to flick the switch." , Color(1, 0, 0), 4, 3.6, 5); 
+	}
+		
 	RenderBGM();
 	RenderMusic();
-
+		
 
 	if(startgame == false)
 	{
@@ -5521,6 +5671,9 @@ void SceneAssignment::Render()
 			if (iChoice == 1) {
 				engine->stopAllSounds();
 				engine2->stopAllSounds();
+				engine3->stopAllSounds();
+				engine4->stopAllSounds();
+				engine5->stopAllSounds();
 				bReset = true;
 			}
 			if (iChoice == 2) {
@@ -5530,6 +5683,9 @@ void SceneAssignment::Render()
 				isPaused = false;
 				engine->setAllSoundsPaused(false);
 				engine2->setAllSoundsPaused(false);
+				engine3->setAllSoundsPaused(false);
+				engine4->setAllSoundsPaused(false);
+				engine5->setAllSoundsPaused(false);
 			}
 		}
 
