@@ -908,7 +908,7 @@ void SceneAssignment::InitCollision()
 /*-------------------------------------------------!! UPDATE NEEDED (WEI HENG) !!----------------------------------------------------*/
 	Travellator.collisionPos.push_back(Vector3(-47,30,100));
 /*-------------------------------------------------!! UPDATE NEEDED (WEI HENG) !!----------------------------------------------------*/
-	Travellator.collisionPos.push_back(Vector3(35, 180,-205));
+	Travellator.collisionPos.push_back(Vector3(35, 180,-190));
 
 	Travellator.collisionRad = 10;
 	ObjectList.push_back(Travellator);
@@ -955,38 +955,91 @@ void SceneAssignment::InitCollision()
 	Barrier.collisionRad = 20;
 	ObjectList.push_back(Barrier);
 
-		//Houses on left side
-	for(int i = 0; i < 2; i++)
+			//Houses on left side
+	for(int i = 0; i < 6; i++)
 	{
-		House.translateVal.push_back(Vector3(-920 + (200*i), 0, 250));
-		House.rotateVal.push_back(90);
-		House.rotateAxis.push_back(Vector3(0,1,0));
-		House.scaleVal.push_back(Vector3(20, 20, 20));
+		if(i < 2)
+		{
+			House.translateVal.push_back(Vector3(-920 + (200*i), 0, 250));
+			
+			House.collisionPos.push_back(Vector3(-920+(200*i), 30, 250));
+			House.collisionPos.push_back(Vector3(-920+60+(200*i), 30, 250));
 
-		House.collisionPos.push_back(Vector3(-920+(200*i), 30, 250));
-		House.collisionPos.push_back(Vector3(-920+60+(200*i), 30, 250));
+			House.collisionPos.push_back(Vector3(-920+(200*i), 30, 250 - 30));
+			House.collisionPos.push_back(Vector3(-920+60+(200*i), 30, 250-30));
+		}
+		
+		else if (i >= 2 && i <4)
+		{
+			House.translateVal.push_back(Vector3(-1420 + (200*i), 0, 0));
+			
+			House.collisionPos.push_back(Vector3(-1420+(200*i), 30, 0));
+			House.collisionPos.push_back(Vector3(-1420+60+(200*i), 30, 0));
 
-		House.collisionPos.push_back(Vector3(-920+(200*i), 30, 250 - 30));
-		House.collisionPos.push_back(Vector3(-920+60+(200*i), 30, 250-30));
-	}
-	
-	//Houses on right side
-	for(int i = 0; i < 2; i++)
-	{
-		House.translateVal.push_back(Vector3(620 + (200*i), 0, 250));
+			House.collisionPos.push_back(Vector3(-1420+(200*i), 30, 0 - 30));
+			House.collisionPos.push_back(Vector3(-1420+60+(200*i), 30, 0-30));
+		}
+		
+		else
+		{
+			House.translateVal.push_back(Vector3(-1820 + (200*i), 0, -200));
+			
+			House.collisionPos.push_back(Vector3(-1820+(200*i), 30, -200));
+			House.collisionPos.push_back(Vector3(-1820+60+(200*i), 30, -200));
+
+			House.collisionPos.push_back(Vector3(-1820+(200*i), 30, -200 - 30));
+			House.collisionPos.push_back(Vector3(-1820+60+(200*i), 30, -200-30));
+		}
+
 		House.rotateVal.push_back(90);
 		House.rotateAxis.push_back(Vector3(0,1,0));
 		House.scaleVal.push_back(Vector3(20, 20, 20));
 
 		
-		House.collisionPos.push_back(Vector3(620+(200*i), 30, 250));
-		House.collisionPos.push_back(Vector3(620+60+(200*i), 30, 250));
-
-		House.collisionPos.push_back(Vector3(620+(200*i), 30, 250 - 30));
-		House.collisionPos.push_back(Vector3(620+60+(200*i), 30, 250-30));
 	}
 	
-	House.collisionRad = 70;
+	//Houses on right side
+	for(int i = 0; i < 6; i++)
+	{
+	
+		if(i < 2)
+		{
+			House.translateVal.push_back(Vector3(620 + (200*i), 0, 250));
+			
+		House.collisionPos.push_back(Vector3(620-(200*i), 30, 250));
+		House.collisionPos.push_back(Vector3(620+60-(200*i), 30, 250));
+
+		House.collisionPos.push_back(Vector3(620-(200*i), 30, 250 - 30));
+		House.collisionPos.push_back(Vector3(620+60-(200*i), 30, 250-30));
+		}
+		
+		else if (i >= 2 && i <4)
+		{
+			House.translateVal.push_back(Vector3(1220 - (200*i), 0, 0));
+			
+			House.collisionPos.push_back(Vector3(1220-(200*i), 30, 0));
+			House.collisionPos.push_back(Vector3(1220+60-(200*i), 30, 0));
+
+			House.collisionPos.push_back(Vector3(1220-(200*i), 30, 0 - 30));
+			House.collisionPos.push_back(Vector3(1220+60-(200*i), 30, 0-30));
+		}
+		
+		else
+		{
+			House.translateVal.push_back(Vector3(1620 - (200*i), 0, -200));
+			
+			House.collisionPos.push_back(Vector3(1620-(200*i), 30, -200));
+			House.collisionPos.push_back(Vector3(1620+60-(200*i), 30, -200));
+
+			House.collisionPos.push_back(Vector3(1620-(200*i), 30, -200 - 30));
+			House.collisionPos.push_back(Vector3(1620+60-(200*i), 30, -200-30));
+		}
+		House.rotateVal.push_back(90);
+		House.rotateAxis.push_back(Vector3(0,1,0));
+		House.scaleVal.push_back(Vector3(20, 20, 20));
+	}
+	
+	House.collisionRad = 60;
 	ObjectList.push_back(House);
 
 	/*-------------------------------------------------!! UPDATE NEEDED (WEI HENG) !!----------------------------------------------------*/
@@ -4993,7 +5046,7 @@ void SceneAssignment::Render()
 				modelStack.PushMatrix();
 				modelStack.Translate(ObjectList[i].collisionPos[j].x,ObjectList[i].collisionPos[j].y,ObjectList[i].collisionPos[j].z);
 				modelStack.Scale(2, 2, 2);
-				RenderMesh(meshList[GEO_DOORMAN], false);
+				RenderMesh(meshList[GEO_ALARM], false);
 				modelStack.PopMatrix();
 			}
 		}
