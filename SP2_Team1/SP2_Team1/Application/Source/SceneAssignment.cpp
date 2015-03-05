@@ -930,8 +930,13 @@ void SceneAssignment::InitCollision()
 	Elevator.rotateAxis.push_back(Vector3(0,1,0));
 	Elevator.scaleVal.push_back(Vector3(12.5,12,13));
 
+	
+
+	//corner off the lv 1 lift
+	Elevator.collisionRad = 20;
 	ObjectList.push_back(Elevator);
 
+	//barriers
 	Barrier.translateVal.push_back(Vector3(10,150,-200));
 	Barrier.rotateVal.push_back(-90);
 	Barrier.rotateAxis.push_back(Vector3(0,1,0));
@@ -1662,7 +1667,7 @@ void SceneAssignment::UpdateDoor(double dt)
 		} 
 	}
 
-	if (openStart >= 2 && openStart <= 4) { 
+	if (openStart >= 1 && openStart <= 3) { 
 		open2 = true; 
 	} 
 
@@ -1770,7 +1775,7 @@ Update to call all other update functions and also update the games and scenerio
 /******************************************************************************/
 void SceneAssignment::Update(double dt)
 {
-	if(Application::IsKeyPressed('P')) {
+	if(Application::IsKeyPressed(VK_ESCAPE)) {
 		isPaused = true;
 		engine->setAllSoundsPaused(true);
 		engine2->setAllSoundsPaused(true);
