@@ -104,7 +104,7 @@ class SceneAssignment : public Scene
 		GEO_PACKET,
 		GEO_BOX1,
 		GEO_CAN1,
-
+		GEO_ARROW,
 		//Andy's work		
 		GEO_LIFT,
 		GEO_DOOR,
@@ -338,7 +338,7 @@ private:
 	float translateX;
 	float translateY;
 	float translateZ;
-
+	float transarrowY;
 	//collision
 	vector<Vector3> sphere;
 	vector<float> radius;

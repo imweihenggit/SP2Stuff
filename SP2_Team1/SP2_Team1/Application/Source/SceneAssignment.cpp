@@ -147,6 +147,12 @@ Initialize all the objects that are going to be used in the program
 /******************************************************************************/
 void SceneAssignment::InitObjects()
 {
+	meshList[GEO_ARROW] = MeshBuilder::GenerateOBJ("tent", "OBJ//arrow.obj");
+	meshList[GEO_ARROW]->textureID = LoadTGA("Image//firealarm_m.tga");
+	meshList[GEO_ARROW]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_ARROW]->material.kDiffuse.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_ARROW]->material.kSpecular.Set(1.0f, 1.0f, 1.0f);
+	meshList[GEO_ARROW]->material.kShininess = 50.f;
 	//lift
 	meshList[GEO_TENT] = MeshBuilder::GenerateOBJ("tent", "OBJ//lift.obj");
 	meshList[GEO_TENT]->textureID = LoadTGA("Image//lift_m.tga");
@@ -1091,6 +1097,8 @@ void SceneAssignment::Init()
 	car4.translateX = 0;
 	truck1.translateX = 0;
 	bus1.translateX = 0;
+	//arrow on top of game master
+	transarrowY = 0;
 
 	//scene2
 	gameStart = false; 
@@ -1728,6 +1736,8 @@ void SceneAssignment::Update(double dt)
 		truck1.translateX += (float)(300 * dt);
 		bus1.translateX += (float)(300 * dt);
 
+		//arrow
+		transarrowY -=(float)(10*dt);
 		bool collideALL = Collision(charPos,ObjectList);
 
 		FPS = 1/dt;
@@ -1747,6 +1757,12 @@ void SceneAssignment::Update(double dt)
 			debug = false;
 		}
 		/*-------------------------------------------------!! UPDATE NEEDED (WEI HENG) !!----------------------------------------------------*/
+
+	if(transarrowY <0)
+	{
+		transarrowY=10;
+	}
+	
 		if (gameStart == true && gameEnd == false) {
 			if (Application::IsKeyPressed('F') && Collision(playerCamera.position,ObjectList,4,28))
 			{
@@ -2218,6 +2234,11 @@ void SceneAssignment::Update(double dt)
 			renderai3text = false;
 		}
 	}
+
+
+
+	//arrow animation on top of game master head
+	
 }
 void SceneAssignment::RenderMesh(Mesh *mesh, bool enableLight)
 {
@@ -2305,7 +2326,11 @@ void SceneAssignment::RenderLevel1()
 	}
 	//=============================================================RenderDoor=============================Credit:Andy===========================================
 
-
+	modelStack.PushMatrix();
+	modelStack.Translate(-260,transarrowY+30,227);
+	modelStack.Scale(25, 30, 25);
+	RenderMesh(meshList[GEO_ARROW], false);
+	modelStack.PopMatrix();
 }
 void SceneAssignment::RenderLevel2()
 {
@@ -4080,6 +4105,12 @@ void SceneAssignment::RenderOut_Skybox()
 	modelStack.Rotate(180,0,1,0);
 	modelStack.Scale(1200,1300,1200);
 	RenderMesh(meshList[GEO_MOUTAIN], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(590,transarrowY+10,195);
+	modelStack.Scale(25, 30, 25);
+	RenderMesh(meshList[GEO_ARROW], false);
 	modelStack.PopMatrix();
 }
 void SceneAssignment::RenderChar()
