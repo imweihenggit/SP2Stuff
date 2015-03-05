@@ -383,7 +383,7 @@ private:
 	bool place1,place2,place3,place4,place5,gameover,congrat,caught;
 	bool ai1, ai2, ai3;
 	bool renderai1text, renderai1text_2, renderai2text, renderai2text_2, renderai3text, renderai3text_2;
-	bool start;
+	bool start1, start2, start3;
 	/*-----------------------AI-------------------------------------------*/
 	float openStart;
 

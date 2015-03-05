@@ -1167,7 +1167,7 @@ void SceneAssignment::Init()
 	renderai1text = renderai2text = renderai3text = false;
 	renderai1text_2 = renderai2text_2 = renderai3text_2 = false;
 	aitimer1 = aitimer2 = aitimer3 = 0;
-	start = false;
+	start1= start2 = start3 = false;
 
 	LiftDoor = LiftDoor2 = 0;
 
@@ -1718,6 +1718,11 @@ void SceneAssignment::UpdateTravel(double dt)
 	//============================================================END===============================================================================================
 
 }	
+/******************************************************************************/
+/*!
+\brief
+Walking animation of moving NPCs
+/******************************************************************************/
 void SceneAssignment::UpdateModelGlenn(double dt)
 {
 	static int rotateDir = 1;
@@ -2096,7 +2101,7 @@ void SceneAssignment::Update(double dt)
 	
 	
 	//static ai 1 work
-	if ((playerCamera.position.x<=210 && playerCamera.position.x>=180) && (playerCamera.position.z<= -170 && playerCamera.position.z>= -190 ) && playerCamera.position.y >= 180 && renderai1text_2==false)
+	if ((playerCamera.position.x<= 270 && playerCamera.position.x>=160) && (playerCamera.position.z<= -160 && playerCamera.position.z>= -190 ) && playerCamera.position.y >= 179 && renderai1text_2==false)
 	{
 		renderai1text = true;
 	}
@@ -2107,10 +2112,10 @@ void SceneAssignment::Update(double dt)
 	if (renderai1text == true && Application::IsKeyPressed('F'))
 	{
 		renderai1text_2 = true;
-		start = true;
+		start1 = true;
 	}
 	
-	if(start == true)
+	if(start1 == true)
 	{
 		aitimer1 += dt;
 		
@@ -2118,11 +2123,13 @@ void SceneAssignment::Update(double dt)
 		{
 			renderai1text_2 = false;
 			renderai1text = false;
+			start1 = false;
+			aitimer1 = 0;
 		}
 	}
 
 	//static ai 2 work
-	if ((playerCamera.position.x<= -20 && playerCamera.position.x>=-70) && (playerCamera.position.z<= 50 && playerCamera.position.z>= 10 ) && playerCamera.position.y >= 180 && renderai2text_2==false)
+	if ((playerCamera.position.x<= 20 && playerCamera.position.x>=-80) && (playerCamera.position.z<= 75 && playerCamera.position.z>= 35 ) && playerCamera.position.y >= 180 && renderai2text_2==false)
 	{
 		renderai2text = true;
 	}
@@ -2133,10 +2140,10 @@ void SceneAssignment::Update(double dt)
 	if (renderai2text == true && Application::IsKeyPressed('F'))
 	{
 		renderai2text_2 = true;
-		start = true;
+		start2 = true;
 	}
 	
-	if(start == true)
+	if(start2 == true)
 	{
 		aitimer2 += dt;
 		
@@ -2144,11 +2151,13 @@ void SceneAssignment::Update(double dt)
 		{
 			renderai2text_2 = false;
 			renderai2text = false;
+			start2 = false;
+			aitimer2 = 0;
 		}
 	}
 
 	//static ai 3 work
-	if ((playerCamera.position.x<= 280 && playerCamera.position.x>= 230) && (playerCamera.position.z<= 130 && playerCamera.position.z>= 90 ) && playerCamera.position.y >= 30 && renderai3text_2==false)
+	if ((playerCamera.position.x<= 280 && playerCamera.position.x>= 230) && (playerCamera.position.z<= 150 && playerCamera.position.z>= 90 ) && (playerCamera.position.y >= 29 && playerCamera.position.y < 178) && renderai3text_2==false)
 	{
 		renderai3text = true;
 	}
@@ -2159,10 +2168,10 @@ void SceneAssignment::Update(double dt)
 	if (renderai3text == true && Application::IsKeyPressed('F'))
 	{
 		renderai3text_2 = true;
-		start = true;
+		start3 = true;
 	}
 	
-	if(start == true)
+	if(start3 == true)
 	{
 		aitimer3 += dt;
 		
@@ -2170,90 +2179,10 @@ void SceneAssignment::Update(double dt)
 		{
 			renderai3text_2 = false;
 			renderai3text = false;
+			aitimer3 = 0;
+			start3 = false;
 		}
 	}
-	
-	
-	//static ai 1 work
-	if ((playerCamera.position.x<=210 && playerCamera.position.x>=180) && (playerCamera.position.z<= -170 && playerCamera.position.z>= -190 ) && playerCamera.position.y >= 180 && renderai1text_2==false)
-	{
-		renderai1text = true;
-	}
-	else
-	{
-		renderai1text = false;
-	}
-	if (renderai1text == true && Application::IsKeyPressed('F'))
-	{
-		renderai1text_2 = true;
-		start = true;
-	}
-	
-	if(start == true)
-	{
-		aitimer1 += dt;
-		
-		if(aitimer1 >= 2)
-		{
-			renderai1text_2 = false;
-			renderai1text = false;
-		}
-	}
-
-	//static ai 2 work
-	if ((playerCamera.position.x<= -20 && playerCamera.position.x>=-70) && (playerCamera.position.z<= 50 && playerCamera.position.z>= 10 ) && playerCamera.position.y >= 180 && renderai2text_2==false)
-	{
-		renderai2text = true;
-	}
-	else
-	{
-		renderai2text = false;
-	}
-	if (renderai2text == true && Application::IsKeyPressed('F'))
-	{
-		renderai2text_2 = true;
-		start = true;
-	}
-	
-	if(start == true)
-	{
-		aitimer2 += dt;
-		
-		if(aitimer2 >= 2)
-		{
-			renderai2text_2 = false;
-			renderai2text = false;
-		}
-	}
-
-	//static ai 3 work
-	if ((playerCamera.position.x<= 280 && playerCamera.position.x>= 230) && (playerCamera.position.z<= 130 && playerCamera.position.z>= 90 ) && playerCamera.position.y >= 30 && renderai3text_2==false)
-	{
-		renderai3text = true;
-	}
-	else
-	{
-		renderai3text = false;
-	}
-	if (renderai3text == true && Application::IsKeyPressed('F'))
-	{
-		renderai3text_2 = true;
-		start = true;
-	}
-	
-	if(start == true)
-	{
-		aitimer3 += dt;
-		
-		if(aitimer3 >= 2)
-		{
-			renderai3text_2 = false;
-			renderai3text = false;
-		}
-	}
-
-
-
 	//arrow animation on top of game master head
 	
 }
@@ -4982,7 +4911,7 @@ void SceneAssignment::RenderStaticAIGlenn()
 	{
 		//template for 'F' function triggers
 		modelStack.PushMatrix();
-		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1.15);
 		modelStack.PopMatrix();
 		RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to talk." , Color(0, 0.7, 1), 4, 6.3, 6);
 	}
@@ -4990,7 +4919,7 @@ void SceneAssignment::RenderStaticAIGlenn()
 	{
 		//template for 'F' function triggers
 		modelStack.PushMatrix();
-		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1.15);
 		modelStack.PopMatrix();
 		RenderTextOnScreen(meshList[GEO_TEXT], "So many to choose from...!" , Color(0, 0.7, 1), 4, 6, 6);
 	}
@@ -4999,7 +4928,7 @@ void SceneAssignment::RenderStaticAIGlenn()
 	{
 		//template for 'F' function triggers
 		modelStack.PushMatrix();
-		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1.15);
 		modelStack.PopMatrix();
 		RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to talk." , Color(0, 0.7, 1), 4, 6.3, 6);
 	}
@@ -5007,7 +4936,7 @@ void SceneAssignment::RenderStaticAIGlenn()
 	{
 		//template for 'F' function triggers
 		modelStack.PushMatrix();
-		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1.15);
 		modelStack.PopMatrix();
 		RenderTextOnScreen(meshList[GEO_TEXT], "I forgot what I want to buy..." , Color(0, 0.7, 1), 4, 4.5, 6);
 	}
@@ -5024,7 +4953,7 @@ void SceneAssignment::RenderStaticAIGlenn()
 	{
 		//template for 'F' function triggers
 		modelStack.PushMatrix();
-		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1.5);
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1.15);
 		modelStack.PopMatrix();
 		RenderTextOnScreen(meshList[GEO_TEXT], "Ice cream should be cheaper." , Color(0, 0.7, 1), 4, 4.5, 6);
 	}
@@ -5207,7 +5136,7 @@ void SceneAssignment::Render()
 	{
 		//template for 'F' function triggers
 		modelStack.PushMatrix();
-		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1.7);
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1.15);
 		modelStack.PopMatrix();
 		RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to talk." , Color(0, 0.7, 1), 4, 6.3, 6);
 	}
@@ -5301,7 +5230,7 @@ void SceneAssignment::Render()
 			{
 				//template for 'F' function triggers
 				modelStack.PushMatrix();
-				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
+				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1.15);
 				modelStack.PopMatrix();
 				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to pick up the item." , Color(0, 0.7, 1), 4, 3.6, 6);
 			}
@@ -5311,9 +5240,9 @@ void SceneAssignment::Render()
 			if (render2 == true)
 			{
 				//template for 'F' function triggers
-				modelStack.PushMatrix();
-				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
-				modelStack.PopMatrix();
+		modelStack.PushMatrix();
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1.15);
+		modelStack.PopMatrix();
 				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to pick up the item." , Color(0, 0.7, 1), 4, 3.6, 6);
 			}
 		}
@@ -5322,9 +5251,9 @@ void SceneAssignment::Render()
 			if (render3 == true)
 			{
 				//template for 'F' function triggers
-				modelStack.PushMatrix();
-				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
-				modelStack.PopMatrix();
+		modelStack.PushMatrix();
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1.15);
+		modelStack.PopMatrix();
 				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to pick up the item." , Color(0, 0.7, 1), 4, 3.6, 6);
 			}
 		}
@@ -5333,9 +5262,9 @@ void SceneAssignment::Render()
 			if (render5 == true)
 			{
 				//template for 'F' function triggers
-				modelStack.PushMatrix();
-				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
-				modelStack.PopMatrix();
+		modelStack.PushMatrix();
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1.15);
+		modelStack.PopMatrix();
 				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to pick up the item." , Color(0, 0.7, 1), 4, 3.6, 6);
 			}
 		}
@@ -5344,9 +5273,9 @@ void SceneAssignment::Render()
 			if (render6 == true)
 			{
 				//template for 'F' function triggers
-				modelStack.PushMatrix();
-				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
-				modelStack.PopMatrix();
+		modelStack.PushMatrix();
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1.15);
+		modelStack.PopMatrix();
 				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to pick up the item." , Color(0, 0.7, 1), 4, 3.6, 6);
 			}
 		}
@@ -5355,9 +5284,9 @@ void SceneAssignment::Render()
 			if (render7 == true)
 			{
 				//template for 'F' function triggers
-				modelStack.PushMatrix();
-				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
-				modelStack.PopMatrix();
+		modelStack.PushMatrix();
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1.15);
+		modelStack.PopMatrix();
 				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to pick up the item." , Color(0, 0.7, 1), 4, 3.6, 6);
 			}
 		}
@@ -5367,9 +5296,9 @@ void SceneAssignment::Render()
 			if (render8 == true)
 			{
 				//template for 'F' function triggers
-				modelStack.PushMatrix();
-				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
-				modelStack.PopMatrix();
+		modelStack.PushMatrix();
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1.15);
+		modelStack.PopMatrix();
 				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to pick up the item." , Color(0, 0.7, 1), 4, 3.6, 6);
 			}
 		}
@@ -5382,17 +5311,17 @@ void SceneAssignment::Render()
 			if (loop1 == true && loop2 == false)
 			{
 				//template for 'F' function triggers
-				modelStack.PushMatrix();
-				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
-				modelStack.PopMatrix();
+		modelStack.PushMatrix();
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1.15);
+		modelStack.PopMatrix();
 				RenderTextOnScreen(meshList[GEO_TEXT], "Please make your way out." , Color(1, 0, 0), 4, 3.6, 6);
 			}
 			else if (render4 == true)
 			{
 				//template for 'F' function triggers
-				modelStack.PushMatrix();
-				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
-				modelStack.PopMatrix();
+		modelStack.PushMatrix();
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1.15);
+		modelStack.PopMatrix();
 				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to start the game." , Color(0, 0.7, 1), 4, 3.7, 6);
 			}	
 
@@ -5408,9 +5337,9 @@ void SceneAssignment::Render()
 
 		else if (gameEnd == false) {
 			//template for 'F' function triggers
-			modelStack.PushMatrix();
-			RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
-			modelStack.PopMatrix();
+		modelStack.PushMatrix();
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1.15);
+		modelStack.PopMatrix();
 			RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to end the game." , Color(0, 0.7, 1), 4, 3.6, 6);
 		}
 
@@ -5421,9 +5350,9 @@ void SceneAssignment::Render()
 			{
 
 				//template for 'F' function triggers
-				modelStack.PushMatrix();
-				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
-				modelStack.PopMatrix();
+		modelStack.PushMatrix();
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1.15);
+		modelStack.PopMatrix();
 
 				RenderTextOnScreen(meshList[GEO_TEXT], "You lose. Try again next time!" , Color(1, 0.0, 0), 4, 3.6, 6);
 				if(musicStop == true){ 
@@ -5437,9 +5366,9 @@ void SceneAssignment::Render()
 
 			else {
 				//template for 'F' function triggers
-				modelStack.PushMatrix();
-				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
-				modelStack.PopMatrix();
+		modelStack.PushMatrix();
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1.15);
+		modelStack.PopMatrix();
 				RenderTextOnScreen(meshList[GEO_TEXT], "You win. Thanks for playing!" , Color(0, 1, 0), 4, 3.6, 6);
 				if(musicStop == true){ 
 					engine->stopAllSounds(); 
@@ -5476,7 +5405,7 @@ void SceneAssignment::Render()
 	{
 		//template for 'F' function triggers
 		modelStack.PushMatrix();
-		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1.15);
 		modelStack.PopMatrix();
 		RenderTextOnScreen(meshList[GEO_TEXT], "PRESS 'F' TO ACTIVATE ALARM!!!" , Color(1, 0, 0), 4, 3.6, 6); 
 	}
@@ -5545,9 +5474,9 @@ void SceneAssignment::Render()
 		if(caught == false)
 		{
 			//template for 'F' function triggers
-			modelStack.PushMatrix();
-			RenderQuadOnScreen(meshList[GEO_UI], 50, 30,0.8, 1.02);
-			modelStack.PopMatrix();
+		modelStack.PushMatrix();
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1.15);
+		modelStack.PopMatrix();
 			RenderTextOnScreen(meshList[GEO_TEXT], "Press [F] to catch" , Color(0, 0.7, 1), 4, 5.9, 6);
 		}
 	}
