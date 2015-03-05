@@ -1,5 +1,13 @@
 #include "timer.h"
-
+/******************************************************************************/
+/*!
+\file	timer.cpp
+\author Wen Sheng Tang
+\par	email: tang_wen_sheng\@nyp.edu.sg
+\brief
+		Track time elapsed in Application
+*/
+/******************************************************************************/
 StopWatch::StopWatch()
 {    
     QueryPerformanceFrequency( &frequency ) ;

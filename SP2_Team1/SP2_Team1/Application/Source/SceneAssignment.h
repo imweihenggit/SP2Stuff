@@ -2,7 +2,7 @@
 #define SCENEASSIGNMENT_H
 
 #include "Scene.h"
-#include "Camera3.h"
+
 #include "Mesh.h"
 #include"MatrixStack.h"
 #include "Light.h"
@@ -14,7 +14,21 @@
 #include <fstream>
 #include <irrKlang.h>
 
-
+/******************************************************************************/
+/*!
+\file	SceneAssignment.h
+\author Lim Wei Heng, Andy Chan, Almeda Glenn, Lee Chun Kiat, Rayner Tay
+\par	
+\brief
+		Logic and asthetics of application
+*/
+/******************************************************************************/
+/******************************************************************************/
+/*!
+		Class SceneAssignment: Scene
+\brief SceneAssignment class
+*/
+/******************************************************************************/
 class SceneAssignment : public Scene
 {
 	enum UNIFORM_TYPE
@@ -104,8 +118,8 @@ class SceneAssignment : public Scene
 		GEO_PACKET,
 		GEO_BOX1,
 		GEO_CAN1,
-
-		//Andy's work		
+		GEO_ARROW,
+		GEO_SWITCH,
 		GEO_LIFT,
 		GEO_DOOR,
 		GEO_ALARM,
@@ -267,6 +281,7 @@ public:
 	void RenderMusic();
 	void RenderBGM(); 
 	void RenderMission();
+	void RenderMission2();
 	void RenderModelGlenn();
 	void RenderQuadOnScreen(Mesh* mesh, float x_size, float y_size, float x, float y);
 	void ReadFromText();	//this should be linked to RenderTextOnScreen function
@@ -312,20 +327,23 @@ private:
 	float eley;
 	float LiftDoor;
 	float LiftDoor2;
-	float waitTime, waitTime2,waitTime3;
+	float waitTime, waitTime2,waitTime3,waitTime4;
 	bool up;
 	bool down;
 	bool Lopen;
 	bool Lclose;
 	bool Lopen2;
 	bool Lclose2;
-	bool buttonPress, buttonPress2,buttonPress3;
+	bool buttonPress, buttonPress2,buttonPress3,buttonPress4;
 
 	//travelator - Andy's work
 	bool travel;
 	bool travelDwn;
 	//music
-	bool musicAlarm, loop1, loop2,musicStop, musicBGM, musicCrowd, Mission, coin;
+	bool musicAlarm, loop1, loop2,musicStop, musicStop2, musicBGM, musicCrowd, Mission,Mission2 , coin, lightson,lightsoff;
+	bool startfire, endfire;
+	bool entrance, exit;
+	int timerez;
 	
 	//entrance
 	bool open2;
@@ -338,7 +356,7 @@ private:
 	float translateX;
 	float translateY;
 	float translateZ;
-
+	float transarrowY;
 	//collision
 	vector<Vector3> sphere;
 	vector<float> radius;
@@ -354,10 +372,10 @@ private:
 	MS modelStack, viewStack, projectionStack;
 
 	vector<CObjects> ObjectList;
-	/*-------------------------------------------------!! UPDATE NEEDED (WEI HENG) !!----------------------------------------------------*/
+
 	CObjects Skybox1, Skybox2, Basket, Cooler, Shelf, Travellator, Cashier, Elevator, Register, Barrier,firealarm, House,
-		     PickUp1, PickUp2, PickUp3, PickUp4, PickUp5, PickUp6, PickUp7,scenerio3;	
-	/*-------------------------------------------------!! UPDATE NEEDED (WEI HENG) !!----------------------------------------------------*/
+		     PickUp1, PickUp2, PickUp3, PickUp4, PickUp5, PickUp6, PickUp7,scenerio3, light;	
+
 
 	int FPS;
 	float ET,timer, aitimer1, aitimer2, aitimer3;
@@ -365,11 +383,11 @@ private:
 	//debug
 	bool debug;
 
-	bool render1, render2, render3, render4, render5, render6, render7, render8,renderscenerio3,renderscenerio3text,startgame,game3;	
+	bool render1, render2, render3, render4, render5, render6, render7, render8,renderscenerio3,renderscenerio3text,startgame,game3,gameover1;	
 	bool place1,place2,place3,place4,place5,gameover,congrat,caught;
 	bool ai1, ai2, ai3;
 	bool renderai1text, renderai1text_2, renderai2text, renderai2text_2, renderai3text, renderai3text_2;
-	bool start;
+	bool start1, start2, start3;
 	/*-----------------------AI-------------------------------------------*/
 	float openStart;
 

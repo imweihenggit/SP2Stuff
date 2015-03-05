@@ -4,7 +4,15 @@
 #include <vector>
 #include "Vertex.h"
 #include "Vector3.h"
-
+/******************************************************************************/
+/*!
+\file	LoadOBJ.h
+\author Andy Chan
+\par	
+\brief
+		Load OBJ vertices
+*/
+/******************************************************************************/
 bool LoadOBJ(
 	const char *file_path, 
 	std::vector<Position> & out_vertices, 

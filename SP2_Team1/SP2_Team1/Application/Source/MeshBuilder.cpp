@@ -6,6 +6,15 @@
 #include "LoadOBJ.h"
 /******************************************************************************/
 /*!
+\file	MeshBuilder.cpp
+\author Andy Chan
+\par	
+\brief
+		Build Meshes here
+*/
+/******************************************************************************/
+/******************************************************************************/
+/*!
 \brief
 Generate the vertices of a reference Axes; Use red for x-axis, green for y-axis, blue for z-axis
 Then generate the VBO/IBO and store them in Mesh object
