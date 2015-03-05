@@ -1,7 +1,16 @@
-
 #include "Mesh.h"
 #include "GL\glew.h"
 #include "Vertex.h"
+
+/******************************************************************************/
+/*!
+\file	Mesh.cpp
+\author Wen Sheng Tang
+\par	email: tang_wen_sheng\@nyp.edu.sg
+\brief
+		Process everything related to Mesh building
+*/
+/******************************************************************************/
 
 /******************************************************************************/
 /*!

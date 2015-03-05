@@ -12,7 +12,15 @@ using namespace std;
 #include <GL/glew.h>
 
 #include "shader.hpp"
-
+/******************************************************************************/
+/*!
+\file	shader.cpp
+\author Wen Sheng Tang
+\par	email: tang_wen_sheng\@nyp.edu.sg
+\brief
+		Load shader files here
+*/
+/******************************************************************************/
 GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path){
 
 	// Create the shaders

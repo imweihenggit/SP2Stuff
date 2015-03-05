@@ -2,6 +2,21 @@
 #define APPLICATION_H
 
 #include "timer.h"
+/******************************************************************************/
+/*!
+\file	Application.h
+\author Lim Wei Heng
+\par	
+\brief
+Run the application here. Modified by Wei Heng
+*/
+/******************************************************************************/
+/******************************************************************************/
+/*!
+		Class Application:
+\brief Application class
+*/
+/******************************************************************************/
 
 class Application
 {

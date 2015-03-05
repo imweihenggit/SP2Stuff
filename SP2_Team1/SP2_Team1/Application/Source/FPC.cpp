@@ -2,7 +2,15 @@
 #include "Application.h"
 #include "Mtx44.h"
 #include "functions.h"
-
+/******************************************************************************/
+/*!
+\file	FPC.cpp
+\author Rayner Tay
+\par	
+\brief
+		First Person Camera with mouse control
+*/
+/******************************************************************************/
 FPC::FPC()
 {
 }
@@ -300,76 +308,7 @@ void FPC::Update(double dt, vector<CObjects> list)
 	// Reset cursor to the center
 	Application::SetMouseinput(midScreenX, midScreenY);
 	
-	/*
-	 * Look - Key Control
-	 */
-	if(Application::IsKeyPressed(VK_LEFT))
-	{
-		float yaw;
-		yaw = (float)(rotSpeed * dt);
-		Mtx44 rotation;
-		position -= target;
-		rotation.SetToRotation(yaw, 0, 1, 0);
-		position = rotation * position;
-		up = rotation * up;
-		position += target;
-	}
 
-	if(Application::IsKeyPressed(VK_RIGHT))
-	{
-		float yaw;
-		yaw = (float)(-rotSpeed * dt);
-		Mtx44 rotation;
-		position -= target;
-		rotation.SetToRotation(yaw, 0, 1, 0);
-		position = rotation * position;
-		up = rotation * up;
-		position += target;
-	}
-
-	if(Application::IsKeyPressed(VK_DOWN))
-	{
-		if (pitchDist > -MAX_PITCH)
-		{
-			float pitch = (float)(-rotSpeed * dt);
-			Vector3 view = (target - position).Normalized();
-			Vector3 right = view.Cross(up);
-			right.y = 0;
-			right.Normalize();
-			up = right.Cross(view).Normalized();
-			Mtx44 rotation;
-			position -=target;
-			rotation.SetToRotation(pitch, right.x, right.y, right.z);
-			position = rotation * position;
-			position +=target;
-
-			pitchDist += pitch;
-		}
-	}
-
-	if(Application::IsKeyPressed(VK_UP))
-	{
-		if (pitchDist < MAX_PITCH)
-		{
-			float pitch = (float)(rotSpeed * dt);
-			Vector3 view = (target - position).Normalized();
-			Vector3 right = view.Cross(up);
-			right.y = 0;
-			right.Normalize();
-			up = right.Cross(view).Normalized();
-			Mtx44 rotation;
-			position -=target;
-			rotation.SetToRotation(pitch, right.x, right.y, right.z);
-			position = rotation * position;
-			position +=target;
-
-			pitchDist += pitch;
-		}
-	}
-	
-	/*
-	 * Reset
-	 */
 	if (Application::IsKeyPressed('R'))
 	{
 		Reset();

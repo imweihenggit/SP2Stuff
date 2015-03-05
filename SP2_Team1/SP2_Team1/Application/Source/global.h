@@ -1,6 +1,16 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
+/******************************************************************************/
+/*!
+\file	global.h
+\author Andy Chan
+\par	
+\brief
+		Libraries used by all .cpp files
+*/
+/******************************************************************************/
+
 #include <iostream>
 #include <string>
 #include <math.h>

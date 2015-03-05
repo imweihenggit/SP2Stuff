@@ -3,6 +3,16 @@
 
 #include "Vector3.h"
 
+/******************************************************************************/
+/*!
+\file	Vertex.h
+\author Andy Chan
+\par	
+\brief
+		Position, Color, TexCoord, Vertex structures are here
+*/
+/******************************************************************************/
+
 struct Position
 {
 	float x, y, z;

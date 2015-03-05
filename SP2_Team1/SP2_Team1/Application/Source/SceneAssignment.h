@@ -2,7 +2,7 @@
 #define SCENEASSIGNMENT_H
 
 #include "Scene.h"
-#include "Camera3.h"
+
 #include "Mesh.h"
 #include"MatrixStack.h"
 #include "Light.h"
@@ -14,7 +14,21 @@
 #include <fstream>
 #include <irrKlang.h>
 
-
+/******************************************************************************/
+/*!
+\file	SceneAssignment.h
+\author Lim Wei Heng, Andy Chan, Almeda Glenn, Lee Chun Kiat, Rayner Tay
+\par	
+\brief
+		Logic and asthetics of application
+*/
+/******************************************************************************/
+/******************************************************************************/
+/*!
+		Class SceneAssignment: Scene
+\brief SceneAssignment class
+*/
+/******************************************************************************/
 class SceneAssignment : public Scene
 {
 	enum UNIFORM_TYPE
@@ -354,10 +368,10 @@ private:
 	MS modelStack, viewStack, projectionStack;
 
 	vector<CObjects> ObjectList;
-	/*-------------------------------------------------!! UPDATE NEEDED (WEI HENG) !!----------------------------------------------------*/
+
 	CObjects Skybox1, Skybox2, Basket, Cooler, Shelf, Travellator, Cashier, Elevator, Register, Barrier,firealarm, House,
 		     PickUp1, PickUp2, PickUp3, PickUp4, PickUp5, PickUp6, PickUp7,scenerio3;	
-	/*-------------------------------------------------!! UPDATE NEEDED (WEI HENG) !!----------------------------------------------------*/
+
 
 	int FPS;
 	float ET,timer, aitimer1, aitimer2, aitimer3;
@@ -365,7 +379,7 @@ private:
 	//debug
 	bool debug;
 
-	bool render1, render2, render3, render4, render5, render6, render7, render8,renderscenerio3,renderscenerio3text,startgame,game3;	
+	bool render1, render2, render3, render4, render5, render6, render7, render8,renderscenerio3,renderscenerio3text,startgame,game3,gameover1;	
 	bool place1,place2,place3,place4,place5,gameover,congrat,caught;
 	bool ai1, ai2, ai3;
 	bool renderai1text, renderai1text_2, renderai2text, renderai2text_2, renderai3text, renderai3text_2;

@@ -1,6 +1,14 @@
 #include "Utility.h"
 
-
+/******************************************************************************/
+/*!
+\file	Utility.cpp
+\author 
+\par	
+\brief
+		Calculate angles using this
+*/
+/******************************************************************************/
 Position operator*(const Mtx44& lhs, const Position& rhs)
 {
 	float b[4];

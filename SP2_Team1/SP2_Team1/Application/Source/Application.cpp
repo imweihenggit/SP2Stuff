@@ -17,30 +17,67 @@ GLFWwindow* m_window;
 const unsigned char FPS = 120; // FPS of this game
 const unsigned int frameTime = 1000 / FPS; // time for each frame
 
-//Define an error callback
+/******************************************************************************/
+/*!
+\file	Application.cpp
+\author Wen Sheng Tang
+\par	email: tang_wen_sheng\@nyp.edu.sg
+\brief
+		Run Application here
+*/
+/******************************************************************************/
+
+
+/******************************************************************************/
+/*!
+\brief
+Define an error callback
+*/
+/******************************************************************************/
 static void error_callback(int error, const char* description)
 {
 	fputs(description, stderr);
 	_fgetchar();
 }
 
+/******************************************************************************/
+/*!
+\brief
 //Define the key input callback
+*/
+/******************************************************************************/
+
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
 }
-
+/******************************************************************************/
+/*!
+\brief
+// update openg1 the new window size
+*/
+/******************************************************************************/
 void resize_callback(GLFWwindow* window, int w, int h)
 {
-	glViewport(0, 0, w, h); // update openg1 the new window size
+	glViewport(0, 0, w, h); 
 }
-
+/******************************************************************************/
+/*!
+\brief
+React to key pressed by user
+*/
+/******************************************************************************/
 bool Application::IsKeyPressed(unsigned short key)
 {
     return ((GetAsyncKeyState(key) & 0x8001) != 0);
 }
-
+/******************************************************************************/
+/*!
+\brief
+React to mouse input by user
+*/
+/******************************************************************************/
 double Application::GetMouseinput(bool X)
 {
 	double POS;
@@ -55,12 +92,22 @@ double Application::GetMouseinput(bool X)
 	}
 	return POS;
 }
-
+/******************************************************************************/
+/*!
+\brief
+Define initial Mouse input
+*/
+/******************************************************************************/
 void Application::SetMouseinput(double X, double Y)
 {
 	glfwSetCursorPos(m_window, X, Y);
 }
-
+/******************************************************************************/
+/*!
+\brief
+Define initial cursor
+*/
+/******************************************************************************/
 void Application::SetCursor(int i)
 {
 	if(i == 1)
@@ -72,7 +119,12 @@ void Application::SetCursor(int i)
 		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 	}
 }
-
+/******************************************************************************/
+/*!
+\brief
+Return Window size
+*/
+/******************************************************************************/
 int Application::returnWindowSize(bool X)
 {
 	int returnInt;
@@ -94,7 +146,12 @@ Application::Application()
 Application::~Application()
 {
 }
-
+/******************************************************************************/
+/*!
+\brief
+Logic for Application to work
+*/
+/******************************************************************************/
 void Application::Init()
 {
 	//Set the error callback
@@ -147,7 +204,12 @@ void Application::Init()
 	glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 	/*-------------------------------------------------!! UPDATE NEEDED (WEI HENG) !!----------------------------------------------------*/
 }
-
+/******************************************************************************/
+/*!
+\brief
+Run these codes when Application is running
+*/
+/******************************************************************************/
 void Application::Run()
 {
 	//Main Loop
@@ -179,7 +241,12 @@ void Application::Run()
 	scene->Exit();
 	delete scene;
 }
-
+/******************************************************************************/
+/*!
+\brief
+Destroy everything before exiting
+*/
+/******************************************************************************/
 void Application::Exit()
 {
 	//Close OpenGL window and terminate GLFW

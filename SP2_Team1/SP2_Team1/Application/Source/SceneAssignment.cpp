@@ -24,6 +24,16 @@ ISoundEngine* engine2 = createIrrKlangDevice(ESOD_AUTO_DETECT,ESEO_MULTI_THREADE
 
 bool SceneAssignment::bReset = false;
 
+/******************************************************************************/
+/*!
+\file	SceneAssignment.cpp
+\author Andy Chan, Lim Wei Heng, Rayner Tay, Almeda Glenn, Lee Chun Kiat
+\par	
+\brief
+		All items are rendered here
+*/
+/******************************************************************************/
+
 SceneAssignment::SceneAssignment()
 {
 	bReset = false;
@@ -908,7 +918,7 @@ void SceneAssignment::InitCollision()
 /*-------------------------------------------------!! UPDATE NEEDED (WEI HENG) !!----------------------------------------------------*/
 	Travellator.collisionPos.push_back(Vector3(-47,30,100));
 /*-------------------------------------------------!! UPDATE NEEDED (WEI HENG) !!----------------------------------------------------*/
-	Travellator.collisionPos.push_back(Vector3(35, 180,-190));
+	Travellator.collisionPos.push_back(Vector3(35, 180,-205));
 
 	Travellator.collisionRad = 10;
 	ObjectList.push_back(Travellator);
@@ -930,13 +940,8 @@ void SceneAssignment::InitCollision()
 	Elevator.rotateAxis.push_back(Vector3(0,1,0));
 	Elevator.scaleVal.push_back(Vector3(12.5,12,13));
 
-	
-
-	//corner off the lv 1 lift
-	Elevator.collisionRad = 20;
 	ObjectList.push_back(Elevator);
 
-	//barriers
 	Barrier.translateVal.push_back(Vector3(10,150,-200));
 	Barrier.rotateVal.push_back(-90);
 	Barrier.rotateAxis.push_back(Vector3(0,1,0));
@@ -960,91 +965,43 @@ void SceneAssignment::InitCollision()
 	Barrier.collisionRad = 20;
 	ObjectList.push_back(Barrier);
 
-			//Houses on left side
-	for(int i = 0; i < 6; i++)
+		//Houses on left side
+	for(int i = 0; i < 2; i++)
 	{
 		if(i < 2)
 		{
-			House.translateVal.push_back(Vector3(-920 + (200*i), 0, 250));
-			
-			House.collisionPos.push_back(Vector3(-920+(200*i), 30, 250));
-			House.collisionPos.push_back(Vector3(-920+60+(200*i), 30, 250));
-
-			House.collisionPos.push_back(Vector3(-920+(200*i), 30, 250 - 30));
-			House.collisionPos.push_back(Vector3(-920+60+(200*i), 30, 250-30));
-		}
-		
-		else if (i >= 2 && i <4)
-		{
-			House.translateVal.push_back(Vector3(-1420 + (200*i), 0, 0));
-			
-			House.collisionPos.push_back(Vector3(-1420+(200*i), 30, 0));
-			House.collisionPos.push_back(Vector3(-1420+60+(200*i), 30, 0));
-
-			House.collisionPos.push_back(Vector3(-1420+(200*i), 30, 0 - 30));
-			House.collisionPos.push_back(Vector3(-1420+60+(200*i), 30, 0-30));
-		}
-		
-		else
-		{
-			House.translateVal.push_back(Vector3(-1820 + (200*i), 0, -200));
-			
-			House.collisionPos.push_back(Vector3(-1820+(200*i), 30, -200));
-			House.collisionPos.push_back(Vector3(-1820+60+(200*i), 30, -200));
-
-			House.collisionPos.push_back(Vector3(-1820+(200*i), 30, -200 - 30));
-			House.collisionPos.push_back(Vector3(-1820+60+(200*i), 30, -200-30));
-		}
-
+		House.translateVal.push_back(Vector3(-920 + (200*i), 0, 250));
 		House.rotateVal.push_back(90);
 		House.rotateAxis.push_back(Vector3(0,1,0));
 		House.scaleVal.push_back(Vector3(20, 20, 20));
 
-		
+		House.collisionPos.push_back(Vector3(-920+(200*i), 30, 250));
+		House.collisionPos.push_back(Vector3(-920+60+(200*i), 30, 250));
+
+		House.collisionPos.push_back(Vector3(-920+(200*i), 30, 250 - 30));
+		House.collisionPos.push_back(Vector3(-920+60+(200*i), 30, 250-30));
 	}
 	
 	//Houses on right side
-	for(int i = 0; i < 6; i++)
+	for(int i = 0; i < 2; i++)
 	{
 	
 		if(i < 2)
 		{
-			House.translateVal.push_back(Vector3(620 + (200*i), 0, 250));
-			
-		House.collisionPos.push_back(Vector3(620-(200*i), 30, 250));
-		House.collisionPos.push_back(Vector3(620+60-(200*i), 30, 250));
-
-		House.collisionPos.push_back(Vector3(620-(200*i), 30, 250 - 30));
-		House.collisionPos.push_back(Vector3(620+60-(200*i), 30, 250-30));
-		}
-		
-		else if (i >= 2 && i <4)
-		{
-			House.translateVal.push_back(Vector3(1220 - (200*i), 0, 0));
-			
-			House.collisionPos.push_back(Vector3(1220-(200*i), 30, 0));
-			House.collisionPos.push_back(Vector3(1220+60-(200*i), 30, 0));
-
-			House.collisionPos.push_back(Vector3(1220-(200*i), 30, 0 - 30));
-			House.collisionPos.push_back(Vector3(1220+60-(200*i), 30, 0-30));
-		}
-		
-		else
-		{
-			House.translateVal.push_back(Vector3(1620 - (200*i), 0, -200));
-			
-			House.collisionPos.push_back(Vector3(1620-(200*i), 30, -200));
-			House.collisionPos.push_back(Vector3(1620+60-(200*i), 30, -200));
-
-			House.collisionPos.push_back(Vector3(1620-(200*i), 30, -200 - 30));
-			House.collisionPos.push_back(Vector3(1620+60-(200*i), 30, -200-30));
-		}
+		House.translateVal.push_back(Vector3(620 + (200*i), 0, 250));
 		House.rotateVal.push_back(90);
 		House.rotateAxis.push_back(Vector3(0,1,0));
 		House.scaleVal.push_back(Vector3(20, 20, 20));
+
+		
+		House.collisionPos.push_back(Vector3(620+(200*i), 30, 250));
+		House.collisionPos.push_back(Vector3(620+60+(200*i), 30, 250));
+
+		House.collisionPos.push_back(Vector3(620+(200*i), 30, 250 - 30));
+		House.collisionPos.push_back(Vector3(620+60+(200*i), 30, 250-30));
 	}
 	
-	House.collisionRad = 60;
+	House.collisionRad = 70;
 	ObjectList.push_back(House);
 
 	/*-------------------------------------------------!! UPDATE NEEDED (WEI HENG) !!----------------------------------------------------*/
@@ -1164,6 +1121,7 @@ void SceneAssignment::Init()
 	//scene3
 	game3 = true;
 	renderscenerio3 = true;
+	gameover1 = true;
 	startgame = true;
 	//travelator
 	travel = false;
@@ -1352,9 +1310,7 @@ void SceneAssignment::Init()
 	playerCamera.Init(Vector3(37, 30, 462), Vector3(0, 1, 0), Vector3(0, 1, 0));
 	playerCamera.SetSensitivity(13, 13);
 	playerCamera.SetSpeed(150, 800);
-	noClipCamera.Init(Vector3(37, 30, 462), Vector3(0, 1,0 ), Vector3(0, 1, 0), true);
-	noClipCamera.SetSensitivity(5, 5);
-	noClipCamera.SetSpeed(100, 80);
+	
 
 	InitCollision();
 	InitLevel1();
@@ -1667,7 +1623,7 @@ void SceneAssignment::UpdateDoor(double dt)
 		} 
 	}
 
-	if (openStart >= 1 && openStart <= 3) { 
+	if (openStart >= 2 && openStart <= 4) { 
 		open2 = true; 
 	} 
 
@@ -1962,7 +1918,7 @@ void SceneAssignment::Update(double dt)
 
 		}
 		//scenerio3
-		if(game3 == true)
+		if(game3 == true && gameover1 == true)
 		{
 			if ((playerCamera.position.x<=545 && playerCamera.position.x>=525) && (playerCamera.position.z<=262 && playerCamera.position.z>=245) && (renderscenerio3== true)&& (startgame == true))
 			{
@@ -2025,14 +1981,15 @@ void SceneAssignment::Update(double dt)
 				{
 					place5 = true;
 				}
-				if(timer>=100)
+				if(timer>=10)
 				{
 					gameover = false;
 				}
 
-				if(timer>105)
+				if(timer>15)
 				{
 					gameover = true;
+					gameover1 = false;
 				}
 				//place1
 				if((playerCamera.position.x<=352 && playerCamera.position.x>=332) && (playerCamera.position.z<=-272 && playerCamera.position.z>=-292)&& timer<=20)
@@ -2298,6 +2255,11 @@ void SceneAssignment::Update(double dt)
 	//arrow animation on top of game master head
 	
 }
+/******************************************************************************/
+/*!
+\brief
+Render out lightings on all of our materials
+/******************************************************************************/
 void SceneAssignment::RenderMesh(Mesh *mesh, bool enableLight)
 {
 	Mtx44 MVP, modelView, modelView_inverse_transpose;
@@ -2341,6 +2303,11 @@ void SceneAssignment::RenderMesh(Mesh *mesh, bool enableLight)
 	}
 
 }
+/******************************************************************************/
+/*!
+\brief
+Render the walls and doors for level 1
+/******************************************************************************/
 void SceneAssignment::RenderLevel1()
 {
 	//ExitLeft
@@ -2390,6 +2357,11 @@ void SceneAssignment::RenderLevel1()
 	RenderMesh(meshList[GEO_ARROW], false);
 	modelStack.PopMatrix();
 }
+/******************************************************************************/
+/*!
+\brief
+Render out the walls and doors for level 2
+/******************************************************************************/
 void SceneAssignment::RenderLevel2()
 {
 	//Level 2 Skybox
@@ -2420,6 +2392,11 @@ void SceneAssignment::RenderLevel2()
 	RenderMesh(meshList[GEO_CEILING], true);
 	modelStack.PopMatrix();
 }
+/******************************************************************************/
+/*!
+\brief
+Render out all the large objects such as the shelves and cashier for both levels
+/******************************************************************************/
 void SceneAssignment::RenderLargeObjects()
 {
 
@@ -2476,6 +2453,11 @@ void SceneAssignment::RenderLargeObjects()
 		modelStack.PopMatrix();
 	}
 }
+/******************************************************************************/
+/*!
+\brief
+Render the cereal boxes at the right column of level 2
+/******************************************************************************/
 void SceneAssignment::RenderRightColumn()
 {
 	//right/last from back/bottom row//////////////////////////////////
@@ -2984,6 +2966,11 @@ void SceneAssignment::RenderRightColumn()
 	}
 
 }
+/******************************************************************************/
+/*!
+\brief
+Render the cereal boxes at the leftr column of level 2
+/******************************************************************************/
 void SceneAssignment::RenderLeftColumn()
 {
 	//left/last from back/bottom row//////////////////////////////////
@@ -3492,6 +3479,11 @@ void SceneAssignment::RenderLeftColumn()
 	}
 
 }
+/******************************************************************************/
+/*!
+\brief
+Render the cereal boxes at the middle column of level 2
+/******************************************************************************/
 void SceneAssignment::RenderMiddleColumn()
 {
 	//middle/ 2 last from back/bottom row//////////////////////////////////
@@ -3723,6 +3715,11 @@ void SceneAssignment::RenderMiddleColumn()
 		modelStack.PopMatrix();
 	}
 }
+/******************************************************************************/
+/*!
+\brief
+Render the fruits and ice cream at level 1
+/******************************************************************************/
 void SceneAssignment::RenderSmallObjects()
 {
 	//left column
@@ -4043,6 +4040,11 @@ void SceneAssignment::RenderSmallObjects()
 	}
 
 }
+/******************************************************************************/
+/*!
+\brief
+Render the exterior skyboxes,moutains and houses outside of the supermarket
+/******************************************************************************/
 void SceneAssignment::RenderOut_Skybox()
 {
 	modelStack.PushMatrix();
@@ -4171,6 +4173,11 @@ void SceneAssignment::RenderOut_Skybox()
 	RenderMesh(meshList[GEO_ARROW], false);
 	modelStack.PopMatrix();
 }
+/******************************************************************************/
+/*!
+\brief
+Render static NPCs at the cash register
+/******************************************************************************/
 void SceneAssignment::RenderChar()
 {
 	//cashier
@@ -4184,6 +4191,11 @@ void SceneAssignment::RenderChar()
 		modelStack.PopMatrix();
 	}
 }
+/******************************************************************************/
+/*!
+\brief
+Render the moving pink NPC 
+/******************************************************************************/
 void SceneAssignment::RenderModelPink()
 {
 	modelStack.PushMatrix(); 
@@ -4294,6 +4306,11 @@ void SceneAssignment::RenderModelPink()
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 }
+/******************************************************************************/
+/*!
+\brief
+Render the moving blue NPC 
+/******************************************************************************/
 void SceneAssignment::RenderModelBlue()
 {
 	modelStack.PushMatrix();
@@ -4386,6 +4403,11 @@ void SceneAssignment::RenderModelBlue()
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 }
+/******************************************************************************/
+/*!
+\brief
+Render the moving orange NPC 
+/******************************************************************************/
 void SceneAssignment::RenderModelOrange()
 {
 	modelStack.PushMatrix();
@@ -4483,6 +4505,11 @@ void SceneAssignment::RenderModelOrange()
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 }
+/******************************************************************************/
+/*!
+\brief
+Render the moving red NPC 
+/******************************************************************************/
 void SceneAssignment::RenderModelRed()
 {
 	modelStack.PushMatrix(); 
@@ -4557,6 +4584,11 @@ void SceneAssignment::RenderModelRed()
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 }
+/******************************************************************************/
+/*!
+\brief
+Render the moving yellow NPC 
+/******************************************************************************/
 void SceneAssignment::RenderModelYellow()
 {
 	modelStack.PushMatrix(); 
@@ -4625,6 +4657,11 @@ void SceneAssignment::RenderModelYellow()
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 }
+/******************************************************************************/
+/*!
+\brief
+Render  the vehicles and its animations 
+/******************************************************************************/
 void SceneAssignment::RenderModelVehicles()
 {
 	//cars, bus and truck
@@ -4671,6 +4708,11 @@ void SceneAssignment::RenderModelVehicles()
 		modelStack.PopMatrix();
 	}
 }
+/******************************************************************************/
+/*!
+\brief
+Render call the render model functions at the top in here like a compile
+/******************************************************************************/
 void SceneAssignment::RenderModels()
 {
 	if (loop1 == true)
@@ -4689,6 +4731,11 @@ void SceneAssignment::RenderModels()
 	RenderModelVehicles();
 	
 }
+/******************************************************************************/
+/*!
+\brief
+Render a function that enable text rendering in the world space
+/******************************************************************************/
 void SceneAssignment::RenderText(Mesh* mesh, std::string text, Color color)
 {
 	if(!mesh || mesh->textureID <= 0) //Proper error check
@@ -4715,6 +4762,11 @@ void SceneAssignment::RenderText(Mesh* mesh, std::string text, Color color)
 	glUniform1i(m_parameters[U_TEXT_ENABLED], 0);
 	glEnable(GL_DEPTH_TEST);
 }
+/******************************************************************************/
+/*!
+\brief
+Render a function that enable text rendering on screen
+/******************************************************************************/
 void SceneAssignment::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y)
 {
 	if(!mesh || mesh->textureID <= 0) //Proper error check
@@ -4755,6 +4807,11 @@ void SceneAssignment::RenderTextOnScreen(Mesh* mesh, std::string text, Color col
 	modelStack.PopMatrix();
 	glEnable(GL_DEPTH_TEST);
 }
+/******************************************************************************/
+/*!
+\brief
+Render music for siren and pickup sound
+/******************************************************************************/
 void SceneAssignment::RenderMusic()
 {
 	ISound* music;
@@ -4779,6 +4836,11 @@ void SceneAssignment::RenderMusic()
 
 	}
 }
+/******************************************************************************/
+/*!
+\brief
+Render music for the background
+/******************************************************************************/
 void SceneAssignment::RenderBGM()
 { 
 	ISound* music2; 
@@ -4796,6 +4858,11 @@ void SceneAssignment::RenderBGM()
 		musicCrowd = false; 
 	}  
 }
+/******************************************************************************/
+/*!
+\brief
+Render music for the games
+/******************************************************************************/
 void SceneAssignment::RenderMission() 
 { 
 	ISound* music4; 
@@ -4811,6 +4878,11 @@ void SceneAssignment::RenderMission()
 
 }
 //update is required for read from text. the code is working.
+/******************************************************************************/
+/*!
+\brief
+Render allow read text file
+/******************************************************************************/
 void SceneAssignment::ReadFromText()
 {
 	string line;
@@ -4834,6 +4906,11 @@ void SceneAssignment::ReadFromText()
 	}
 	myfile.close();
 }
+/******************************************************************************/
+/*!
+\brief
+Render out all the dailogue boxes adn UI
+/******************************************************************************/
 void SceneAssignment::RenderQuadOnScreen(Mesh* mesh, float x_size, float y_size, float x, float y)
 {
 	if(!mesh || mesh->textureID <= 0) //Proper error check
@@ -4871,6 +4948,11 @@ void SceneAssignment::RenderQuadOnScreen(Mesh* mesh, float x_size, float y_size,
 	modelStack.PopMatrix();
 	glEnable(GL_DEPTH_TEST);
 }
+/******************************************************************************/
+/*!
+\brief
+Render  the static NPCs where u can talk to
+/******************************************************************************/
 void SceneAssignment::RenderStaticAIGlenn()
 {
 		modelStack.PushMatrix();
@@ -4900,7 +4982,7 @@ void SceneAssignment::RenderStaticAIGlenn()
 		modelStack.PushMatrix();
 		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
 		modelStack.PopMatrix();
-		RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to talk." , Color(0, 0.7, 1), 4, 6.3, 5);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to talk." , Color(0, 0.7, 1), 4, 6.3, 6);
 	}
 	if(renderai1text_2 == true)
 	{
@@ -4908,7 +4990,7 @@ void SceneAssignment::RenderStaticAIGlenn()
 		modelStack.PushMatrix();
 		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
 		modelStack.PopMatrix();
-		RenderTextOnScreen(meshList[GEO_TEXT], "So many to choose from...!" , Color(0, 0.7, 1), 4, 6, 5);
+		RenderTextOnScreen(meshList[GEO_TEXT], "So many to choose from...!" , Color(0, 0.7, 1), 4, 6, 6);
 	}
 
 	if(renderai2text == true)
@@ -4917,7 +4999,7 @@ void SceneAssignment::RenderStaticAIGlenn()
 		modelStack.PushMatrix();
 		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
 		modelStack.PopMatrix();
-		RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to talk." , Color(0, 0.7, 1), 4, 6.3, 5);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to talk." , Color(0, 0.7, 1), 4, 6.3, 6);
 	}
 	if(renderai2text_2 == true)
 	{
@@ -4925,26 +5007,31 @@ void SceneAssignment::RenderStaticAIGlenn()
 		modelStack.PushMatrix();
 		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
 		modelStack.PopMatrix();
-		RenderTextOnScreen(meshList[GEO_TEXT], "I forgot what I want to buy..." , Color(0, 0.7, 1), 4, 4.5, 5);
+		RenderTextOnScreen(meshList[GEO_TEXT], "I forgot what I want to buy..." , Color(0, 0.7, 1), 4, 4.5, 6);
 	}
 
 	if(renderai3text == true)
 	{
 		//template for 'F' function triggers
 		modelStack.PushMatrix();
-		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1.15);
 		modelStack.PopMatrix();
-		RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to talk." , Color(0, 0.7, 1), 4, 6.3, 5);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to talk." , Color(0, 0.7, 1), 4, 6.3, 6);
 	}
 	if(renderai3text_2 == true)
 	{
 		//template for 'F' function triggers
 		modelStack.PushMatrix();
-		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1.5);
 		modelStack.PopMatrix();
-		RenderTextOnScreen(meshList[GEO_TEXT], "Ice cream should be cheaper." , Color(0, 0.7, 1), 4, 4.5, 5);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Ice cream should be cheaper." , Color(0, 0.7, 1), 4, 4.5, 6);
 	}
 }
+/******************************************************************************/
+/*!
+\brief
+Render all of our games and a combine of all render fuctions in here
+/******************************************************************************/
 void SceneAssignment::Render()
 {
 	// Render VBO here
@@ -5050,8 +5137,8 @@ void SceneAssignment::Render()
 			{
 				modelStack.PushMatrix();
 				modelStack.Translate(ObjectList[i].collisionPos[j].x,ObjectList[i].collisionPos[j].y,ObjectList[i].collisionPos[j].z);
-				modelStack.Scale(2, 2, 2);
-				RenderMesh(meshList[GEO_ALARM], false);
+				modelStack.Scale(1, 1, 1);
+				RenderMesh(meshList[GEO_MOUTAIN], false);
 				modelStack.PopMatrix();
 			}
 		}
@@ -5118,9 +5205,9 @@ void SceneAssignment::Render()
 	{
 		//template for 'F' function triggers
 		modelStack.PushMatrix();
-		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
+		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1.7);
 		modelStack.PopMatrix();
-		RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to talk." , Color(0, 0.7, 1), 4, 6.3, 5);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to talk." , Color(0, 0.7, 1), 4, 6.3, 6);
 	}
 	if(congrat == false)
 	{
@@ -5214,7 +5301,7 @@ void SceneAssignment::Render()
 				modelStack.PushMatrix();
 				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
 				modelStack.PopMatrix();
-				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to pick up the item." , Color(0, 0.7, 1), 4, 3.6, 5.2);
+				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to pick up the item." , Color(0, 0.7, 1), 4, 3.6, 6);
 			}
 		}
 		if (Collision(playerCamera.position,ObjectList,2,29))
@@ -5225,7 +5312,7 @@ void SceneAssignment::Render()
 				modelStack.PushMatrix();
 				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
 				modelStack.PopMatrix();
-				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to pick up the item." , Color(0, 0.7, 1), 4, 3.6, 5.2);
+				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to pick up the item." , Color(0, 0.7, 1), 4, 3.6, 6);
 			}
 		}
 		if (Collision(playerCamera.position,ObjectList,3,4))
@@ -5236,7 +5323,7 @@ void SceneAssignment::Render()
 				modelStack.PushMatrix();
 				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
 				modelStack.PopMatrix();
-				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to pick up the item." , Color(0, 0.7, 1), 4, 3.6, 5.2);
+				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to pick up the item." , Color(0, 0.7, 1), 4, 3.6, 6);
 			}
 		}
 		if (Collision(playerCamera.position,ObjectList,4,83) ||Collision(playerCamera.position,ObjectList,4,30)  )
@@ -5247,7 +5334,7 @@ void SceneAssignment::Render()
 				modelStack.PushMatrix();
 				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
 				modelStack.PopMatrix();
-				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to pick up the item." , Color(0, 0.7, 1), 4, 3.6, 5.2);
+				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to pick up the item." , Color(0, 0.7, 1), 4, 3.6, 6);
 			}
 		}
 		if (Collision(playerCamera.position,ObjectList,4,46))
@@ -5258,7 +5345,7 @@ void SceneAssignment::Render()
 				modelStack.PushMatrix();
 				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
 				modelStack.PopMatrix();
-				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to pick up the item." , Color(0, 0.7, 1), 4, 3.6, 5.2);
+				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to pick up the item." , Color(0, 0.7, 1), 4, 3.6, 6);
 			}
 		}
 		if (Collision(playerCamera.position,ObjectList,4,36))
@@ -5269,7 +5356,7 @@ void SceneAssignment::Render()
 				modelStack.PushMatrix();
 				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
 				modelStack.PopMatrix();
-				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to pick up the item." , Color(0, 0.7, 1), 4, 3.6, 5.2);
+				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to pick up the item." , Color(0, 0.7, 1), 4, 3.6, 6);
 			}
 		}
 
@@ -5281,7 +5368,7 @@ void SceneAssignment::Render()
 				modelStack.PushMatrix();
 				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
 				modelStack.PopMatrix();
-				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to pick up the item." , Color(0, 0.7, 1), 4, 3.6, 5.2);
+				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to pick up the item." , Color(0, 0.7, 1), 4, 3.6, 6);
 			}
 		}
 	}
@@ -5296,7 +5383,7 @@ void SceneAssignment::Render()
 				modelStack.PushMatrix();
 				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
 				modelStack.PopMatrix();
-				RenderTextOnScreen(meshList[GEO_TEXT], "Please make your way out." , Color(1, 0, 0), 4, 3.6, 5.2);
+				RenderTextOnScreen(meshList[GEO_TEXT], "Please make your way out." , Color(1, 0, 0), 4, 3.6, 6);
 			}
 			else if (render4 == true)
 			{
@@ -5304,7 +5391,7 @@ void SceneAssignment::Render()
 				modelStack.PushMatrix();
 				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
 				modelStack.PopMatrix();
-				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to start the game." , Color(0, 0.7, 1), 4, 3.7, 5.2);
+				RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to start the game." , Color(0, 0.7, 1), 4, 3.7, 6);
 			}	
 
 			if (render4 == false)
@@ -5322,7 +5409,7 @@ void SceneAssignment::Render()
 			modelStack.PushMatrix();
 			RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
 			modelStack.PopMatrix();
-			RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to end the game." , Color(0, 0.7, 1), 4, 3.6, 5.2);
+			RenderTextOnScreen(meshList[GEO_TEXT], "Press 'F' to end the game." , Color(0, 0.7, 1), 4, 3.6, 6);
 		}
 
 		else if (gameEnd == true) 
@@ -5336,7 +5423,7 @@ void SceneAssignment::Render()
 				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
 				modelStack.PopMatrix();
 
-				RenderTextOnScreen(meshList[GEO_TEXT], "You lose. Try again next time!" , Color(1, 0.0, 0), 4, 3.6, 5.2);
+				RenderTextOnScreen(meshList[GEO_TEXT], "You lose. Try again next time!" , Color(1, 0.0, 0), 4, 3.6, 6);
 				if(musicStop == true){ 
 					engine->stopAllSounds(); 
 					engine->play2D("../irrKlang/media/fail.wav",false); 
@@ -5351,7 +5438,7 @@ void SceneAssignment::Render()
 				modelStack.PushMatrix();
 				RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
 				modelStack.PopMatrix();
-				RenderTextOnScreen(meshList[GEO_TEXT], "You win. Thanks for playing!" , Color(0, 1, 0), 4, 3.6, 5.2);
+				RenderTextOnScreen(meshList[GEO_TEXT], "You win. Thanks for playing!" , Color(0, 1, 0), 4, 3.6, 6);
 				if(musicStop == true){ 
 					engine->stopAllSounds(); 
 					engine->play2D("../irrKlang/media/win.wav",false); 
@@ -5389,7 +5476,7 @@ void SceneAssignment::Render()
 		modelStack.PushMatrix();
 		RenderQuadOnScreen(meshList[GEO_UI], 70, 30, 0.6, 1);
 		modelStack.PopMatrix();
-		RenderTextOnScreen(meshList[GEO_TEXT], "PRESS 'F' TO ACTIVATE ALARM!!!" , Color(1, 0, 0), 4, 3.6, 5); 
+		RenderTextOnScreen(meshList[GEO_TEXT], "PRESS 'F' TO ACTIVATE ALARM!!!" , Color(1, 0, 0), 4, 3.6, 6); 
 	}
 	RenderBGM();
 	RenderMusic();
@@ -5459,7 +5546,7 @@ void SceneAssignment::Render()
 			modelStack.PushMatrix();
 			RenderQuadOnScreen(meshList[GEO_UI], 50, 30,0.8, 1.02);
 			modelStack.PopMatrix();
-			RenderTextOnScreen(meshList[GEO_TEXT], "Press [F] to catch" , Color(0, 0.7, 1), 4, 5.9, 5.2);
+			RenderTextOnScreen(meshList[GEO_TEXT], "Press [F] to catch" , Color(0, 0.7, 1), 4, 5.9, 6);
 		}
 	}
 
@@ -5516,7 +5603,11 @@ void SceneAssignment::Render()
 		}
 
 }
-
+/******************************************************************************/
+/*!
+\brief
+Render Exit program
+/******************************************************************************/
 void SceneAssignment::Exit()
 {
 	glDeleteVertexArrays(1, &m_vertexArrayID);
