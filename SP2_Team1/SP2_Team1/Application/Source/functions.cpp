@@ -1,5 +1,19 @@
 #include "functions.h"
-
+/******************************************************************************/
+/*!
+\file	functions.cpp
+\author Lim Wei Heng
+\par	
+\brief
+		Detect collision
+*/
+/******************************************************************************/
+/******************************************************************************/
+/*!
+\brief
+Collision positions
+*/
+/******************************************************************************/
 bool Collision(Vector3 charPos, std::vector<CObjects> objList)
 {
 	float charRad = 5;
@@ -17,6 +31,12 @@ bool Collision(Vector3 charPos, std::vector<CObjects> objList)
 	
 	return false;
 }
+/******************************************************************************/
+/*!
+\brief
+Collision detections
+*/
+/******************************************************************************/
 bool Collision(Vector3 charPos, std::vector<CObjects> objList, int obj, int pos)
 {
 	float charRad = 5;

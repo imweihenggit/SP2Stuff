@@ -2,7 +2,16 @@
 #define MOVEAI_H
 #include "MatrixStack.h"
 #include "Vector3.h"
-	
+
+/******************************************************************************/
+/*!
+\file	MoveAI.h
+\author Lim Wei Heng
+\par	
+\brief
+		Movement of NPCs
+*/
+/******************************************************************************/
 bool AImoveZ (MS &model, float &zero, float val, float speed = 1);
 bool AImoveX (MS &model, float &zero, float val, float speed = 1);
 bool AImoveY (MS &model, float &zero, float val, float speed = 1);

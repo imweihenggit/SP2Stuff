@@ -2,7 +2,15 @@
 #include "Application.h"
 #include "Mtx44.h"
 #include "functions.h"
-
+/******************************************************************************/
+/*!
+\file	FPC.cpp
+\author Rayner Tay
+\par	
+\brief
+		First Person Camera with mouse control
+*/
+/******************************************************************************/
 FPC::FPC()
 {
 }
@@ -161,7 +169,7 @@ void FPC::Update(double dt, vector<CObjects> list)
 				position -= right * moveSpeed * dt;
 				target -= right * moveSpeed * dt;
 				
-				if (position.x > 1100 || position.x <-1100 || position.z > 695 || position.z < -230|| (collideA == true && collideD == false))
+				if (position.x > 1100 || position.x <-1100 || position.z > 695 || position.z < -935|| (collideA == true && collideD == false))
 				{
 					position += right * moveSpeed * dt;
 					target += right * moveSpeed * dt;
@@ -188,7 +196,7 @@ void FPC::Update(double dt, vector<CObjects> list)
 				position += right * moveSpeed * dt;
 				target += right * moveSpeed * dt;
 
-				if (position.x > 1100 || position.x <-1100 || position.z > 695 || position.z < -230 || (collideD == true && collideA == false))
+				if (position.x > 1100 || position.x <-1100 || position.z > 695 || position.z < -935 || (collideD == true && collideA == false))
 				{
 					position -= right * moveSpeed * dt;
 					target -= right * moveSpeed * dt;
@@ -212,7 +220,7 @@ void FPC::Update(double dt, vector<CObjects> list)
 				position += view * moveSpeed * dt;
 				target += view * moveSpeed * dt;
 
-				if (position.x > 1100 || position.x <-1100 || position.z > 695 || position.z < -230 || (collideW == true && collideS == false))
+				if (position.x > 1100 || position.x <-1100 || position.z > 695 || position.z < -935 || (collideW == true && collideS == false))
 				{
 					position -= view * moveSpeed * dt;
 					target -= view * moveSpeed * dt;
@@ -237,7 +245,7 @@ void FPC::Update(double dt, vector<CObjects> list)
 				position -= view * moveSpeed * dt;
 				target -= view * moveSpeed * dt;
 
-				if (position.x > 1100 || position.x <-1100 || position.z > 695 || position.z < -230 || (collideS == true && collideW == false))
+				if (position.x > 1100 || position.x <-1100 || position.z > 695 || position.z < -935 || (collideS == true && collideW == false))
 				{
 					position += view * moveSpeed * dt;
 					target += view * moveSpeed * dt;
@@ -300,76 +308,7 @@ void FPC::Update(double dt, vector<CObjects> list)
 	// Reset cursor to the center
 	Application::SetMouseinput(midScreenX, midScreenY);
 	
-	/*
-	 * Look - Key Control
-	 */
-	if(Application::IsKeyPressed(VK_LEFT))
-	{
-		float yaw;
-		yaw = (float)(rotSpeed * dt);
-		Mtx44 rotation;
-		position -= target;
-		rotation.SetToRotation(yaw, 0, 1, 0);
-		position = rotation * position;
-		up = rotation * up;
-		position += target;
-	}
 
-	if(Application::IsKeyPressed(VK_RIGHT))
-	{
-		float yaw;
-		yaw = (float)(-rotSpeed * dt);
-		Mtx44 rotation;
-		position -= target;
-		rotation.SetToRotation(yaw, 0, 1, 0);
-		position = rotation * position;
-		up = rotation * up;
-		position += target;
-	}
-
-	if(Application::IsKeyPressed(VK_DOWN))
-	{
-		if (pitchDist > -MAX_PITCH)
-		{
-			float pitch = (float)(-rotSpeed * dt);
-			Vector3 view = (target - position).Normalized();
-			Vector3 right = view.Cross(up);
-			right.y = 0;
-			right.Normalize();
-			up = right.Cross(view).Normalized();
-			Mtx44 rotation;
-			position -=target;
-			rotation.SetToRotation(pitch, right.x, right.y, right.z);
-			position = rotation * position;
-			position +=target;
-
-			pitchDist += pitch;
-		}
-	}
-
-	if(Application::IsKeyPressed(VK_UP))
-	{
-		if (pitchDist < MAX_PITCH)
-		{
-			float pitch = (float)(rotSpeed * dt);
-			Vector3 view = (target - position).Normalized();
-			Vector3 right = view.Cross(up);
-			right.y = 0;
-			right.Normalize();
-			up = right.Cross(view).Normalized();
-			Mtx44 rotation;
-			position -=target;
-			rotation.SetToRotation(pitch, right.x, right.y, right.z);
-			position = rotation * position;
-			position +=target;
-
-			pitchDist += pitch;
-		}
-	}
-	
-	/*
-	 * Reset
-	 */
 	if (Application::IsKeyPressed('R'))
 	{
 		Reset();

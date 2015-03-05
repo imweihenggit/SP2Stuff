@@ -1,6 +1,22 @@
 #ifndef MATERIAL_H
 #define MATERIAL_H
 
+/******************************************************************************/
+/*!
+\file	Material.h
+\author Andy Chan
+\par	
+\brief
+		Material codes to calculate light behavior
+*/
+/******************************************************************************/
+/******************************************************************************/
+/*!
+		Struct Component and Material:
+\brief Component and Material structures
+*/
+/******************************************************************************/
+
 struct Component
 	{
 	float r, g, b;

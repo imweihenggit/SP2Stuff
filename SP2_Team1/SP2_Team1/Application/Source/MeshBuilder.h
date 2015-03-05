@@ -6,6 +6,15 @@
 
 /******************************************************************************/
 /*!
+\file	MeshBuilder.h
+\author Andy Chan
+\par	
+\brief
+		Build meshes for rendering
+*/
+/******************************************************************************/
+/******************************************************************************/
+/*!
 		Class MeshBuilder:
 \brief	Provides methods to generate mesh of different shapes
 */

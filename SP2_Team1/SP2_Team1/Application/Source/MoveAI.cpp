@@ -1,5 +1,20 @@
 #include "MoveAI.h"
 
+/******************************************************************************/
+/*!
+\file	MoveAI.cpp
+\author Lim Wei Heng
+\par	
+\brief
+		NPC movements
+*/
+/******************************************************************************/
+/******************************************************************************/
+/*!
+\brief
+ NPC movement across Z-axis
+*/
+/******************************************************************************/
 bool AImoveZ (MS &model, float &zero, float val, float speed)
 {
 	model.Translate(0,0,zero);
@@ -25,7 +40,12 @@ bool AImoveZ (MS &model, float &zero, float val, float speed)
 			return false;
 	}
 }
-
+/******************************************************************************/
+/*!
+\brief
+ NPC movement across X-axis
+*/
+/******************************************************************************/
 bool AImoveX (MS &model, float &zero, float val, float speed)
 {
 	model.Translate(zero,0,0);
@@ -51,7 +71,12 @@ bool AImoveX (MS &model, float &zero, float val, float speed)
 			return false;
 	}
 }
-
+/******************************************************************************/
+/*!
+\brief
+ NPC movement across Y-axis
+*/
+/******************************************************************************/
 bool AImoveY (MS &model, float &zero, float val, float speed)
 {
 
@@ -78,7 +103,12 @@ bool AImoveY (MS &model, float &zero, float val, float speed)
 			return false;
 	}
 }
-
+/******************************************************************************/
+/*!
+\brief
+	Stop NPC from moving
+*/
+/******************************************************************************/
 bool AIstop (float &zero, float val, float speed)
 {
 	if (zero < val)
@@ -89,7 +119,12 @@ bool AIstop (float &zero, float val, float speed)
 	else
 		return false;
 }
-
+/******************************************************************************/
+/*!
+\brief
+	Rotate NPC
+*/
+/******************************************************************************/
 bool AIrotate (MS &model, Vector3 &pos, float &zero, char axis, float val, float speed)
 {
 	model.Translate(pos.x,pos.y,pos.z);
